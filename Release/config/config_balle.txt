@@ -1,0 +1,3 @@
+BalleDefaut.vitesse;1
+BalleDefaut.vie;5
+BalleDefaut.degat;5

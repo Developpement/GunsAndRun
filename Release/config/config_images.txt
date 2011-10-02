@@ -1,0 +1,13 @@
+backgroundVisible;images\\background\\decor1.png
+uniteJoueur;images\\personnages\\persoTest.png
+armeDefaut;images\\Armes\\ArmeDefaut.png
+cadreVisible;images\\cadre\\cadre.png
+boutonArme1;images\\bouttons\\noWeapons.png
+boutonNoWeapon;images\\bouttons\\noWeapons.png
+BoutonAmelioreArme1;images\\bouttons\\ameliore.png
+BoutonSupprimeArme1;images\\bouttons\\supprime.png
+BoutonGrade;images\\bouttons\\Niveau1.png
+BoutonVie;images\\bouttons\\vie.png
+BoutonDefense;images\\bouttons\\defense.png
+BoutonSupport;images\\bouttons\\support1.png
+BalleDefaut;images\\Balles\\BalleDefaut.png
