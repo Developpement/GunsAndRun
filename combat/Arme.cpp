@@ -106,6 +106,18 @@ UsineArmes::UsineArmes()
 {
 }
 
+UsineArmes::~UsineArmes()
+{
+	for(map<string,Arme*>::iterator it=modelesArmes.begin();it!=modelesArmes.end();it++)
+		delete it->second;
+	modelesArmes.clear();
+
+	cout << "UsineArmes destructeur appele." << endl;
+}
+
+
+
+
 bool UsineArmes::chargement()
 {
 	ifstream fichier(fichierConfigArme.c_str());

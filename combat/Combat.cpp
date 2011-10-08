@@ -22,9 +22,13 @@ int main( int argc, char* argv[] )
 
 	// Vide la mémoire pour les objets static*
 	UsineBalles::destruction();
+	UsineArmes::destruction();
+
 	Surfaces::destruction();
+	Application::destruction();
 	Musique::destruction();
 	Configuration::destruction();
+	
 
 	return 0;
 }

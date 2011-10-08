@@ -63,8 +63,14 @@ class Application
 	Musique* musique;
 
 
-	// methodes	
+	/**
+	* \brief Constructeur de la classe application. Initialise quelques variables.
+	*/
 	Application();
+
+	/**
+	* \brief Destructeur de la classe Application. Libère la mémoire allouée dynamiquement.
+	*/
 	~Application();
 
 
@@ -95,6 +101,6 @@ public:
 	//int load ();
 	int update ();
 	int draw ();
-	int cleanUp();
+
 
 };

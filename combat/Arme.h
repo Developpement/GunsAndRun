@@ -93,6 +93,7 @@ class UsineArmes
 	map<string, Arme*> modelesArmes;
 
 	UsineArmes();
+	~UsineArmes();
 	bool chargement();
 
 public:

@@ -33,8 +33,28 @@ Application::Application()
 Application::~Application()
 {
 	//TODO Suppression des données en mémoire propres à l'application.
+	// Les unitées:
+	for(list<Unite*>::iterator it=unitees.begin();it!=unitees.end();it++) {
+		delete *it;
+		*it=0;
+	}
+	unitees.clear();
+
+	// Les balles:
+	for(list<Balle*>::iterator it=balles.begin();it!=balles.end();it++) {
+		delete *it;
+		*it=0;
+	}
+	balles.clear();
+
+	// Le cadre et le background (appel de destruction).
 
 
+
+	/* free the background surface */
+	SDL_FreeSurface(screen);
+	/* cleanup SDL */
+	SDL_Quit();
 }
 
 
@@ -90,11 +110,6 @@ int Application::init ()
 	return 0;
 }
 
-
-//int Application::load() 
-//{
-//
-//}
 
 
 
@@ -207,15 +222,6 @@ int Application::update ()
 
 		}// end SDL_PollEvent
 
-		/* an event was found */
-		//background->handleInput(event);
-
-	/*
-
-		for (list<Balle>::iterator itBalle = balles.begin(); itBalle != balles.end(); itBalle++) {
-			itBalle->handleInput(event);
-		}*/
-
 		//----------------------
 		// UPDATING ROUTINE
 		//----------------------
@@ -248,13 +254,16 @@ int Application::update ()
 		}
 
 		draw();
-	}
+	} // end while 
 
-	cleanUp();
+
 
 	return 0;
 }
 
+
+/**
+*/
 int Application::draw() 
 {
 	background->draw(screen);
@@ -277,12 +286,3 @@ int Application::draw()
 	return 0;
 }
 
-
-int Application::cleanUp ()
-{
-	/* free the background surface */
-	SDL_FreeSurface(screen);
-	/* cleanup SDL */
-	SDL_Quit();
-	return 0;
-}
