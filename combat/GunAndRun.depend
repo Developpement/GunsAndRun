@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1318086461 source:/home/kannagi/GitHub/combat/GunAndRun/Affichage.cpp
+	"Affichage.h"
+
+1318087142 /home/kannagi/GitHub/combat/GunAndRun/Affichage.h
+	<SDL/SDL.h>
+	<SDL/SDL_rotozoom.h>
+	<algorithm>
+

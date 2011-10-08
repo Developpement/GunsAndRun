@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="GunAndRun" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="bin">
+				<Option output="bin/GunAndRun" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+			<Target title="console">
+				<Option output="bin/GunAndRun" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-fexpensive-optimizations" />
+			<Add option="-Os" />
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Linker>
+			<Add option="-s" />
+			<Add library="SDL" />
+			<Add library="SDL_image" />
+			<Add library="SDL_mixer" />
+			<Add library="SDL_ttf" />
+		</Linker>
+		<Unit filename="Affichage.cpp" />
+		<Unit filename="Affichage.h" />
+		<Unit filename="Application.cpp" />
+		<Unit filename="Application.h" />
+		<Unit filename="Arme.cpp" />
+		<Unit filename="Arme.h" />
+		<Unit filename="Background.cpp" />
+		<Unit filename="Background.h" />
+		<Unit filename="Balle.cpp" />
+		<Unit filename="Balle.h" />
+		<Unit filename="Bouton.cpp" />
+		<Unit filename="Bouton.h" />
+		<Unit filename="Cadre.cpp" />
+		<Unit filename="Cadre.h" />
+		<Unit filename="Combat.cpp" />
+		<Unit filename="Configuration.cpp" />
+		<Unit filename="Configuration.h" />
+		<Unit filename="DisplayFormatSurfaces.cpp" />
+		<Unit filename="DisplayFormatSurfaces.h" />
+		<Unit filename="Musique.cpp" />
+		<Unit filename="Musique.h" />
+		<Unit filename="Outils.cpp" />
+		<Unit filename="Outils.h" />
+		<Unit filename="SDL_Collide.h" />
+		<Unit filename="SDL_collide.cpp" />
+		<Unit filename="Unite.cpp" />
+		<Unit filename="Unite.h" />
+		<Unit filename="conversions.h" />
+		<Unit filename="definitions.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
