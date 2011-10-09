@@ -7,20 +7,22 @@
 #include <sstream>
 #include <map>
 #include "definitions.h"
-#include "DialogueTr.h"
+#ifdef WIN32
+#include <TR/DialogueTr.h>
+#endif
 using namespace std;
 
 /**
 * \class Configuration
 * \brief Stocke et fournit un accès à la configuration du jeu.
 */
-class Configuration 
+class Configuration
 {
 	/*! La configuration du jeu: <le nom ou référence, la config ou valeur> */
 	map<string,string> config;
 	/*! Unique instance de la configuration du jeu. */
 	static Configuration* _singleton;
-	
+
 	/**
 	* \brief Constructeur de la classe Configuration.
 	*/
@@ -48,7 +50,7 @@ public:
 	* \return Le pointeur vers l'unique instance de type Configuration.
 	*/
 	static Configuration* getInstance();
-	
+
 	/**
 	* \brief Libère la mémoire allouée à l'unique instance de la classe Configuration.
 	*/

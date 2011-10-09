@@ -1,7 +1,7 @@
 #include "Bouton.h"
 
 Bouton::Bouton()
-{	
+{
 	this->application=0;
 	cout << "Constructeur du bouton non appele" << endl;
 }
@@ -11,7 +11,7 @@ Bouton::Bouton()
 // ----------------------BOUTON ARME 1-------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonArme1::BoutonArme1()
-{	
+{
 	cout << "Constructeur BoutonArme1 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -21,8 +21,11 @@ BoutonArme1::BoutonArme1()
 
 bool BoutonArme1::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme1.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme1.posY"))*application->resolution.second));
+    string boutonArme1PosX=configuration->getValeurParametre("boutonArme1.posX");
+    string boutonArme1PosY=configuration->getValeurParametre("boutonArme1.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonArme1PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonArme1PosY)*application->resolution.second));
 	return true;
 }
 
@@ -48,7 +51,7 @@ bool BoutonArme1::draw(SDL_Surface* screen)
 // ----------------------BOUTON ARME 2-------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonArme2::BoutonArme2()
-{	
+{
 	cout << "Constructeur BoutonArme2 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -58,8 +61,11 @@ BoutonArme2::BoutonArme2()
 
 bool BoutonArme2::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme2.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme2.posY"))*application->resolution.second));
+    string boutonArme2PosX=configuration->getValeurParametre("boutonArme2.posX");
+    string boutonArme2PosY=configuration->getValeurParametre("boutonArme2.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonArme2PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonArme2PosY)*application->resolution.second));
 	return true;
 }
 
@@ -85,7 +91,7 @@ bool BoutonArme2::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 
 BoutonArme3::BoutonArme3()
-{	
+{
 	cout << "Constructeur BoutonArme3 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -95,8 +101,11 @@ BoutonArme3::BoutonArme3()
 
 bool BoutonArme3::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme3.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme3.posY"))*application->resolution.second));
+    string boutonArme3PosX=configuration->getValeurParametre("boutonArme3.posX");
+    string boutonArme3PosY=configuration->getValeurParametre("boutonArme3.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonArme3PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonArme3PosY)*application->resolution.second));
 	return true;
 }
 
@@ -117,7 +126,7 @@ bool BoutonArme3::draw(SDL_Surface* screen)
 // ----------------------BOUTON ARME 4-------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonArme4::BoutonArme4()
-{	
+{
 	cout << "Constructeur BoutonArme4 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -127,8 +136,11 @@ BoutonArme4::BoutonArme4()
 
 bool BoutonArme4::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme4.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("boutonArme4.posY"))*application->resolution.second));
+    string boutonArme4PosX=configuration->getValeurParametre("boutonArme4.posX");
+    string boutonArme4PosY=configuration->getValeurParametre("boutonArme4.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonArme4PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonArme4PosY)*application->resolution.second));
 	return true;
 }
 
@@ -150,7 +162,7 @@ bool BoutonArme4::draw(SDL_Surface* screen)
 // ----------------------BOUTON AMELIORE ARME 1----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme1::BoutonAmelioreArme1()
-{	
+{
 	cout << "Constructeur BoutonAmelioreArme1 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -160,8 +172,11 @@ BoutonAmelioreArme1::BoutonAmelioreArme1()
 
 bool BoutonAmelioreArme1::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme1.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme1.posY"))*application->resolution.second));
+    string boutonAmelioreArme1PosX=configuration->getValeurParametre("BoutonAmelioreArme1.posX");
+    string boutonAmelioreArme1PosY=configuration->getValeurParametre("BoutonAmelioreArme1.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme1PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme1PosY)*application->resolution.second));
 	return true;
 }
 
@@ -187,7 +202,7 @@ bool BoutonAmelioreArme1::draw(SDL_Surface* screen)
 // ----------------------BOUTON AMELIORE ARME 2----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme2::BoutonAmelioreArme2()
-{	
+{
 	cout << "Constructeur BoutonAmelioreArme2 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -197,8 +212,11 @@ BoutonAmelioreArme2::BoutonAmelioreArme2()
 
 bool BoutonAmelioreArme2::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme2.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme2.posY"))*application->resolution.second));
+    string boutonAmelioreArme2PosX=configuration->getValeurParametre("BoutonAmelioreArme2.posX");
+    string boutonAmelioreArme2PosY=configuration->getValeurParametre("BoutonAmelioreArme2.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme2PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme2PosY)*application->resolution.second));
 	return true;
 }
 
@@ -220,7 +238,7 @@ bool BoutonAmelioreArme2::draw(SDL_Surface* screen)
 // ----------------------BOUTON AMELIORE ARME 3----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme3::BoutonAmelioreArme3()
-{	
+{
 	cout << "Constructeur BoutonAmelioreArme3 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -230,8 +248,11 @@ BoutonAmelioreArme3::BoutonAmelioreArme3()
 
 bool BoutonAmelioreArme3::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme3.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme3.posY"))*application->resolution.second));
+    string boutonAmelioreArme3PosX=configuration->getValeurParametre("BoutonAmelioreArme3.posX");
+    string boutonAmelioreArme3PosY=configuration->getValeurParametre("BoutonAmelioreArme3.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme3PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme3PosY)*application->resolution.second));
 	return true;
 }
 
@@ -253,7 +274,7 @@ bool BoutonAmelioreArme3::draw(SDL_Surface* screen)
 // ----------------------BOUTON AMELIORE ARME 4----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme4::BoutonAmelioreArme4()
-{	
+{
 	cout << "Constructeur BoutonAmelioreArme4 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -263,8 +284,11 @@ BoutonAmelioreArme4::BoutonAmelioreArme4()
 
 bool BoutonAmelioreArme4::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme4.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonAmelioreArme4.posY"))*application->resolution.second));
+    string boutonAmelioreArme4PosX=configuration->getValeurParametre("BoutonAmelioreArme4.posX");
+    string boutonAmelioreArme4PosY=configuration->getValeurParametre("BoutonAmelioreArme4.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme4PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme4PosY)*application->resolution.second));
 	return true;
 }
 
@@ -286,7 +310,7 @@ bool BoutonAmelioreArme4::draw(SDL_Surface* screen)
 // ----------------------BOUTON SUPPRIME ARME 1----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme1::BoutonSupprimeArme1()
-{	
+{
 	cout << "Constructeur BoutonSupprimeArme1 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -296,8 +320,11 @@ BoutonSupprimeArme1::BoutonSupprimeArme1()
 
 bool BoutonSupprimeArme1::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme1.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme1.posY"))*application->resolution.second));
+    string boutonSupprimeArme1PosX=configuration->getValeurParametre("BoutonSupprimeArme1.posX");
+    string boutonSupprimeArme1PosY=configuration->getValeurParametre("BoutonSupprimeArme1.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme1PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme1PosY)*application->resolution.second));
 	return true;
 }
 
@@ -323,7 +350,7 @@ bool BoutonSupprimeArme1::draw(SDL_Surface* screen)
 // ----------------------BOUTON SUPPRIME ARME 2----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme2::BoutonSupprimeArme2()
-{	
+{
 	cout << "Constructeur BoutonSupprimeArme2 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -333,8 +360,11 @@ BoutonSupprimeArme2::BoutonSupprimeArme2()
 
 bool BoutonSupprimeArme2::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme2.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme2.posY"))*application->resolution.second));
+    string boutonSupprimeArme2PosX=configuration->getValeurParametre("BoutonSupprimeArme2.posX");
+    string boutonSupprimeArme2PosY=configuration->getValeurParametre("BoutonSupprimeArme2.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme2PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme2PosY)*application->resolution.second));
 	return true;
 }
 
@@ -356,7 +386,7 @@ bool BoutonSupprimeArme2::draw(SDL_Surface* screen)
 // ----------------------BOUTON SUPPRIME ARME 3----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme3::BoutonSupprimeArme3()
-{	
+{
 	cout << "Constructeur BoutonSupprimeArme3 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -366,8 +396,11 @@ BoutonSupprimeArme3::BoutonSupprimeArme3()
 
 bool BoutonSupprimeArme3::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme3.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme3.posY"))*application->resolution.second));
+    string boutonSupprimeArme3PosX=configuration->getValeurParametre("BoutonSupprimeArme3.posX");
+    string boutonSupprimeArme3PosY=configuration->getValeurParametre("BoutonSupprimeArme3.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme3PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme3PosY)*application->resolution.second));
 	return true;
 }
 
@@ -389,7 +422,7 @@ bool BoutonSupprimeArme3::draw(SDL_Surface* screen)
 // ----------------------BOUTON SUPPRIME ARME 4----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme4::BoutonSupprimeArme4()
-{	
+{
 	cout << "Constructeur BoutonSupprimeArme4 appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -399,8 +432,11 @@ BoutonSupprimeArme4::BoutonSupprimeArme4()
 
 bool BoutonSupprimeArme4::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme4.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupprimeArme4.posY"))*application->resolution.second));
+    string boutonSupprimeArme4PosX=configuration->getValeurParametre("BoutonSupprimeArme4.posX");
+    string boutonSupprimeArme4PosY=configuration->getValeurParametre("BoutonSupprimeArme4.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme4PosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme4PosY)*application->resolution.second));
 	return true;
 }
 
@@ -421,7 +457,7 @@ bool BoutonSupprimeArme4::draw(SDL_Surface* screen)
 // ----------------------BOUTON GRADE--------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonGrade::BoutonGrade()
-{	
+{
 	cout << "Constructeur BoutonGrade appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -431,8 +467,11 @@ BoutonGrade::BoutonGrade()
 
 bool BoutonGrade::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonGrade.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonGrade.posY"))*application->resolution.second));
+    string boutonGradePosX=configuration->getValeurParametre("BoutonGrade.posX");
+    string boutonGradePosY=configuration->getValeurParametre("BoutonGrade.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonGradePosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonGradePosY)*application->resolution.second));
 	return true;
 }
 
@@ -458,7 +497,7 @@ bool BoutonGrade::draw(SDL_Surface* screen)
 // ----------------------BOUTON VIE----------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonVie::BoutonVie()
-{	
+{
 	cout << "Constructeur BoutonVie appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -468,8 +507,11 @@ BoutonVie::BoutonVie()
 
 bool BoutonVie::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonVie.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonVie.posY"))*application->resolution.second));
+    string boutonViePosX=configuration->getValeurParametre("BoutonVie.posX");
+    string boutonViePosY=configuration->getValeurParametre("BoutonVie.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonViePosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonViePosY)*application->resolution.second));
 	return true;
 }
 
@@ -495,7 +537,7 @@ bool BoutonVie::draw(SDL_Surface* screen)
 // ----------------------BOUTON DEFENSE------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonDefense::BoutonDefense()
-{	
+{
 	cout << "Constructeur BoutonDefense appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -505,8 +547,11 @@ BoutonDefense::BoutonDefense()
 
 bool BoutonDefense::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonDefense.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonDefense.posY"))*application->resolution.second));
+    string boutonDefensePosX=configuration->getValeurParametre("BoutonDefense.posX");
+    string boutonDefensePosY=configuration->getValeurParametre("BoutonDefense.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonDefensePosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonDefensePosY)*application->resolution.second));
 	return true;
 }
 
@@ -532,7 +577,7 @@ bool BoutonDefense::draw(SDL_Surface* screen)
 // ----------------------BOUTON SUPPORT------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupport::BoutonSupport()
-{	
+{
 	cout << "Constructeur BoutonSupport appele!" << endl;
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
@@ -542,8 +587,11 @@ BoutonSupport::BoutonSupport()
 
 bool BoutonSupport::init()
 {
-	posX = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupport.posX"))*application->resolution.first));
-	posY = static_cast<int>(ceil(stringToFloat(configuration->getValeurParametre("BoutonSupport.posY"))*application->resolution.second));
+    string boutonSupportPosX=configuration->getValeurParametre("BoutonSupport.posX");
+    string boutonSupportPosY=configuration->getValeurParametre("BoutonSupport.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonSupportPosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonSupportPosY)*application->resolution.second));
 	return true;
 }
 

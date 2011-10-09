@@ -1,21 +1,21 @@
 /*
     SDL_Collide:  A 2D collision detection library for use with SDL
-    
+
     MIT License
     Copyright 2005-2006 SDL_collide Team
     http://sdl-collide.sourceforge.net
     All rights reserved.
-    
+
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
     in the Software without restriction, including without limitation the rights
     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
     copies of the Software, and to permit persons to whom the Software is
     furnished to do so, subject to the following conditions:
-    
+
     The above copyright notice and this permission notice shall be included in all
     copies or substantial portions of the Software.
-    
+
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,10 +23,10 @@
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
-    
+
     Amir Taaki
     genjix@gmail.com
-    
+
     Rob Loach
     http://robloach.net
 */
@@ -55,7 +55,7 @@ int SDL_CollideTransparentPixel(SDL_Surface *surface , int u , int v)
 	/*here p is the address to the pixel we want to retrieve*/
 	Uint8 *p = (Uint8 *)surface->pixels + v * surface->pitch + u * bpp;
 
-	Uint32 pixelcolor;
+	Uint32 pixelcolor=0; // previous:   Uint32 pixelcolor;
 
 	switch(bpp)
 	{
@@ -195,7 +195,7 @@ int SDL_CollideBoundingBox(SDL_Rect a , SDL_Rect b)
 
 	circle1 : centre (x1,y1) with radius r1
 	circle2 : centre (x2,y2) with radius r2
-	
+
 	(allow distance between circles of offset)
 */
 int SDL_CollideBoundingCircle(int x1 , int y1 , int r1 ,
@@ -203,10 +203,10 @@ int SDL_CollideBoundingCircle(int x1 , int y1 , int r1 ,
 {
 	int xdiff = x2 - x1;	// x plane difference
 	int ydiff = y2 - y1;	// y plane difference
-	
+
 	/* distance between the circles centres squared */
 	int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
-	
+
 	/* calculate sum of radiuses squared */
 	int r_sum_sq = r1 + r2;	// square on seperate line, so
 	r_sum_sq *= r_sum_sq;	// dont recompute r1 + r2

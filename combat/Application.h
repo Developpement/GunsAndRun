@@ -10,8 +10,8 @@
 #include "Conversions.h"
 #include "Configuration.h"
 #include "definitions.h"
-#include <SDL_rotozoom.h>
-#include "SDL.h"
+#include <SDL/SDL_rotozoom.h>
+#include <SDL/SDL.h>
 
 #include <list>
 
@@ -19,7 +19,7 @@
 * \class KeyValue
 * \brief Contient l'état des touches et souris.
 */
-class KeyValue 
+class KeyValue
 {
 public:
 	bool isArrowUpPressed;
@@ -41,6 +41,8 @@ public:
 };
 
 
+
+
 class Cadre;
 class Background;
 class Unite;
@@ -58,7 +60,7 @@ class Application
 	/*! Pointeur vers l'instance unique de la configuration du jeu. */
 	Configuration* configuration;
 	/*! Liste des images chargées en mémoire. */
-	Surfaces* surfaces; 
+	Surfaces* surfaces;
 	/*! Permet l'utilisation de musique et de sons. */
 	Musique* musique;
 
@@ -93,7 +95,7 @@ public:
 	//Configuration configuration;
 	SDL_Event event;
 
-	// methodes	
+	// methodes
 	static Application* getInstance();
 	static Application* destruction();
 

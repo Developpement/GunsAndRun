@@ -2,6 +2,19 @@
 #include "Balle.h"
 
 
+template <typename T>
+Balle::Balle(T& posX, T& posY, double angle, string& type, int& identifiantJoueur)
+{
+	application = Application::getInstance();
+	this->identifiantJoueur=identifiantJoueur;
+	this->angle = angle;
+	this->type = type;
+
+	load();
+}
+
+
+
 int Balle::load()
 {
 	Configuration* configuration=Configuration::getInstance();
@@ -10,27 +23,32 @@ int Balle::load()
 	animation = surfaces->getAnimation(type.c_str());
 	imageCourante=(*animation).begin();
 	boitesCollisions = surfaces->getBoitesCollisions(type.c_str());
-	this->degats = stringToInt(configuration->getValeurParametre((type+string(".degat")).c_str()));
-	this->vitesse = stringToFloat(configuration->getValeurParametre((type+string(".vitesse")).c_str()));
-	this->vie = stringToInt(configuration->getValeurParametre((type+string(".vie")).c_str()));
+
+	string degatStr=configuration->getValeurParametre((type+string(".degat")).c_str());
+	string vitesseStr=configuration->getValeurParametre((type+string(".vitesse")).c_str());
+	string vieStr=configuration->getValeurParametre((type+string(".vie")).c_str());
+
+	this->degats = stringToInt(degatStr);
+	this->vitesse = stringToFloat(vitesseStr);
+	this->vie = stringToInt(vieStr);
 
 	return 0;
 }
 
-int Balle::update() 
+int Balle::update()
 {
 	// Se déplace et gère les collisions.
 	float decalX = velX + application->background->velXbackground;
-	float decalY = velY + application->background->velYbackground; 
+	float decalY = velY + application->background->velYbackground;
 
 	if((velX!=0)&&(velY!=0)){
 		if (detecteCollisions(decalX, decalY)){
 			velX=0;
 			velY=0;
 		}
-	}	
+	}
 
-	posX += decalX; 
+	posX += decalX;
 	posY += decalY;
 
 	return 0;
@@ -54,7 +72,7 @@ bool Balle::detecteCollisions(float& decalX, float& decalY)
 		if (( (*itUnite)->identifiantJoueur!=identifiantJoueur)&&(collision(newX, newY, *boitesCollisions, (*itUnite)->posX, (*itUnite)->posY, *(*itUnite)->boitesCollisions))) {
 			(*itUnite)->vie-=degats;
 			vie=0;
-			cout << "collision unite" << endl;		
+			cout << "collision unite" << endl;
 			return true;
 		}
 		itUnite++;
@@ -80,9 +98,9 @@ int Balle::draw(SDL_Surface *screen)
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
-		
-		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF ); 
-		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey ); 
+
+		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF );
+		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
 
 		int posX2 = (2*(int)posX + (*imageCourante)->w - surfaceAfficher->w)/2;
 		int posY2 = (2*(int)posY + (*imageCourante)->h - surfaceAfficher->h)/2;
@@ -90,7 +108,7 @@ int Balle::draw(SDL_Surface *screen)
 		afficheEcran((int)posX2, (int)posY2, screen, surfaceAfficher);
 		SDL_FreeSurface(surfaceAfficher);
 	}
-	return 0;	
+	return 0;
 }
 
 
@@ -141,7 +159,7 @@ bool UsineBalles::chargement()
 
 	string ligne;
 	while(getline(fichier,ligne)) {
-	
+
 		stringstream ss(ligne);
 		string nouvelleClef,nouvelleValeur,nouveauNom;
 		getline(ss,nouvelleClef,';');
@@ -150,7 +168,7 @@ bool UsineBalles::chargement()
 		string::size_type posPoint=nouvelleClef.find_first_of('.');
 		if(posPoint!=string::npos) {
 			nouveauNom=nouvelleClef.substr(0,posPoint);
-		
+
 			map<string, Balle*>::iterator it = modelesBalles.find(nouveauNom);
 			if(it==modelesBalles.end()) {
 				int posX,posY,identifiantJoueur=0;

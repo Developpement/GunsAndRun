@@ -53,21 +53,22 @@ int UniteJoueurJouable::load()
 	boitesCollisions = surfaces->getBoitesCollisions("uniteJoueur");
 
 	//autres
-	vie=stringToInt(configuration->getValeurParametre("playerStartLife"));
+	string playerStartLife=configuration->getValeurParametre("playerStartLife");
+	vie=stringToInt(playerStartLife);
 #endif
 	return 0;
 }
 
 
 
-int UniteJoueurJouable::handleInput(SDL_Event& event) 
+int UniteJoueurJouable::handleInput(SDL_Event& event)
 {
 #ifndef NOUNIT
 	switch (event.type) {
-	
+
 		case SDL_MOUSEMOTION:
 			// on récupère les positions de la souris:
-			//if (typeUnite == PJ_JOUABLE) 
+			//if (typeUnite == PJ_JOUABLE)
 			{
 				int x = event.motion.x;
 				int y = event.motion.y;
@@ -98,7 +99,7 @@ int UniteJoueurJouable::handleInput(SDL_Event& event)
 }
 
 
-int UniteJoueurJouable::update() 
+int UniteJoueurJouable::update()
 {
 #ifndef NOUNIT
 	if(typeUnite==PNON_JOUEUR){
@@ -114,7 +115,7 @@ int UniteJoueurJouable::update()
 	return 0;
 }
 
-int UniteJoueurJouable::draw(SDL_Surface* screen) 
+int UniteJoueurJouable::draw(SDL_Surface* screen)
 {
 #ifndef NOUNIT
 	if (angle == 0)
@@ -122,9 +123,9 @@ int UniteJoueurJouable::draw(SDL_Surface* screen)
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageUniteCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
-		
-		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF ); 
-		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey ); 
+
+		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF );
+		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
 
 		int posX2 = static_cast<int>((2*posX + (*imageUniteCourante)->w - surfaceAfficher->w)/2);
 		int posY2 = static_cast<int>((2*posY + (*imageUniteCourante)->h - surfaceAfficher->h)/2);
@@ -184,25 +185,26 @@ int UniteNonJoueur::load()
 	boitesCollisions = surfaces->getBoitesCollisions("uniteJoueur");
 
 	//autres
-	vie=stringToInt(configuration->getValeurParametre("playerStartLife"));
+	string playerStartLife=configuration->getValeurParametre("playerStartLife");
+	vie=stringToInt(playerStartLife);
 #endif
 	return 0;
 }
 
 
 
-int UniteNonJoueur::handleInput(SDL_Event& event) 
+int UniteNonJoueur::handleInput(SDL_Event& event)
 {
 	return 0;
 }
 
 
-int UniteNonJoueur::update() 
+int UniteNonJoueur::update()
 {
 #ifndef NOUNIT
 	velX=application->background->velXbackground;
 	velY=application->background->velYbackground;
-	
+
 	posX += velX;
 	posY += velY;
 
@@ -211,7 +213,7 @@ int UniteNonJoueur::update()
 	return 0;
 }
 
-int UniteNonJoueur::draw(SDL_Surface* screen) 
+int UniteNonJoueur::draw(SDL_Surface* screen)
 {
 #ifndef NOUNIT
 	if (angle == 0)
@@ -219,9 +221,9 @@ int UniteNonJoueur::draw(SDL_Surface* screen)
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageUniteCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
-		
-		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF ); 
-		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey ); 
+
+		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF );
+		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
 
 		int posX2 = static_cast<int>((2*posX + (*imageUniteCourante)->w - surfaceAfficher->w)/2);
 		int posY2 = static_cast<int>((2*posY + (*imageUniteCourante)->h - surfaceAfficher->h)/2);

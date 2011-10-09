@@ -6,19 +6,18 @@
 #include "Affichage.h"
 #include "Outils.h"
 #include <cmath>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 #include <map>
 using namespace std;
 
-static float zero = 0;
-static float coeffSpeedDiago=1.4f;
+
 
 class Application;
 
-class Background 
+class Background
 {
-public:	
+public:
 	Application* application;
 	Configuration* config;
 	Surfaces* surfaces;
@@ -30,8 +29,13 @@ public:
 	vector<SDL_Rect>* boitesCollisions;
 
 	// position des decors, directement liés à la vitesse de déplacement du joueur
-	float posXbackground, posYbackground, velXbackground, velYbackground, velXbackgroundTeo, velYbackgroundTeo;
-	
+	float posXbackground;
+	float posYbackground;
+	float velXbackground;
+	float velYbackground;
+	float velXbackgroundTeo;
+	float velYbackgroundTeo;
+
 	Background(int& posX, int& posY, Configuration*, Surfaces*, Application*);
 	bool detecteCollisions(float& decalX, float& decalY);
 	int load();

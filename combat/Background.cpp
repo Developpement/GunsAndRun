@@ -1,6 +1,8 @@
 
 #include "Background.h"
 
+static float zero = 0;
+static float coeffSpeedDiago=1.4f;
 
 
 Background::Background(int &posX, int &posY, Configuration *config, Surfaces *surfaces, Application* application)
@@ -14,8 +16,8 @@ Background::Background(int &posX, int &posY, Configuration *config, Surfaces *su
 	posYbackground = static_cast<float>(-posY);
 
 	velXbackgroundTeo=velXbackground=velYbackground=velYbackgroundTeo=0;
-	
-	maxSpeed = stringToFloat( this->config->getValeurParametre("playerMaxSpeed") );
+	string playerMaxSpeed = this->config->getValeurParametre("playerMaxSpeed");
+	maxSpeed = stringToFloat(playerMaxSpeed);
 }
 
 int Background::load()
@@ -42,7 +44,7 @@ bool Background::detecteCollisions(float& decalX, float& decalY)
 			float newY = posYbackground + decalY;
 
 			if (collision(newX, newY, *boitesCollisions, (*itUnite)->posX, (*itUnite)->posY, *(*itUnite)->boitesCollisions) == true) {
-				cout << "collision" << endl;		
+				cout << "collision" << endl;
 				return true;
 			}
 			return false;
@@ -188,7 +190,7 @@ int Background::setSpeedKeyLeftPressed()
 int Background::setSpeedKeyUpReleased()
 {
 	velYbackgroundTeo=0;
-	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	float speedLimit=maxSpeed/coeffSpeedDiago;
 	if(velXbackgroundTeo!=0) {
 		if(velXbackgroundTeo<0)
 			velXbackgroundTeo=-maxSpeed;
@@ -200,7 +202,7 @@ int Background::setSpeedKeyUpReleased()
 int Background::setSpeedKeyDownReleased()
 {
 	velYbackgroundTeo=0;
-	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	float speedLimit=maxSpeed/coeffSpeedDiago;
 	if(velXbackgroundTeo!=0) {
 		if(velXbackgroundTeo<0)
 			velXbackgroundTeo=-maxSpeed;
@@ -211,7 +213,7 @@ int Background::setSpeedKeyDownReleased()
 int Background::setSpeedKeyRightReleased()
 {
 	velXbackgroundTeo=0;
-	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	float speedLimit=maxSpeed/coeffSpeedDiago;
 	if(velYbackgroundTeo!=0) {
 		if(velYbackgroundTeo<0)
 			velYbackgroundTeo=-maxSpeed;
@@ -222,7 +224,7 @@ int Background::setSpeedKeyRightReleased()
 int Background::setSpeedKeyLeftReleased()
 {
 	velXbackgroundTeo=0;
-	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	float speedLimit=maxSpeed/coeffSpeedDiago;
 	if(velYbackgroundTeo!=0) {
 		if(velYbackgroundTeo<0)
 			velYbackgroundTeo=-maxSpeed;

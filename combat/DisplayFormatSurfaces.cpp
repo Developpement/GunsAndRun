@@ -32,7 +32,7 @@ Surfaces* Surfaces::destruction()
 	return _singleton;
 }
 
-Surfaces::Surfaces() 
+Surfaces::Surfaces()
 {
 	configuration=Configuration::getInstance();
 	cout << "Constructeur Surfaces apelle" << endl;
@@ -43,7 +43,7 @@ Surfaces::Surfaces()
 */
 vector<SDL_Surface*>* Surfaces::getAnimation (const char* nomAnimation)
 {
-	map<string,vector<SDL_Surface*>>::iterator it = animList.find(string(nomAnimation));
+	map< string, vector<SDL_Surface*> >::iterator it = animList.find(string(nomAnimation));
 	if(it==animList.end()) {
 		string err=string("Impossible de trouver l'animation nommée {")+string(nomAnimation)+string("}.");
 		MessageBoxA(NULL,err.c_str(),"Erreur!",MB_OK|MB_ICONERROR);
@@ -59,7 +59,7 @@ vector<SDL_Surface*>* Surfaces::getAnimation (const char* nomAnimation)
 */
 vector<SDL_Surface*>* Surfaces::getAnimation (const char* name, int& largeur, int& hauteur)
 {
-	map<string,vector<SDL_Surface*>>::iterator it = animList.find(string(name));
+	map< string, vector<SDL_Surface*> >::iterator it = animList.find(string(name));
 	if(it==animList.end()) {
 		configuration->getValeurParametre(name);
 		load();
@@ -75,7 +75,7 @@ vector<SDL_Surface*>* Surfaces::getAnimation (const char* name, int& largeur, in
 
 pair<int,int> Surfaces::getSizeAnimationFirstImage (const char* name)
 {
-	map<string,vector<SDL_Surface*>>::iterator it = animList.find(string(name));
+	map< string, vector<SDL_Surface*> >::iterator it = animList.find(string(name));
 	pair<int,int> taille(it->second[0]->w,it->second[0]->h);
 	return taille;
 }
@@ -85,7 +85,7 @@ pair<int,int> Surfaces::getSizeAnimationFirstImage (const char* name)
 */
 vector<SDL_Rect>* Surfaces::getBoitesCollisions (const char* name)
 {
-	map<string,vector<SDL_Rect>>::iterator it = collisionList.find(string(name));
+	map< string, vector<SDL_Rect> >::iterator it = collisionList.find(string(name));
 	if (it != collisionList.end()) {
 		return & collisionList[string(name)];
 	}
@@ -99,7 +99,7 @@ vector<SDL_Rect>* Surfaces::getBoitesCollisions (const char* name)
 */
 vector<SDL_Rect>* Surfaces::getBoitesCollisions (const char* name, int& largeur, int& hauteur)
 {
-	map<string,vector<SDL_Rect>>::iterator it = collisionList.find(string(name));
+	map< string, vector<SDL_Rect> >::iterator it = collisionList.find(string(name));
 	if (it != collisionList.end()) {
 		if((it->second.begin()->w!=largeur)||(it->second.begin()->h!=hauteur)){
 			for(vector<SDL_Rect>::iterator itRect=it->second.begin();itRect!=it->second.end();itRect++){
@@ -110,7 +110,7 @@ vector<SDL_Rect>* Surfaces::getBoitesCollisions (const char* name, int& largeur,
 				itRect->h /=(Uint16)ceil((float)taille.second/(float)hauteur);
 			}//end for
 		}// end else
-		return & collisionList[string(name)];		
+		return & collisionList[string(name)];
 	}//end if
 	else return 0;
 }
@@ -128,7 +128,7 @@ int Surfaces::addAnimation (string nomAnim, string imageNeutre)
 	else {
 		format = "bmp";
 	}
-	
+
 	string buf = imageNeutre + format;
 
 	vector<SDL_Surface*> animationCourante;
@@ -143,8 +143,8 @@ int Surfaces::addAnimation (string nomAnim, string imageNeutre)
 			surfaceOptimisee = SDL_DisplayFormat(surfaceBrute);
 			SDL_FreeSurface(surfaceBrute);
 			if (surfaceOptimisee != 0) {
-				Uint32 colorkey = SDL_MapRGB( surfaceOptimisee->format, 0, 0xFF, 0xFF ); 
-				SDL_SetColorKey( surfaceOptimisee, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey ); 
+				Uint32 colorkey = SDL_MapRGB( surfaceOptimisee->format, 0, 0xFF, 0xFF );
+				SDL_SetColorKey( surfaceOptimisee, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
 			}
 		}
 
@@ -160,8 +160,8 @@ int Surfaces::addAnimation (string nomAnim, string imageNeutre)
 		buf = imageNeutre + "_" + toString(i) + format;
 		i++;
 	}while(surfaceOptimisee!=0);
-	
-	animList.insert(pair<string,vector<SDL_Surface*>>(string(nomAnim),animationCourante));
+
+	animList.insert(pair< string, vector<SDL_Surface*> >(string(nomAnim),animationCourante));
 
 	return 0;
 }
@@ -180,7 +180,7 @@ int Surfaces::addCollisionBox(string nomAnim, string imageNeutre)
 	else {
 		format = "bmp";
 	}
-	
+
 	string buf = imageNeutre + format;
 
 	vector<SDL_Rect> collisions;
@@ -197,12 +197,12 @@ int Surfaces::addCollisionBox(string nomAnim, string imageNeutre)
 			cout << "IMG_Load error " << IMG_GetError () << endl << ", with " << buf << endl;
 			break;
 		}
-			
+
 		buf = imageNeutre + "_" + toString(i) + format;
 		i++;
 	}while(1);
-	
-	collisionList.insert(pair<string,vector<SDL_Rect>>(string(nomAnim),collisions));
+
+	collisionList.insert(pair< string, vector<SDL_Rect> >(string(nomAnim),collisions));
 
 	return 0;
 }
@@ -212,10 +212,10 @@ int Surfaces::addCollisionBox(string nomAnim, string imageNeutre)
 * \details Cette méthode ne charge les images que si le conteneur est vide.
 * \return true en cas de succès, false en cas d'échec.
 */
-bool Surfaces::load() 
+bool Surfaces::load()
 {
 	if((!animList.empty())||(!collisionList.empty())) {
-		cout << "Erreur: Tentative de chargement d'images déjà en mémoire." << endl;	
+		cout << "Erreur: Tentative de chargement d'images déjà en mémoire." << endl;
 		return false;
 	}
 
@@ -227,14 +227,14 @@ bool Surfaces::load()
 		cout << "Cannot write in file " << fichierConfigImages << endl;
 		return false;
 	}
-	
+
 	string line, key, value;
 	while(getline(fichier, line)) {
 		stringstream ss;
 		ss << line;
 		getline(ss, key, ';');
 		getline(ss, value, ';');
-		
+
 		addAnimation(key, value);
 		addCollisionBox(key, value);
 	}

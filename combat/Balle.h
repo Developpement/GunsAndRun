@@ -4,12 +4,12 @@
 #include "DisplayFormatSurfaces.h"
 #include "Affichage.h"
 #include "Outils.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 #include <map>
 using namespace std;
 
-class Application;
+//class Application;
 class Arme;
 
 class Balle
@@ -28,7 +28,7 @@ public:
 	//int etat;
 
 	string type;
-	
+
 	//Les coordonnées x et y du point
     float vitesse, posX, posY, velX, velY;
 
@@ -36,7 +36,7 @@ public:
 	Balle(T& posX, T& posY, double angle, string& type, int& identifiantJoueur);
 
 	int load();
-	
+
 	int update();
 	int handleInput(SDL_Event& event);
 	bool detecteCollisions(float& decalX, float& decalY);
@@ -45,20 +45,6 @@ public:
 	Balle* clone();
 };
 
-
-
-
-
-template <typename T>
-Balle::Balle(T& posX, T& posY, double angle, string& type, int& identifiantJoueur)
-{
-	this->application = application=Application::getInstance();
-	this->identifiantJoueur=identifiantJoueur;
-	this->angle = angle;
-	this->type = type;
-
-	load();
-}
 
 
 

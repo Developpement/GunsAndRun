@@ -2,6 +2,31 @@
 #include "Arme.h"
 
 
+//template <typename T>
+Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typeBalle, int typeUnite, int identifiantJoueur)
+{
+	this->type=typeArme;
+	this->sousTypeBalle=typeBalle;
+
+	this->typeUnite= typeUnite;
+	application=Application::getInstance();
+	surfaces=Surfaces::getInstance();
+	usineBalles=UsineBalles::getInstance();
+
+	load();
+
+	this->identifiantJoueur = identifiantJoueur;
+	this->posX = static_cast<float>(posX);
+	this->posY = static_cast<float>(posY);
+	velX = 1;
+	velY = 1;
+	cadence = 1;
+	this->angle=angle;
+}
+
+
+
+
 int Arme::load()
 {
 	animation = surfaces->getAnimation((char*)type.c_str());
@@ -11,9 +36,9 @@ int Arme::load()
 	return 0;
 }
 
-int Arme::handleInput(SDL_Event& event) 
+int Arme::handleInput(SDL_Event& event)
 {
-	
+
 	return 0;
 }
 
@@ -32,7 +57,7 @@ int Arme::update()
 		posX+=velX;
 		posY+=velY;
 	}
-	
+
 	return 0;
 }
 
@@ -64,9 +89,9 @@ int Arme::draw(SDL_Surface* screen)
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
-		
-		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF ); 
-		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey ); 
+
+		Uint32 colorkey = SDL_MapRGB( surfaceAfficher->format, 0, 0xFF, 0xFF );
+		SDL_SetColorKey( surfaceAfficher, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
 
 		float posX2 = (2*posX + (*imageCourante)->w - surfaceAfficher->w)/2;
 		float posY2 = (2*posY + (*imageCourante)->h - surfaceAfficher->h)/2;
@@ -128,7 +153,7 @@ bool UsineArmes::chargement()
 
 	string ligne;
 	while(getline(fichier,ligne)) {
-	
+
 		stringstream ss(ligne);
 		string nouvelleClef,nouvelleValeur,nouveauNom;
 		getline(ss,nouvelleClef,';');
@@ -137,14 +162,15 @@ bool UsineArmes::chargement()
 		string::size_type posPoint=nouvelleClef.find_first_of('.');
 		if(posPoint!=string::npos) {
 			nouveauNom=nouvelleClef.substr(0,posPoint);
-		
+
 			map<string, Arme*>::iterator it = modelesArmes.find(nouveauNom);
 			if(it==modelesArmes.end()) {
-				int posX=0;
-				int posY=0;
-				int identifiantJoueur=0;
+                float posX=0;
+				float posY=0;
+				//int identifiantJoueur=0;
 				double angle=0;
-				Arme* arme = new Arme(posX,posY, angle, nouveauNom, string("BalleDefaut"), NON_DEFINI,0);
+				string balleDefaut = "BalleDefaut";
+				Arme* arme = new Arme(posX,posY, angle, nouveauNom, balleDefaut, NON_DEFINI,0);
 				modelesArmes.insert(pair<string,Arme*>(nouveauNom,arme));
 			}
 		}

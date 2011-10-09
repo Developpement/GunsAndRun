@@ -6,10 +6,12 @@ using namespace std;
 
 int main( int argc, char* argv[] )
 {
+#ifdef WIN32
 	char szthis[300];
 	char* c = szthis + GetModuleFileName(0, szthis, 300);
 	while(*c != '\\') c--; *c = 0;
 	SetCurrentDirectory(szthis);
+#endif
 
 	// Initialisation des objets static*
 	Configuration::getInstance();
@@ -28,7 +30,7 @@ int main( int argc, char* argv[] )
 	Application::destruction();
 	Musique::destruction();
 	Configuration::destruction();
-	
+
 
 	return 0;
 }

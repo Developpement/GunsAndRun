@@ -3,7 +3,7 @@
 
 Application* Application::_singleton=0;
 
-Application* Application::getInstance()  
+Application* Application::getInstance()
 {
 	if(_singleton==0) {
 		_singleton=new Application();
@@ -60,6 +60,9 @@ Application::~Application()
 
 int Application::init ()
 {
+    const char bytePerPixelStr[]="bytePerPixel";
+    string param;
+
 	/* initialize SDL */
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -72,7 +75,9 @@ int Application::init ()
 	string windowHeightStr= configuration->getValeurParametre("ScreenHeight");
 	windowWidth=stringToInt(windowWidthStr);
 	windowHeight=stringToInt(windowHeightStr);
-	int bytePerPixel = stringToInt(configuration->getValeurParametre("bytePerPixel"));
+
+    param=configuration->getValeurParametre(bytePerPixelStr);
+	int bytePerPixel = stringToInt(param);
 	bool isFullScreen = configuration->getValeurParametre("fullscreenEnable").compare("1")==0?true:false;
 	if (isFullScreen)
 		screen = SDL_SetVideoMode(windowWidth, windowHeight, bytePerPixel, SDL_FULLSCREEN | SDL_HWSURFACE);
@@ -99,11 +104,13 @@ int Application::init ()
 #ifndef NOUNIT
 	int moiX = (windowWidth)/2;
 	int moiY = (windowHeight)/2;
+	string typeArme="armeDefaut";
+	string typeBalle="BalleDefaut";
 
-	unitees.push_back(new UniteJoueurJouable(moiX,moiY, string("armeDefaut"), string("BalleDefaut")));
+	unitees.push_back(new UniteJoueurJouable(moiX,moiY, typeArme, typeBalle));
 	int newX = 100;
 	int newY=newX;
-	unitees.push_back(new UniteNonJoueur(newX, newY, string("armeDefaut"), string("BalleDefaut")));
+	unitees.push_back(new UniteNonJoueur(newX, newY, typeArme, typeBalle));
 #endif
 
 
@@ -113,7 +120,7 @@ int Application::init ()
 
 
 
-int Application::update () 
+int Application::update ()
 {
 	musique->playMusique(AMBIANT);
 
@@ -125,28 +132,28 @@ int Application::update ()
 	{
 		/* look for an event */
 		if (SDL_PollEvent(&event)) {
-			
+
 			switch (event.type) {
 				case SDL_KEYDOWN:
 					switch( event.key.keysym.sym ) {
-						case SDLK_UP:	
+						case SDLK_UP:
 							cout << "Touche haut appuyee" << endl;
-							keyValue.isArrowUpPressed=true;		
-							background->setSpeedKeyUpPressed();							
+							keyValue.isArrowUpPressed=true;
+							background->setSpeedKeyUpPressed();
 							break;
-						case SDLK_DOWN:	
+						case SDLK_DOWN:
 							cout << "Touche bas appuyee" << endl;
-							keyValue.isArrowDownPressed=true;	
+							keyValue.isArrowDownPressed=true;
 							background->setSpeedKeyDownPressed();
 							break;
-						case SDLK_LEFT:	
+						case SDLK_LEFT:
 							cout << "Touche gauche appuyee" << endl;
-							keyValue.isArrowLeftPressed=true;	
+							keyValue.isArrowLeftPressed=true;
 							background->setSpeedKeyLeftPressed();
 							break;
 						case SDLK_RIGHT:
 							cout << "Touche droite appuyee" << endl;
-							keyValue.isArrowRightPressed=true;	
+							keyValue.isArrowRightPressed=true;
 							background->setSpeedKeyRightPressed();
 							break;
 						case SDLK_ESCAPE:	gameover = 1;	break;
@@ -158,24 +165,24 @@ int Application::update ()
 				case SDL_KEYUP:
 					switch( event.key.keysym.sym )
 					{
-						case SDLK_UP:	
+						case SDLK_UP:
 							cout << "Touche haut relache" << endl;
-							keyValue.isArrowUpPressed=false;	
+							keyValue.isArrowUpPressed=false;
 							background->setSpeedKeyUpReleased();
 							break;
-						case SDLK_DOWN:	
+						case SDLK_DOWN:
 							cout << "Touche bas relache" << endl;
-							keyValue.isArrowDownPressed=false;	
+							keyValue.isArrowDownPressed=false;
 							background->setSpeedKeyDownReleased();
 							break;
-						case SDLK_LEFT:	
+						case SDLK_LEFT:
 							cout << "Touche gauche relache" << endl;
-							keyValue.isArrowLeftPressed=false;	
+							keyValue.isArrowLeftPressed=false;
 							background->setSpeedKeyLeftReleased();
 							break;
 						case SDLK_RIGHT:
 							cout << "Touche droite relache" << endl;
-							keyValue.isArrowRightPressed=false;	
+							keyValue.isArrowRightPressed=false;
 							background->setSpeedKeyRightReleased();
 							break;
 						default: break;
@@ -203,7 +210,7 @@ int Application::update ()
 
 					if(keyValue.isLeftMouseClickOnCadre)
 						cadre->handleInput(event);
-					
+
 					cout << "Bouton souris relache" <<endl;
 					keyValue.isLeftMouseClickOnCadre=false;
 					keyValue.isLeftMouseClickOnBackground=false;
@@ -254,7 +261,7 @@ int Application::update ()
 		}
 
 		draw();
-	} // end while 
+	} // end while
 
 
 
@@ -264,7 +271,7 @@ int Application::update ()
 
 /**
 */
-int Application::draw() 
+int Application::draw()
 {
 	background->draw(screen);
 

@@ -1,19 +1,19 @@
 #pragma once
 
-#include "Application.h"
+//#include "Application.h"
 #include "Arme.h"
 #include "DisplayFormatSurfaces.h"
 #include "Configuration.h"
 #include "Affichage.h"
 #include "Outils.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 #include <map>
 using namespace std;
 
 class Arme;
 class UsineArmes;
-class Application;
+//class Application;
 
 enum typeUniteControle {
 	NON_DEFINI,
@@ -45,7 +45,7 @@ public:
 	double angle;
 	int etat;
 	typeUniteControle typeUnite;
-	
+
 	int vie;
 	//Les coordonnées x et y du point
     float posX, posY;

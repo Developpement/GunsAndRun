@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SDL.h>
-#include <SDL_rotozoom.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_rotozoom.h>
 #include <algorithm>
 
 /**
@@ -52,7 +52,7 @@ SDL_Surface* chargeBMPFormatAffichable (const char* nomFichier, int largeur, int
 
 
 /**
-* \brief Affiche une surface à l'écran en effectuant le redimmentionnement, la rotation, puis la copie d'une SDL_Surface sur une autre (écran). 
+* \brief Affiche une surface à l'écran en effectuant le redimmentionnement, la rotation, puis la copie d'une SDL_Surface sur une autre (écran).
 * \param ecran Surface de destination.
 * \param src Surface source.
 * \param largeur Largeur de la surface src affichée à l'écran.

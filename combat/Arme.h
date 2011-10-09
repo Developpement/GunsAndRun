@@ -1,29 +1,29 @@
 #pragma once
 
-#include "Application.h"
+//#include "Application.h"
 #include "Balle.h"
 #include "DisplayFormatSurfaces.h"
 #include "Affichage.h"
 #include "Outils.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 #include <map>
 using namespace std;
 
 #define MAX_BALLES 300
 
+//class Application;
 //class UsineArmes;
 class UsineBalles;
-class Application;
 class Unite;
 
-class Arme 
+class Arme
 {
 public:
 	Application* application;
 	Surfaces* surfaces;
 	UsineBalles* usineBalles;
-	
+
 
 	int typeUnite;
 	int identifiantJoueur;
@@ -47,8 +47,8 @@ public:
     //La vitesse du point
     float velX, velY;
 
-	template <typename T>
-	Arme(T posX, T posY, double& angle, string& typeArme, string& typeBalle, int typeUnite, int identifiantJoueur);
+	//template <typename T>
+	Arme(float& posX, float& posY, double& angle, string& typeArme, string& typeBalle, int typeUnite, int identifiantJoueur);
 	int handleInput(SDL_Event& event);
 	int load();
 	int update();
@@ -61,28 +61,6 @@ public:
 };
 
 
-
-template <typename T>
-Arme::Arme(T posX, T posY, double& angle, string& typeArme,string& typeBalle, int typeUnite, int identifiantJoueur)
-{
-	this->type=typeArme;
-	this->sousTypeBalle=typeBalle;
-
-	this->typeUnite= typeUnite;
-	application=Application::getInstance();
-	surfaces=Surfaces::getInstance();
-	usineBalles=UsineBalles::getInstance();
-
-	load();
-	
-	this->identifiantJoueur = identifiantJoueur;
-	this->posX = static_cast<float>(posX);
-	this->posY = static_cast<float>(posY);
-	velX = 1;
-	velY = 1;
-	cadence = 1;
-	this->angle=angle;
-}
 
 
 

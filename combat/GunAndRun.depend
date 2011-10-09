@@ -7,3 +7,165 @@
 	<SDL/SDL_rotozoom.h>
 	<algorithm>
 
+1317154708 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\affichage.cpp
+	"Affichage.h"
+
+1318101754 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\affichage.h
+	<SDL/SDL.h>
+	<SDL/SDL_rotozoom.h>
+	<algorithm>
+
+1318111823 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\application.cpp
+	"Application.h"
+	<windows.h>
+
+1318175533 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\application.h
+	"Musique.h"
+	"Cadre.h"
+	"Background.h"
+	"Unite.h"
+	"DisplayFormatSurfaces.h"
+	"Affichage.h"
+	"Conversions.h"
+	"Configuration.h"
+	"definitions.h"
+	<SDL/SDL_rotozoom.h>
+	<SDL/SDL.h>
+	<list>
+
+1318112607 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\musique.h
+	"SDL/SDL.h"
+	"SDL/SDL_mixer.h"
+	"Configuration.h"
+	"definitions.h"
+	"Conversions.h"
+	<windows.h>
+	<map>
+	<string>
+
+1318101936 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\configuration.h
+	<string>
+	<fstream>
+	<iostream>
+	<vector>
+	<sstream>
+	<map>
+	"definitions.h"
+	<TR/DialogueTr.h>
+
+1317511959 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\definitions.h
+	<string>
+
+1314832912 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\conversions.h
+	<string>
+	<iostream>
+	<sstream>
+
+1318112570 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\cadre.h
+	"DisplayFormatSurfaces.h"
+	"Configuration.h"
+	"Affichage.h"
+	"Outils.h"
+	"Bouton.h"
+	<SDL/SDL.h>
+	<vector>
+	<map>
+
+1318102178 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\displayformatsurfaces.h
+	"Outils.h"
+	"conversions.h"
+	"Configuration.h"
+	"definitions.h"
+	"Affichage.h"
+	<SDL/SDL_image.h>
+	<SDL/SDL.h>
+	<string>
+	<map>
+	<cmath>
+
+1318101944 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\outils.h
+	<SDL/SDL.h>
+	<vector>
+
+1318112731 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\bouton.h
+	"Application.h"
+	"Configuration.h"
+
+1318176409 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\background.h
+	"Application.h"
+	"DisplayFormatSurfaces.h"
+	"Configuration.h"
+	"Affichage.h"
+	"Outils.h"
+	<cmath>
+	<SDL/SDL.h>
+	<vector>
+	<map>
+
+1318112626 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\unite.h
+	"Arme.h"
+	"DisplayFormatSurfaces.h"
+	"Configuration.h"
+	"Affichage.h"
+	"Outils.h"
+	<SDL/SDL.h>
+	<vector>
+	<map>
+
+1318175766 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\arme.h
+	"Balle.h"
+	"DisplayFormatSurfaces.h"
+	"Affichage.h"
+	"Outils.h"
+	<SDL/SDL.h>
+	<vector>
+	<map>
+
+1318175517 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\balle.h
+	"Application.h"
+	"DisplayFormatSurfaces.h"
+	"Affichage.h"
+	"Outils.h"
+	<SDL/SDL.h>
+	<vector>
+	<map>
+
+1318176093 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\arme.cpp
+	"Arme.h"
+
+1318176405 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\background.cpp
+	"Background.h"
+
+1318176547 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\balle.cpp
+	"Balle.h"
+
+1318177381 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\bouton.cpp
+	"Bouton.h"
+
+1317569720 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\cadre.cpp
+	"Cadre.h"
+
+1318112342 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\combat.cpp
+	"Application.h"
+	<windows.h>
+
+1317512749 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\configuration.cpp
+	"Configuration.h"
+
+1318177512 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\displayformatsurfaces.cpp
+	"DisplayFormatSurfaces.h"
+
+1318177543 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\musique.cpp
+	"Musique.h"
+
+1314491618 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\outils.cpp
+	"Outils.h"
+	<math.h>
+
+1318177600 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\sdl_collide.cpp
+	"SDL_collide.h"
+	"assert.h"
+
+1318177551 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\sdl_collide.h
+	<SDL/SDL.h>
+

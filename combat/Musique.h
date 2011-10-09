@@ -1,13 +1,14 @@
 #pragma once
 
-#include "SDL.h"
-#include "SDL_mixer.h"
+#include "SDL/SDL.h"
+#include "SDL/SDL_mixer.h"
 #include "Configuration.h"
 #include "definitions.h"
 #include "Conversions.h"
 
+#ifdef WIN32
 #include <windows.h>
-
+#endif
 
 #include <map>
 #include <string>
@@ -17,7 +18,7 @@ using namespace std;
 * \struct MusiqueType
 * \brief Enumère tous les types de musique disponibles.
 */
-enum MusiqueType 
+enum MusiqueType
 {
 	AMBIANT,
 	CALME,
@@ -29,7 +30,7 @@ enum MusiqueType
 * \class Musique
 * \brief Permet de jouer de la musique ou des sons.
 */
-class Musique 
+class Musique
 {
 	static Musique* _singleton;
 

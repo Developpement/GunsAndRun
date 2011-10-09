@@ -46,15 +46,15 @@ bool Musique::load()
 {
 #ifndef NOMUSIC
 	// Chargement des sons et musiques dans les maps
-	repertoireSon = configuration->getValeurParametre("repertoireSon", fichierConfigApplication);
-	repertoireMusiqueAmbiant = configuration->getValeurParametre("repertoireMusiqueAmbiant", fichierConfigApplication);
-	repertoireMusiqueVif = configuration->getValeurParametre("repertoireMusiqueVif", fichierConfigApplication);
-	repertoireMusiqueCalme = configuration->getValeurParametre("repertoireMusiqueCalme", fichierConfigApplication);
+	repertoireSon = configuration->getValeurParametre("repertoireSon");
+	repertoireMusiqueAmbiant = configuration->getValeurParametre("repertoireMusiqueAmbiant");
+	repertoireMusiqueVif = configuration->getValeurParametre("repertoireMusiqueVif");
+	repertoireMusiqueCalme = configuration->getValeurParametre("repertoireMusiqueCalme");
 
 	HANDLE hfind;
 	WIN32_FIND_DATA wfd;
 	string tofind;
-	
+
 	//Chargement de la musique 'ambiant'
 	tofind = repertoireMusiqueAmbiant+"\\*.wav";
 	hfind = FindFirstFile(tofind.c_str(), &wfd);
@@ -71,7 +71,7 @@ bool Musique::load()
 	}
 	else cout << "Aucun fichier trouve dans le repertoire " << repertoireMusiqueAmbiant << endl;
 	FindClose(hfind);
-	
+
 	// Chargement de la musique 'vif'
 	tofind = repertoireMusiqueVif+"\\*.wav";
 	hfind = FindFirstFile(tofind.c_str(), &wfd);

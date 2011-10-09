@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Application.h"
+//#include "Application.h"
 #include "DisplayFormatSurfaces.h"
 #include "Configuration.h"
 #include "Affichage.h"
 #include "Outils.h"
 #include "Bouton.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 #include <map>
 using namespace std;
@@ -24,11 +24,11 @@ public:
 	Configuration* configuration;
 	Application* application;
 	Surfaces* surfaces;
-	
+
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
 	vector<SDL_Rect>* boitesCollisions;
-	
+
 	// On utilise un vecteur de pointeurs, car il n'est pas possible d'instancier une classe virtuelle pure dans un conteneur de type vector
 	vector<Bouton*> boutonsCadre;
 	/*BoutonArme1* boutonArme1;

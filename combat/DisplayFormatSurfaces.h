@@ -6,8 +6,8 @@
 #include "definitions.h"
 #include "Affichage.h"
 
-#include <SDL_image.h>
-#include <SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL.h>
 #include <string>
 #include <map>
 #include <cmath>
@@ -37,9 +37,9 @@ class Surfaces
 	static Surfaces* _singleton;
 
 	/*! Liste des animation indexées par nom. */
-	map<string,vector<SDL_Surface*>> animList;
+	map< string,vector<SDL_Surface*> > animList;
 	/*! A chaque animation correspond une boite de collisions. */
-	map<string,vector<SDL_Rect>> collisionList;
+	map< string,vector<SDL_Rect> > collisionList;
 
 	/*! Permet d'utiliser les fichiers de configuration pour charger les images. */
 	Configuration* configuration;
@@ -49,7 +49,7 @@ class Surfaces
 
 public:
 
-	
+
 	/**
 	* \brief Force l'existance unique d'un objet Surfaces.
 	* \details La première fois que la méthode est appelée, une instance de la classe est crée. Les fois suivantes, seul le pointeur vers la première instance est appelée
@@ -63,7 +63,7 @@ public:
 	* \return Pointeur vers l'adresse 0.
 	*/
 	static Surfaces* destruction();
-	
+
 	/**
 	* \brief charge toutes les animations et les boitiers de collision à partir de cette méthode.
 	* \details Cette méthode ne charge les images que si le conteneur est vide.
@@ -71,18 +71,18 @@ public:
 	*/
 	bool load();
 
-	
+
 	int addAnimation (string Animation, string imageNeutre);
 	int addCollisionBox(string Animation, string imageNeutre);
-	
+
 	vector<SDL_Surface*>* getAnimation (const char* nomAnimation);
 	vector<SDL_Surface*>* getAnimation (const char* name, int& largeur, int& hauteur);
 
 	pair<int,int> getSizeAnimationFirstImage (const char* name);
-	
+
 	vector<SDL_Rect>* getBoitesCollisions (const char* name);
 	vector<SDL_Rect>* getBoitesCollisions (const char* name, int& largeur, int& hauteur);
-	
-	
+
+
 };
 
