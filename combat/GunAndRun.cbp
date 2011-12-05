@@ -11,25 +11,31 @@
 				<Option object_output="obj\" />
 				<Option type="0" />
 				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
 			</Target>
 			<Target title="console">
 				<Option output="bin\GunAndRun" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-fexpensive-optimizations" />
-			<Add option="-Os" />
 			<Add option="-Wall" />
+			<Add option="-g" />
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
-			<Add option="-s" />
+			<Add library="mingw32" />
+			<Add library="SDLmain" />
 			<Add library="SDL" />
+			<Add library="SDL_gfx" />
 			<Add library="SDL_image" />
-			<Add library="SDL_mixer" />
 			<Add library="SDL_ttf" />
 		</Linker>
 		<Unit filename="Affichage.cpp" />
@@ -57,6 +63,8 @@
 		<Unit filename="Outils.h" />
 		<Unit filename="SDL_Collide.h" />
 		<Unit filename="SDL_collide.cpp" />
+		<Unit filename="Timers.cpp" />
+		<Unit filename="Timers.h" />
 		<Unit filename="Unite.cpp" />
 		<Unit filename="Unite.h" />
 		<Unit filename="conversions.h" />

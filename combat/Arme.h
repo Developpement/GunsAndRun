@@ -1,11 +1,14 @@
 #pragma once
 
-//#include "Application.h"
 #include "Balle.h"
 #include "DisplayFormatSurfaces.h"
 #include "Affichage.h"
 #include "Outils.h"
+#include "Debug.h"
+#include "Timers.h"
+#include "Configuration.h"
 #include <SDL/SDL.h>
+#include <string>
 #include <vector>
 #include <map>
 using namespace std;
@@ -19,11 +22,14 @@ class Unite;
 
 class Arme
 {
-public:
+
 	Application* application;
 	Surfaces* surfaces;
 	UsineBalles* usineBalles;
+	Timers* timers;
+	Configuration* configuration;
 
+public:
 
 	int typeUnite;
 	int identifiantJoueur;
@@ -36,10 +42,11 @@ public:
 	double angle;
 	bool tir;
 
+	int timerCadence;
+
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
 	vector<SDL_Rect>* boitesCollisions;
-
 
 	//Les coordonnées x et y du point
     float posX, posY;
@@ -53,8 +60,8 @@ public:
 	int load();
 	int update();
 	void updateAngle(double& angle);
-	int debutTir ();
-	int	arretTir();
+	void debutTir ();
+	void arretTir();
 	int draw(SDL_Surface* screen);
 
 	Arme* clone();
@@ -68,6 +75,7 @@ public:
 class UsineArmes
 {
 	static UsineArmes* _singleton;
+	Debug* debug;
 	map<string, Arme*> modelesArmes;
 
 	UsineArmes();

@@ -5,6 +5,8 @@
 
 Cadre::Cadre(int &posX, int &posY, Configuration *config, Surfaces *surfaces, Application* application)
 {
+	debug=Debug::getInstance();
+
 	this->posX=posX;
 	this->posY=posY;
 
@@ -58,7 +60,7 @@ bool Cadre::actionSouris(int& X, int& Y)
 
 int Cadre::handleInput(SDL_Event& event)
 {
-	cout << "Cadre doit effectuer une action" << endl;
+	debug->print("Cadre doit effectuer une action");
 
 	return 0;
 }

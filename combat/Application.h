@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "Timers.h"
 #include "Musique.h"
 #include "Cadre.h"
 #include "Background.h"
@@ -10,6 +10,7 @@
 #include "Conversions.h"
 #include "Configuration.h"
 #include "definitions.h"
+#include "Debug.h"
 #include <SDL/SDL_rotozoom.h>
 #include <SDL/SDL.h>
 
@@ -62,7 +63,12 @@ class Application
 	/*! Liste des images chargées en mémoire. */
 	Surfaces* surfaces;
 	/*! Permet l'utilisation de musique et de sons. */
-	Musique* musique;
+	//Musique* musique;
+
+	/*! Les Timers */
+	Timers* timers;
+
+	Debug* debug;
 
 
 	/**

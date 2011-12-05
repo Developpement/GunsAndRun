@@ -2,8 +2,9 @@
 
 Bouton::Bouton()
 {
+	debug=Debug::getInstance();
 	this->application=0;
-	cout << "Constructeur du bouton non appele" << endl;
+	debug->print("Constructeur du bouton non appele");
 }
 
 
@@ -12,7 +13,7 @@ Bouton::Bouton()
 // ------------------------------------------------------------------------------------
 BoutonArme1::BoutonArme1()
 {
-	cout << "Constructeur BoutonArme1 appele!" << endl;
+	debug->print("Constructeur BoutonArme1 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -52,7 +53,7 @@ bool BoutonArme1::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonArme2::BoutonArme2()
 {
-	cout << "Constructeur BoutonArme2 appele!" << endl;
+	debug->print("Constructeur BoutonArme2 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -92,7 +93,7 @@ bool BoutonArme2::draw(SDL_Surface* screen)
 
 BoutonArme3::BoutonArme3()
 {
-	cout << "Constructeur BoutonArme3 appele!" << endl;
+	debug->print("Constructeur BoutonArme3 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -127,7 +128,7 @@ bool BoutonArme3::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonArme4::BoutonArme4()
 {
-	cout << "Constructeur BoutonArme4 appele!" << endl;
+	debug->print("Constructeur BoutonArme4 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -163,7 +164,7 @@ bool BoutonArme4::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme1::BoutonAmelioreArme1()
 {
-	cout << "Constructeur BoutonAmelioreArme1 appele!" << endl;
+	debug->print("Constructeur BoutonAmelioreArme1 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -203,7 +204,7 @@ bool BoutonAmelioreArme1::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme2::BoutonAmelioreArme2()
 {
-	cout << "Constructeur BoutonAmelioreArme2 appele!" << endl;
+	debug->print("Constructeur BoutonAmelioreArme2 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -239,7 +240,7 @@ bool BoutonAmelioreArme2::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme3::BoutonAmelioreArme3()
 {
-	cout << "Constructeur BoutonAmelioreArme3 appele!" << endl;
+	debug->print("Constructeur BoutonAmelioreArme3 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -275,7 +276,7 @@ bool BoutonAmelioreArme3::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme4::BoutonAmelioreArme4()
 {
-	cout << "Constructeur BoutonAmelioreArme4 appele!" << endl;
+	debug->print("Constructeur BoutonAmelioreArme4 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -311,7 +312,7 @@ bool BoutonAmelioreArme4::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme1::BoutonSupprimeArme1()
 {
-	cout << "Constructeur BoutonSupprimeArme1 appele!" << endl;
+	debug->print("Constructeur BoutonSupprimeArme1 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -351,7 +352,7 @@ bool BoutonSupprimeArme1::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme2::BoutonSupprimeArme2()
 {
-	cout << "Constructeur BoutonSupprimeArme2 appele!" << endl;
+	debug->print("Constructeur BoutonSupprimeArme2 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -387,7 +388,7 @@ bool BoutonSupprimeArme2::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme3::BoutonSupprimeArme3()
 {
-	cout << "Constructeur BoutonSupprimeArme3 appele!" << endl;
+	debug->print("Constructeur BoutonSupprimeArme3 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -423,7 +424,7 @@ bool BoutonSupprimeArme3::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme4::BoutonSupprimeArme4()
 {
-	cout << "Constructeur BoutonSupprimeArme4 appele!" << endl;
+	debug->print("Constructeur BoutonSupprimeArme4 appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -458,7 +459,7 @@ bool BoutonSupprimeArme4::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonGrade::BoutonGrade()
 {
-	cout << "Constructeur BoutonGrade appele!" << endl;
+	debug->print("Constructeur BoutonGrade appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -498,7 +499,7 @@ bool BoutonGrade::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonVie::BoutonVie()
 {
-	cout << "Constructeur BoutonVie appele!" << endl;
+	debug->print("Constructeur BoutonVie appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -538,7 +539,7 @@ bool BoutonVie::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonDefense::BoutonDefense()
 {
-	cout << "Constructeur BoutonDefense appele!" << endl;
+	debug->print("Constructeur BoutonDefense appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();
@@ -578,7 +579,7 @@ bool BoutonDefense::draw(SDL_Surface* screen)
 // ------------------------------------------------------------------------------------
 BoutonSupport::BoutonSupport()
 {
-	cout << "Constructeur BoutonSupport appele!" << endl;
+	debug->print("Constructeur BoutonSupport appele!");
 	this->application=Application::getInstance();
 	this->configuration=Configuration::getInstance();
 	init();

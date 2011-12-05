@@ -7,8 +7,10 @@
 #include <sstream>
 #include <map>
 #include "definitions.h"
+#include "Debug.h"
 #ifdef WIN32
-#include <TR/DialogueTr.h>
+#include <Les miens/DialogueTr.h>
+#include <windows.h>
 #endif
 using namespace std;
 
@@ -22,6 +24,8 @@ class Configuration
 	map<string,string> config;
 	/*! Unique instance de la configuration du jeu. */
 	static Configuration* _singleton;
+
+	Debug* debug;
 
 	/**
 	* \brief Constructeur de la classe Configuration.
@@ -61,6 +65,9 @@ public:
 	* \param nomParametre Nom du paramètre à rechercher.
 	* \return La valeur du paramètre sous forme de chaine.
 	*/
+	//template <typename T>
+	//T getValeurParametreA (const char* nomParametre);
+
 	string getValeurParametre(const char* nomParametre);
 
 #if 0

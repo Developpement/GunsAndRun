@@ -3,7 +3,7 @@
 
 #include "Application.h"
 #include "Configuration.h"
-
+#include "Debug.h"
 class Application;
 
 
@@ -14,6 +14,7 @@ public:
 	int posX,posY; // position de l'image sur l'écran
 	Application* application;
 	Configuration* configuration;
+	Debug* debug;
 
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;

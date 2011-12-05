@@ -2,9 +2,12 @@
 #include "Arme.h"
 
 
-//template <typename T>
+/**
+* \brief
+*/
 Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typeBalle, int typeUnite, int identifiantJoueur)
 {
+	timers = Timers::getInstance();
 	this->type=typeArme;
 	this->sousTypeBalle=typeBalle;
 
@@ -12,6 +15,7 @@ Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typ
 	application=Application::getInstance();
 	surfaces=Surfaces::getInstance();
 	usineBalles=UsineBalles::getInstance();
+	configuration=Configuration::getInstance();
 
 	load();
 
@@ -20,13 +24,20 @@ Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typ
 	this->posY = static_cast<float>(posY);
 	velX = 1;
 	velY = 1;
-	cadence = 1;
+	tir=false;
+	
+	// Nombre de balles par seconde
+	
+	string cadenceKey = typeArme+".cadence";
+	
+	cadence = stringToInt(configuration->getValeurParametre(cadenceKey.c_str()));
+	
 	this->angle=angle;
 }
 
-
-
-
+/**
+* \brief
+*/
 int Arme::load()
 {
 	animation = surfaces->getAnimation((char*)type.c_str());
@@ -36,20 +47,27 @@ int Arme::load()
 	return 0;
 }
 
+/**
+* \brief
+*/
 int Arme::handleInput(SDL_Event& event)
 {
-
 	return 0;
 }
 
-
+/**
+* \brief
+*/
 int Arme::update()
 {
-	if (tir == true) {// AJouter la fréquence
-		if (application->balles.size()>=MAX_BALLES)
-			application->balles.erase(application->balles.begin());
+	if (tir == true) {
+		if(timers->timerInferieurHorloge(timerCadence)) {
+			timers->horlogePlusDelai(timerCadence,cadence);
+			if (application->balles.size()>=MAX_BALLES)
+				application->balles.erase(application->balles.begin());
 
-		application->balles.push_back(usineBalles->creationBalle(posX, posY, angle, sousTypeBalle, identifiantJoueur));
+			application->balles.push_back(usineBalles->creationBalle(posX, posY, angle, sousTypeBalle, identifiantJoueur));
+		}
 	}
 	if(typeUnite==PNON_JOUEUR){
 		velX=application->background->velXbackground;
@@ -61,27 +79,33 @@ int Arme::update()
 	return 0;
 }
 
-int Arme::debutTir()
+/**
+* \brief
+*/
+void Arme::debutTir()
 {
 	tir = true;
-	return 0;
 }
 
-
-int Arme::arretTir()
+/**
+* \brief
+*/
+void Arme::arretTir()
 {
 	tir = false;
-	return 0;
 }
 
-
-
+/**
+* \brief
+*/
 void Arme::updateAngle(double &angle)
 {
 	this->angle = angle;
 }
 
-
+/**
+* \brief
+*/
 int Arme::draw(SDL_Surface* screen)
 {
 	if (angle == 0)
@@ -107,7 +131,9 @@ int Arme::draw(SDL_Surface* screen)
 //--------------------------------------------------------
 UsineArmes* UsineArmes::_singleton=0;
 
-
+/**
+* \brief
+*/
 UsineArmes* UsineArmes::getInstance()
 {
 	if(_singleton==0) {
@@ -120,6 +146,9 @@ UsineArmes* UsineArmes::getInstance()
 	return _singleton;
 }
 
+/**
+* \brief
+*/
 UsineArmes* UsineArmes::destruction()
 {
 	delete _singleton;
@@ -127,27 +156,34 @@ UsineArmes* UsineArmes::destruction()
 	return _singleton;
 }
 
+/**
+* \brief
+*/
 UsineArmes::UsineArmes()
 {
+	debug=Debug::getInstance();
 }
 
+/**
+* \brief
+*/
 UsineArmes::~UsineArmes()
 {
 	for(map<string,Arme*>::iterator it=modelesArmes.begin();it!=modelesArmes.end();it++)
 		delete it->second;
 	modelesArmes.clear();
 
-	cout << "UsineArmes destructeur appele." << endl;
+	debug->print("UsineArmes destructeur appele.");
 }
 
-
-
-
+/**
+* \brief
+*/
 bool UsineArmes::chargement()
 {
 	ifstream fichier(fichierConfigArme.c_str());
 	if(fichier.fail()) {
-		cout << "Impossible d'ouvrir le fichier " << fichierConfigArme << endl;
+		debug->print("Impossible d'ouvrir le fichier "+fichierConfigArme);
 		return false;
 	}
 
@@ -181,7 +217,9 @@ bool UsineArmes::chargement()
 	return true;
 }
 
-
+/**
+* \brief
+*/
 Arme* Arme::clone()
 {
 	return new Arme(*this);

@@ -7,6 +7,7 @@ static float coeffSpeedDiago=1.4f;
 
 Background::Background(int &posX, int &posY, Configuration *config, Surfaces *surfaces, Application* application)
 {
+	debug=Debug::getInstance();
 	this->config = config;
 	this->surfaces = surfaces;
 	this->application = application;
@@ -22,7 +23,13 @@ Background::Background(int &posX, int &posY, Configuration *config, Surfaces *su
 
 int Background::load()
 {
+	string windowWidthStr= config->getValeurParametre("ScreenWidth");
+	string windowHeightStr= config->getValeurParametre("ScreenHeight");
+	int windowWidth=stringToInt(windowWidthStr);
+	int windowHeight=stringToInt(windowHeightStr);
+
 	animation = surfaces->getAnimation("backgroundVisible");
+	fondNoir = surfaces->getAnimation("ecranNoir", windowWidth, windowHeight);
 	imageCourante=(*animation).begin();
 	boitesCollisions = surfaces->getBoitesCollisions("backgroundVisible");
 
@@ -44,7 +51,7 @@ bool Background::detecteCollisions(float& decalX, float& decalY)
 			float newY = posYbackground + decalY;
 
 			if (collision(newX, newY, *boitesCollisions, (*itUnite)->posX, (*itUnite)->posY, *(*itUnite)->boitesCollisions) == true) {
-				cout << "collision" << endl;
+				debug->print("collision");
 				return true;
 			}
 			return false;
@@ -262,6 +269,7 @@ int Background::update()
 
 int Background::draw(SDL_Surface *screen)
 {
+	afficheEcran(zero,zero, screen, fondNoir->at(0));
 	afficheEcran(static_cast<int>(posXbackground), static_cast<int>(posYbackground), screen, *imageCourante);
 
 	return 0;

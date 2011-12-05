@@ -34,8 +34,9 @@ Surfaces* Surfaces::destruction()
 
 Surfaces::Surfaces()
 {
+	debug=Debug::getInstance();
 	configuration=Configuration::getInstance();
-	cout << "Constructeur Surfaces apelle" << endl;
+	debug->print("Constructeur Surfaces apelle");
 }
 
 /*
@@ -150,7 +151,7 @@ int Surfaces::addAnimation (string nomAnim, string imageNeutre)
 
 
 		if ( surfaceOptimisee == 0 ) {
-			cout << "IMG_Load error " << IMG_GetError () << endl << ", with " << buf << endl;
+			debug->print("IMG_Load error "+toStringA(IMG_GetError())+"\n, with "+buf);
 			break;
 		}
 		else {
@@ -194,7 +195,7 @@ int Surfaces::addCollisionBox(string nomAnim, string imageNeutre)
 			SDL_FreeSurface(surfaceBrute);
 		}
 		else {
-			cout << "IMG_Load error " << IMG_GetError () << endl << ", with " << buf << endl;
+			debug->print("IMG_Load error "+toStringA(IMG_GetError())+"\n, with "+buf);
 			break;
 		}
 
@@ -215,16 +216,16 @@ int Surfaces::addCollisionBox(string nomAnim, string imageNeutre)
 bool Surfaces::load()
 {
 	if((!animList.empty())||(!collisionList.empty())) {
-		cout << "Erreur: Tentative de chargement d'images déjà en mémoire." << endl;
+		debug->print("Erreur: Tentative de chargement d'images déjà en mémoire.");
 		return false;
 	}
 
-	cout << "Chargement des animations et des boites de collisions." << endl;
+	debug->print("Chargement des animations et des boites de collisions.");
 
 	// Ouverture du fichier d'images en lecture
 	ifstream fichier (fichierConfigImages.c_str());
 	if (fichier.fail()) {
-		cout << "Cannot write in file " << fichierConfigImages << endl;
+		debug->print("Cannot write in file "+fichierConfigImages);
 		return false;
 	}
 

@@ -4,6 +4,8 @@
 #include "DisplayFormatSurfaces.h"
 #include "Affichage.h"
 #include "Outils.h"
+#include "Debug.h"
+#include "Timers.h"
 #include <SDL/SDL.h>
 #include <vector>
 #include <map>
@@ -16,6 +18,8 @@ class Balle
 {
 public:
 	Application* application;
+	Debug* debug;
+	Timers* timers;
 
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
@@ -25,9 +29,11 @@ public:
 	int vie;
 	int degats;
 	double angle;
-	//int etat;
 
 	string type;
+
+
+	int timerDureeVie, dureeVie;
 
 	//Les coordonnées x et y du point
     float vitesse, posX, posY, velX, velY;
@@ -54,6 +60,9 @@ public:
 class UsineBalles
 {
 	static UsineBalles* _singleton;
+	Debug* debug;
+	Timers* timers;
+
 	map<string, Balle*> modelesBalles;
 
 	UsineBalles();
@@ -82,6 +91,7 @@ Balle* UsineBalles::creationBalle(T& posX, T& posY, double angle, string& typeBa
 		nouvelleBalle->posY = (float)posY + ((float)(*(nouvelleBalle->imageCourante))->h)/2;
 		nouvelleBalle->velX = angleVersX(nouvelleBalle->vitesse, angle);
 		nouvelleBalle->velY = angleVersY(nouvelleBalle->vitesse, angle);
+		timers->horlogePlusDelai(nouvelleBalle->timerDureeVie,nouvelleBalle->dureeVie);
 		return nouvelleBalle;
 	}
 	else return 0;

@@ -1,1 +1,2 @@
 armeDefaut.precisionDegre;0
+armeDefaut.cadence;1000

@@ -6,7 +6,8 @@
 
 Unite::Unite()
 {
-	cout << "Constructeur Unite appele" << endl;
+	debug=Debug::getInstance();
+	debug->print("Constructeur Unite appele");
 }
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -53,8 +54,7 @@ int UniteJoueurJouable::load()
 	boitesCollisions = surfaces->getBoitesCollisions("uniteJoueur");
 
 	//autres
-	string playerStartLife=configuration->getValeurParametre("playerStartLife");
-	vie=stringToInt(playerStartLife);
+	vie = stringToInt(configuration->getValeurParametre("playerStartLife"));
 #endif
 	return 0;
 }
@@ -81,13 +81,13 @@ int UniteJoueurJouable::handleInput(SDL_Event& event)
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 			//if ((typeUnite == PJ_JOUABLE)&&(application->keyValue.isLeftMouseClickOnBackground)) {
-				//cout << "Feu!!!" << endl;
+				//debug->print("Feu!!!" << endl;
 				arme->debutTir();
 			//}
 			break;
 		case SDL_MOUSEBUTTONUP:
 			//if (typeUnite == PJ_JOUABLE) {
-				cout << "Stop Tir (nb balles=" <<application->balles.size()<<")."<< endl;
+				debug->print("Stop Tir (nb balles="+toStringA(application->balles.size())+").");
 				arme->arretTir();
 			//}
 			break;
@@ -185,8 +185,7 @@ int UniteNonJoueur::load()
 	boitesCollisions = surfaces->getBoitesCollisions("uniteJoueur");
 
 	//autres
-	string playerStartLife=configuration->getValeurParametre("playerStartLife");
-	vie=stringToInt(playerStartLife);
+	vie=stringToInt(configuration->getValeurParametre("playerStartLife"));
 #endif
 	return 0;
 }

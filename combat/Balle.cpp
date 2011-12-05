@@ -5,10 +5,15 @@
 template <typename T>
 Balle::Balle(T& posX, T& posY, double angle, string& type, int& identifiantJoueur)
 {
+	debug=Debug::getInstance();
 	application = Application::getInstance();
+	timers=Timers::getInstance();
 	this->identifiantJoueur=identifiantJoueur;
 	this->angle = angle;
 	this->type = type;
+
+	string configDureeVie = Configuration::getInstance()->getValeurParametre((type+string(".dureeVie")).c_str());
+	dureeVie = stringToInt(configDureeVie);
 
 	load();
 }
@@ -51,6 +56,9 @@ int Balle::update()
 	posX += decalX;
 	posY += decalY;
 
+	if(timers->timerInferieurHorloge(timerDureeVie))
+		vie=0;
+
 	return 0;
 }
 
@@ -72,7 +80,7 @@ bool Balle::detecteCollisions(float& decalX, float& decalY)
 		if (( (*itUnite)->identifiantJoueur!=identifiantJoueur)&&(collision(newX, newY, *boitesCollisions, (*itUnite)->posX, (*itUnite)->posY, *(*itUnite)->boitesCollisions))) {
 			(*itUnite)->vie-=degats;
 			vie=0;
-			cout << "collision unite" << endl;
+			debug->print("collision unite");
 			return true;
 		}
 		itUnite++;
@@ -82,7 +90,7 @@ bool Balle::detecteCollisions(float& decalX, float& decalY)
 
 	if(collision(newX,newY,*boitesCollisions, posPixelXBackground, posPixelYBackground,*(application->background->boitesCollisions))){
 		this->vie=0;
-		//cout << "collision background" <<endl;
+		//debug->print("collision background" <<endl;
 		return true;
 	}
 
@@ -147,13 +155,15 @@ UsineBalles* UsineBalles::destruction()
 
 UsineBalles::UsineBalles()
 {
+	debug=Debug::getInstance();
+	timers=Timers::getInstance();
 }
 
 bool UsineBalles::chargement()
 {
 	ifstream fichier(fichierConfigBalle.c_str());
 	if(fichier.fail()) {
-		cout << "Impossible d'ouvrir le fichier " << fichierConfigBalle << endl;
+		debug->print("Impossible d'ouvrir le fichier "+fichierConfigBalle);
 		return false;
 	}
 

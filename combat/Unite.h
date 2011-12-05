@@ -6,6 +6,8 @@
 #include "Configuration.h"
 #include "Affichage.h"
 #include "Outils.h"
+#include "Conversions.h"
+#include "Debug.h"
 #include <SDL/SDL.h>
 #include <vector>
 #include <map>
@@ -30,6 +32,8 @@ public:
 	Application* application;
 	Configuration* configuration;
 	Surfaces* surfaces;
+
+	Debug* debug;
 
 	Arme* arme;
 	UsineArmes* usineArmes;

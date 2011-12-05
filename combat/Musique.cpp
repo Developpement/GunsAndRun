@@ -1,13 +1,13 @@
 
 #include "Musique.h"
-
+/*
 Musique* Musique::_singleton=0;
 
 
 Musique::Musique ()
 {
 	this->configuration = Configuration::getInstance();
-	cout << "Musique constructeur" << endl;
+	debug->print("Musique constructeur" << endl;
 }
 
 Musique* Musique::getInstance()
@@ -62,14 +62,14 @@ bool Musique::load()
 		do {
 			// the name of the oldest file must not be the current log file
 			string cFileName(wfd.cFileName); // Get a wstring to work
-			cout << "Musique ambiant: " << cFileName << endl;
+			debug->print("Musique ambiant: " << cFileName << endl;
 			Mix_Music* buf=Mix_LoadMUS((repertoireMusiqueAmbiant+"\\"+cFileName).c_str());
 			if(buf!=NULL)
 				musiquesAmbiant.insert(pair<string,Mix_Music*>(cFileName, buf) );
 
 		}while (FindNextFile(hfind, &wfd));
 	}
-	else cout << "Aucun fichier trouve dans le repertoire " << repertoireMusiqueAmbiant << endl;
+	else debug->print("Aucun fichier trouve dans le repertoire " << repertoireMusiqueAmbiant << endl;
 	FindClose(hfind);
 
 	// Chargement de la musique 'vif'
@@ -79,14 +79,14 @@ bool Musique::load()
 		do {
 			// the name of the oldest file must not be the current log file
 			string cFileName(wfd.cFileName); // Get a wstring to work
-			cout << "Musique vif: " << cFileName << endl;
+			debug->print("Musique vif: " << cFileName << endl;
 			Mix_Music* buf=Mix_LoadMUS((repertoireMusiqueVif+"\\"+cFileName).c_str());
 			if(buf!=NULL)
 				musiquesVif.insert(pair<string,Mix_Music*>(cFileName, buf) );
 
 		}while (FindNextFile(hfind, &wfd));
 	}
-	else cout << "Aucun fichier trouve dans le repertoire " << repertoireMusiqueVif << endl;
+	else debug->print("Aucun fichier trouve dans le repertoire " << repertoireMusiqueVif << endl;
 	FindClose(hfind);
 
 
@@ -97,14 +97,14 @@ bool Musique::load()
 		do {
 			// the name of the oldest file must not be the current log file
 			string cFileName(wfd.cFileName); // Get a wstring to work
-			cout << "Musique calme: " << cFileName << endl;
+			debug->print("Musique calme: " << cFileName << endl;
 			Mix_Music* buf=Mix_LoadMUS((repertoireMusiqueCalme+"\\"+cFileName).c_str());
 			if(buf!=NULL)
 				musiquesCalme.insert(pair<string,Mix_Music*>(cFileName, buf) );
 
 		}while (FindNextFile(hfind, &wfd));
 	}
-	else cout << "Aucun fichier trouve dans le repertoire " << repertoireMusiqueCalme << endl;
+	else debug->print("Aucun fichier trouve dans le repertoire " << repertoireMusiqueCalme << endl;
 	FindClose(hfind);
 
 	// Chargement des sons
@@ -114,14 +114,14 @@ bool Musique::load()
 		do {
 			// the name of the oldest file must not be the current log file
 			string cFileName(wfd.cFileName); // Get a wstring to work
-			cout << "son trouve: " << cFileName << endl;
+			debug->print("son trouve: " << cFileName << endl;
 			Mix_Chunk* buf=Mix_LoadWAV((repertoireSon+"\\"+cFileName).c_str());
 			if(buf!=NULL)
 				sons.insert(pair<string,Mix_Chunk*>(cFileName, buf) );
 
 		}while (FindNextFile(hfind, &wfd));
 	}
-	else cout << "Aucun fichier trouve dans le repertoire " << repertoireSon << endl;
+	else debug->print("Aucun fichier trouve dans le repertoire " << repertoireSon << endl;
 	FindClose(hfind);
 
 
@@ -166,3 +166,4 @@ bool Musique::playSound(Mix_Chunk* snd)
 
 	return false;
 }
+*/

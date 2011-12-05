@@ -1,3 +1,4 @@
+ecranNoir;images\\background\\noir.png
 backgroundVisible;images\\background\\decor1.png
 uniteJoueur;images\\personnages\\persoTest.png
 armeDefaut;images\\Armes\\ArmeDefaut.png

@@ -15,11 +15,12 @@
 	<SDL/SDL_rotozoom.h>
 	<algorithm>
 
-1318111823 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\application.cpp
+1318981270 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\application.cpp
 	"Application.h"
 	<windows.h>
 
-1318175533 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\application.h
+1318978971 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\application.h
+	"Timers.h"
 	"Musique.h"
 	"Cadre.h"
 	"Background.h"
@@ -33,7 +34,7 @@
 	<SDL/SDL.h>
 	<list>
 
-1318112607 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\musique.h
+1318185771 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\musique.h
 	"SDL/SDL.h"
 	"SDL/SDL_mixer.h"
 	"Configuration.h"
@@ -43,7 +44,7 @@
 	<map>
 	<string>
 
-1318101936 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\configuration.h
+1318182759 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\configuration.h
 	<string>
 	<fstream>
 	<iostream>
@@ -51,7 +52,7 @@
 	<sstream>
 	<map>
 	"definitions.h"
-	<TR/DialogueTr.h>
+	<windows.h>
 
 1317511959 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\definitions.h
 	<string>
@@ -130,7 +131,7 @@
 	<vector>
 	<map>
 
-1318176093 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\arme.cpp
+1318247437 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\arme.cpp
 	"Arme.h"
 
 1318176405 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\background.cpp
@@ -145,17 +146,17 @@
 1317569720 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\cadre.cpp
 	"Cadre.h"
 
-1318112342 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\combat.cpp
+1318245213 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\combat.cpp
 	"Application.h"
 	<windows.h>
 
-1317512749 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\configuration.cpp
+1318244464 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\configuration.cpp
 	"Configuration.h"
 
 1318177512 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\displayformatsurfaces.cpp
 	"DisplayFormatSurfaces.h"
 
-1318177543 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\musique.cpp
+1318185749 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\musique.cpp
 	"Musique.h"
 
 1314491618 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\outils.cpp
@@ -168,4 +169,18 @@
 
 1318177551 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\sdl_collide.h
 	<SDL/SDL.h>
+
+1318177691 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\unite.cpp
+	"Unite.h"
+
+1318981089 c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\timers.h
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL_ttf.h>
+	<string>
+	<iostream>
+	<vector>
+
+1318980277 source:c:\users\pcthomas\documents\visual studio 2008\projects\gunsandrun\combat\timers.cpp
+	"Timers.h"
 

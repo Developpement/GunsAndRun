@@ -5,6 +5,7 @@
 #include "Configuration.h"
 #include "Affichage.h"
 #include "Outils.h"
+#include "Debug.h"
 #include <cmath>
 #include <SDL/SDL.h>
 #include <vector>
@@ -21,9 +22,11 @@ public:
 	Application* application;
 	Configuration* config;
 	Surfaces* surfaces;
+	Debug* debug;
 
 	float maxSpeed; // vitesse max sur le plan de déplacement
 
+	vector<SDL_Surface*>* fondNoir;
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
 	vector<SDL_Rect>* boitesCollisions;

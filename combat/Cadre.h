@@ -6,6 +6,7 @@
 #include "Affichage.h"
 #include "Outils.h"
 #include "Bouton.h"
+#include "Debug.h"
 #include <SDL/SDL.h>
 #include <vector>
 #include <map>
@@ -24,6 +25,7 @@ public:
 	Configuration* configuration;
 	Application* application;
 	Surfaces* surfaces;
+	Debug* debug;
 
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;

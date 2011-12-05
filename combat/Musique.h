@@ -1,5 +1,6 @@
 #pragma once
 
+/*
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "Configuration.h"
@@ -14,10 +15,10 @@
 #include <string>
 using namespace std;
 
-/**
+**
 * \struct MusiqueType
 * \brief Enumère tous les types de musique disponibles.
-*/
+*
 enum MusiqueType
 {
 	AMBIANT,
@@ -26,10 +27,10 @@ enum MusiqueType
 };
 
 
-/**
+**
 * \class Musique
 * \brief Permet de jouer de la musique ou des sons.
-*/
+*
 class Musique
 {
 	static Musique* _singleton;
@@ -61,3 +62,5 @@ public:
 	bool playSound(Mix_Chunk*);
 
 };
+
+*/

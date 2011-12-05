@@ -3,7 +3,7 @@ ScreenWidth;800
 ScreenHeight;600
 fullscreenEnable;0
 bytePerPixel;24
-playerMaxSpeed;2
+playerMaxSpeed;5
 playerStartLife;50
 repertoireSon;Mixer\\Sons
 repertoireMusiqueAmbiant;Mixer\\Musiques\\ambiant

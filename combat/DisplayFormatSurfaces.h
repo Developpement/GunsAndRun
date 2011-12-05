@@ -5,6 +5,7 @@
 #include "Configuration.h"
 #include "definitions.h"
 #include "Affichage.h"
+#include "Debug.h"
 
 #include <SDL/SDL_image.h>
 #include <SDL/SDL.h>
@@ -35,6 +36,8 @@ class Surfaces
 {
 	/*! Unique objet contenant toutes les surfaces. Evite duplication. */
 	static Surfaces* _singleton;
+
+	Debug* debug;
 
 	/*! Liste des animation indexées par nom. */
 	map< string,vector<SDL_Surface*> > animList;

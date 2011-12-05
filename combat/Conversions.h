@@ -5,6 +5,14 @@
 using namespace std;
 
 template <typename T>
+inline string toStringA (T value)
+{
+	stringstream ss;
+	ss << value;
+	return ss.str();
+}
+
+template <typename T>
 inline string toString (T& value)
 {
 	stringstream ss;

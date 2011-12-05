@@ -3,6 +3,9 @@
 
 Application* Application::_singleton=0;
 
+/**
+* \brief
+*/
 Application* Application::getInstance()
 {
 	if(_singleton==0) {
@@ -12,6 +15,9 @@ Application* Application::getInstance()
 }
 
 
+/**
+* \brief
+*/
 Application* Application::destruction()
 {
 	delete _singleton;
@@ -20,16 +26,23 @@ Application* Application::destruction()
 }
 
 
-
+/**
+* \brief
+*/
 Application::Application()
 {
 	configuration=Configuration::getInstance();
-	musique=Musique::getInstance();
+	timers=Timers::getInstance();
+//	musique=Musique::getInstance();
+	debug=Debug::getInstance();
 
 	idCpt=0;
-	cout << "Application constructeur" << endl;
+	debug->print("Application constructeur");
 }
 
+/**
+* \brief
+*/
 Application::~Application()
 {
 	//TODO Suppression des données en mémoire propres à l'application.
@@ -49,15 +62,15 @@ Application::~Application()
 
 	// Le cadre et le background (appel de destruction).
 
-
-
 	/* free the background surface */
 	SDL_FreeSurface(screen);
 	/* cleanup SDL */
 	SDL_Quit();
 }
 
-
+/**
+* \brief
+*/
 int Application::init ()
 {
     const char bytePerPixelStr[]="bytePerPixel";
@@ -119,17 +132,19 @@ int Application::init ()
 
 
 
-
+/**
+* \brief
+*/
 int Application::update ()
 {
-	musique->playMusique(AMBIANT);
-
-
+//	musique->playMusique(AMBIANT);
 
 	int gameover = 0;
 	/* message pump */
 	while (!gameover)
 	{
+	    timers->raffraichissement();
+
 		/* look for an event */
 		if (SDL_PollEvent(&event)) {
 
@@ -137,22 +152,22 @@ int Application::update ()
 				case SDL_KEYDOWN:
 					switch( event.key.keysym.sym ) {
 						case SDLK_UP:
-							cout << "Touche haut appuyee" << endl;
+							debug->print("Touche haut appuyee");
 							keyValue.isArrowUpPressed=true;
 							background->setSpeedKeyUpPressed();
 							break;
 						case SDLK_DOWN:
-							cout << "Touche bas appuyee" << endl;
+							debug->print("Touche bas appuyee");
 							keyValue.isArrowDownPressed=true;
 							background->setSpeedKeyDownPressed();
 							break;
 						case SDLK_LEFT:
-							cout << "Touche gauche appuyee" << endl;
+							debug->print("Touche gauche appuyee");
 							keyValue.isArrowLeftPressed=true;
 							background->setSpeedKeyLeftPressed();
 							break;
 						case SDLK_RIGHT:
-							cout << "Touche droite appuyee" << endl;
+							debug->print("Touche droite appuyee");
 							keyValue.isArrowRightPressed=true;
 							background->setSpeedKeyRightPressed();
 							break;
@@ -166,22 +181,22 @@ int Application::update ()
 					switch( event.key.keysym.sym )
 					{
 						case SDLK_UP:
-							cout << "Touche haut relache" << endl;
+							debug->print("Touche haut relache");
 							keyValue.isArrowUpPressed=false;
 							background->setSpeedKeyUpReleased();
 							break;
 						case SDLK_DOWN:
-							cout << "Touche bas relache" << endl;
+							debug->print("Touche bas relache");
 							keyValue.isArrowDownPressed=false;
 							background->setSpeedKeyDownReleased();
 							break;
 						case SDLK_LEFT:
-							cout << "Touche gauche relache" << endl;
+							debug->print("Touche gauche relache");
 							keyValue.isArrowLeftPressed=false;
 							background->setSpeedKeyLeftReleased();
 							break;
 						case SDLK_RIGHT:
-							cout << "Touche droite relache" << endl;
+							debug->print("Touche droite relache");
 							keyValue.isArrowRightPressed=false;
 							background->setSpeedKeyRightReleased();
 							break;
@@ -195,12 +210,12 @@ int Application::update ()
 					int x = event.motion.x;
 					int y = event.motion.y;
 					if(cadre->actionSouris(x,y)){
-						cout << "Clic sur le cadre"<<endl;
+						debug->print("Clic sur le cadre");
 						keyValue.isLeftMouseClickOnCadre=true;
 						keyValue.isLeftMouseClickOnBackground=false;
 					}
 					else {
-						cout << "Clic sur le terrain" << endl;
+						debug->print("Clic sur le terrain");
 						keyValue.isLeftMouseClickOnCadre=false;
 						keyValue.isLeftMouseClickOnBackground=true;
 					}
@@ -211,7 +226,7 @@ int Application::update ()
 					if(keyValue.isLeftMouseClickOnCadre)
 						cadre->handleInput(event);
 
-					cout << "Bouton souris relache" <<endl;
+					debug->print("Bouton souris relache");
 					keyValue.isLeftMouseClickOnCadre=false;
 					keyValue.isLeftMouseClickOnBackground=false;
 
@@ -232,37 +247,39 @@ int Application::update ()
 		//----------------------
 		// UPDATING ROUTINE
 		//----------------------
-		background->update();
+        if(timers->lanceToutesLesMs(16,TIMER_UPDATE)) {
+            background->update();
 
-		list<Unite*>::iterator itUnite;
-		for (itUnite = unitees.begin(); itUnite != unitees.end(); itUnite++) {
-			(*itUnite)->update();
-		}
+            list<Unite*>::iterator itUnite;
+            for (itUnite = unitees.begin(); itUnite != unitees.end(); itUnite++) {
+                (*itUnite)->update();
+            }
 
-		list<Balle*>::iterator itBalle;
-		for (itBalle = balles.begin(); itBalle != balles.end(); itBalle++) {
-			(*itBalle)->update();
-		}
+            list<Balle*>::iterator itBalle;
+            for (itBalle = balles.begin(); itBalle != balles.end(); itBalle++) {
+                (*itBalle)->update();
+            }
 
-		// destruction des objets
-		itBalle=balles.begin();
-		while(itBalle!=balles.end()){
-			if((*itBalle)->vie<=0) {
-				delete (*itBalle);
-				itBalle=balles.erase(itBalle);
-			}
-			else itBalle++;
-		}
-		itUnite=unitees.begin();
-		while(itUnite!=unitees.end()){
-			if((*itUnite)->vie<=0)
-				itUnite=unitees.erase(itUnite);
-			else itUnite++;
-		}
+            // destruction des objets
+            itBalle=balles.begin();
+            while(itBalle!=balles.end()){
+                if((*itBalle)->vie<=0) {
+                    delete (*itBalle);
+                    itBalle=balles.erase(itBalle);
+                }
+                else itBalle++;
+            }
+            itUnite=unitees.begin();
+            while(itUnite!=unitees.end()){
+                if((*itUnite)->vie<=0)
+                    itUnite=unitees.erase(itUnite);
+                else itUnite++;
+            }
+        }
 
-		draw();
+        if(timers->lanceToutesLesMs(16,TIMER_AFFICHE))
+            draw();
 	} // end while
-
 
 
 	return 0;
@@ -270,6 +287,7 @@ int Application::update ()
 
 
 /**
+* \brief
 */
 int Application::draw()
 {
