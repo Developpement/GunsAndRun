@@ -2,8 +2,8 @@ ecranNoir;images\\background\\noir.png
 backgroundVisible;images\\background\\decor1.png
 uniteJoueur;images\\personnages\\persoTest.png
 armeDefaut;images\\Armes\\ArmeDefaut.png
+armeDefaut.boutton;images\\bouttons\\bouttonArmeDefaut.png
 cadreVisible;images\\cadre\\cadre.png
-boutonArme1;images\\bouttons\\noWeapons.png
 boutonNoWeapon;images\\bouttons\\noWeapons.png
 BoutonAmelioreArme1;images\\bouttons\\ameliore.png
 BoutonSupprimeArme1;images\\bouttons\\supprime.png

@@ -1,18 +1,32 @@
 #include "Cadre.h"
 
+Cadre* Cadre::_singleton = 0;
 
+Cadre* Cadre::getInstance()
+{	
+	if(_singleton==0)
+		_singleton = new Cadre;
+	return _singleton;
+}
 
-
-Cadre::Cadre(int &posX, int &posY, Configuration *config, Surfaces *surfaces, Application* application)
+Cadre* Cadre::destruction()
+{
+	if(_singleton!=0) {
+		delete _singleton;
+		_singleton=0;
+	}
+	return _singleton;
+}
+	  
+Cadre::Cadre()
 {
 	debug=Debug::getInstance();
 
-	this->posX=posX;
-	this->posY=posY;
+	posX=posY=0;
 
-	this->configuration=config;
-	this->surfaces = surfaces;
-	this->application = application;
+	configuration=Configuration::getInstance();
+	surfaces = Surfaces::getInstance();
+	application = Application::getInstance();
 	load();
 
 
@@ -37,6 +51,11 @@ Cadre::Cadre(int &posX, int &posY, Configuration *config, Surfaces *surfaces, Ap
 	boutonsCadre.push_back(new BoutonSupport());
 
 	doitEffectuerUneAction=false;
+}
+
+Cadre::~Cadre()
+{
+	debug->print("Cadre destructeur appele");
 }
 
 
@@ -74,4 +93,17 @@ int Cadre::draw(SDL_Surface* screen)
 		(*it)->draw(screen);
 	}
 	return 0;
+}
+
+bool Cadre::changeImageBouttonArme (string& nom)
+{
+	for (vector<Bouton*>::iterator it=boutonsCadre.begin();it!=boutonsCadre.end();it++){
+		if((*it)->typeBouttons==BOUTTONS_SELECTION_ARME) {
+			if((*it)->type.compare("boutonNoWeapon")==0){
+				(*it)->changeImage(nom);
+				return true;
+			}
+		}
+	}
+	return false;
 }

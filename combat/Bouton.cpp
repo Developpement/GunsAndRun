@@ -7,6 +7,20 @@ Bouton::Bouton()
 	debug->print("Constructeur du bouton non appele");
 }
 
+void Bouton::changeImage(string& nom)
+{
+	Surfaces* surfaces=Surfaces::getInstance();
+	pair<int,int> ancienneTaille = surfaces->getSizeAnimationFirstImage(type.c_str());
+	type=nom+".boutton";
+	pair<int,int> nouvelleTaille = surfaces->getSizeAnimationFirstImage(type.c_str());
+
+	if((ancienneTaille.first!=nouvelleTaille.first)||(ancienneTaille.second!=nouvelleTaille.second))
+		animation=surfaces->getAnimation(type.c_str(),ancienneTaille.first,ancienneTaille.second);
+	else animation=surfaces->getAnimation(type.c_str());
+	imageCourante=(*animation).begin();
+}
+
+
 
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON ARME 1-------------------------------------------------
@@ -22,8 +36,9 @@ BoutonArme1::BoutonArme1()
 
 bool BoutonArme1::init()
 {
-    string boutonArme1PosX=configuration->getValeurParametre("boutonArme1.posX");
-    string boutonArme1PosY=configuration->getValeurParametre("boutonArme1.posY");
+	typeBouttons=BOUTTONS_SELECTION_ARME;
+   string boutonArme1PosX=configuration->getValeurParametre("boutonArme1.posX");
+	string boutonArme1PosY=configuration->getValeurParametre("boutonArme1.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonArme1PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonArme1PosY)*application->resolution.second));
@@ -32,12 +47,13 @@ bool BoutonArme1::init()
 
 bool BoutonArme1::load()
 {
+	type="boutonNoWeapon";
 	Surfaces* surfaces=Surfaces::getInstance();
-	//animation=application->surfaces->getAnimation("boutonArme1");
-	pair<int, int> taille=surfaces->getSizeAnimationFirstImage("boutonArme1");
+	//animation=application->surfaces->getAnimation("boutonAucuneArme");
+	pair<int, int> taille=surfaces->getSizeAnimationFirstImage("boutonNoWeapon");
 	int largeur = static_cast<int>(ceil(taille.first*application->resolution.first));
 	int hauteur = static_cast<int>(ceil(taille.second*application->resolution.second));
-	animation=surfaces->getAnimation("boutonArme1", largeur, hauteur);
+	animation=surfaces->getAnimation(type.c_str(), largeur, hauteur);
 	imageCourante=(*animation).begin();
 	return true;
 }
@@ -62,8 +78,9 @@ BoutonArme2::BoutonArme2()
 
 bool BoutonArme2::init()
 {
-    string boutonArme2PosX=configuration->getValeurParametre("boutonArme2.posX");
-    string boutonArme2PosY=configuration->getValeurParametre("boutonArme2.posY");
+	typeBouttons=BOUTTONS_SELECTION_ARME;
+   string boutonArme2PosX=configuration->getValeurParametre("boutonArme2.posX");
+   string boutonArme2PosY=configuration->getValeurParametre("boutonArme2.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonArme2PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonArme2PosY)*application->resolution.second));
@@ -72,11 +89,12 @@ bool BoutonArme2::init()
 
 bool BoutonArme2::load()
 {
+	type="boutonNoWeapon";
 	Surfaces* surfaces=Surfaces::getInstance();
-	pair<int, int> taille=surfaces->getSizeAnimationFirstImage("boutonNoWeapon");
-	int largeur = static_cast<int>(ceil(taille.first*application->resolution.first));
-	int hauteur = static_cast<int>(ceil(taille.second*application->resolution.second));
-	animation=surfaces->getAnimation("boutonNoWeapon", largeur, hauteur);
+	//pair<int, int> taille=surfaces->getSizeAnimationFirstImage("boutonNoWeapon");
+	//int largeur = static_cast<int>(ceil(taille.first*application->resolution.first));
+	//int hauteur = static_cast<int>(ceil(taille.second*application->resolution.second));
+	animation=surfaces->getAnimation(type.c_str());//, largeur, hauteur);
 	imageCourante=(*animation).begin();
 	return true;
 }
@@ -102,8 +120,9 @@ BoutonArme3::BoutonArme3()
 
 bool BoutonArme3::init()
 {
-    string boutonArme3PosX=configuration->getValeurParametre("boutonArme3.posX");
-    string boutonArme3PosY=configuration->getValeurParametre("boutonArme3.posY");
+	typeBouttons=BOUTTONS_SELECTION_ARME;
+   string boutonArme3PosX=configuration->getValeurParametre("boutonArme3.posX");
+   string boutonArme3PosY=configuration->getValeurParametre("boutonArme3.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonArme3PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonArme3PosY)*application->resolution.second));
@@ -112,8 +131,9 @@ bool BoutonArme3::init()
 
 bool BoutonArme3::load()
 {
+	type="boutonNoWeapon";
 	Surfaces* surfaces=Surfaces::getInstance();
-	animation=surfaces->getAnimation("boutonNoWeapon");
+	animation=surfaces->getAnimation(type.c_str());
 	imageCourante=(*animation).begin();
 	return true;
 }
@@ -137,8 +157,9 @@ BoutonArme4::BoutonArme4()
 
 bool BoutonArme4::init()
 {
-    string boutonArme4PosX=configuration->getValeurParametre("boutonArme4.posX");
-    string boutonArme4PosY=configuration->getValeurParametre("boutonArme4.posY");
+	typeBouttons=BOUTTONS_SELECTION_ARME;
+   string boutonArme4PosX=configuration->getValeurParametre("boutonArme4.posX");
+   string boutonArme4PosY=configuration->getValeurParametre("boutonArme4.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonArme4PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonArme4PosY)*application->resolution.second));
@@ -147,8 +168,9 @@ bool BoutonArme4::init()
 
 bool BoutonArme4::load()
 {
+	type="boutonNoWeapon";
 	Surfaces* surfaces=Surfaces::getInstance();
-	animation=surfaces->getAnimation("boutonNoWeapon");
+	animation=surfaces->getAnimation(type.c_str());
 	imageCourante=(*animation).begin();
 	return true;
 }
@@ -173,8 +195,9 @@ BoutonAmelioreArme1::BoutonAmelioreArme1()
 
 bool BoutonAmelioreArme1::init()
 {
-    string boutonAmelioreArme1PosX=configuration->getValeurParametre("BoutonAmelioreArme1.posX");
-    string boutonAmelioreArme1PosY=configuration->getValeurParametre("BoutonAmelioreArme1.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonAmelioreArme1PosX=configuration->getValeurParametre("BoutonAmelioreArme1.posX");
+   string boutonAmelioreArme1PosY=configuration->getValeurParametre("BoutonAmelioreArme1.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme1PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme1PosY)*application->resolution.second));
@@ -213,8 +236,9 @@ BoutonAmelioreArme2::BoutonAmelioreArme2()
 
 bool BoutonAmelioreArme2::init()
 {
-    string boutonAmelioreArme2PosX=configuration->getValeurParametre("BoutonAmelioreArme2.posX");
-    string boutonAmelioreArme2PosY=configuration->getValeurParametre("BoutonAmelioreArme2.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonAmelioreArme2PosX=configuration->getValeurParametre("BoutonAmelioreArme2.posX");
+   string boutonAmelioreArme2PosY=configuration->getValeurParametre("BoutonAmelioreArme2.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme2PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme2PosY)*application->resolution.second));
@@ -249,8 +273,9 @@ BoutonAmelioreArme3::BoutonAmelioreArme3()
 
 bool BoutonAmelioreArme3::init()
 {
-    string boutonAmelioreArme3PosX=configuration->getValeurParametre("BoutonAmelioreArme3.posX");
-    string boutonAmelioreArme3PosY=configuration->getValeurParametre("BoutonAmelioreArme3.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonAmelioreArme3PosX=configuration->getValeurParametre("BoutonAmelioreArme3.posX");
+   string boutonAmelioreArme3PosY=configuration->getValeurParametre("BoutonAmelioreArme3.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme3PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme3PosY)*application->resolution.second));
@@ -285,8 +310,9 @@ BoutonAmelioreArme4::BoutonAmelioreArme4()
 
 bool BoutonAmelioreArme4::init()
 {
-    string boutonAmelioreArme4PosX=configuration->getValeurParametre("BoutonAmelioreArme4.posX");
-    string boutonAmelioreArme4PosY=configuration->getValeurParametre("BoutonAmelioreArme4.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonAmelioreArme4PosX=configuration->getValeurParametre("BoutonAmelioreArme4.posX");
+   string boutonAmelioreArme4PosY=configuration->getValeurParametre("BoutonAmelioreArme4.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme4PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonAmelioreArme4PosY)*application->resolution.second));
@@ -321,8 +347,9 @@ BoutonSupprimeArme1::BoutonSupprimeArme1()
 
 bool BoutonSupprimeArme1::init()
 {
-    string boutonSupprimeArme1PosX=configuration->getValeurParametre("BoutonSupprimeArme1.posX");
-    string boutonSupprimeArme1PosY=configuration->getValeurParametre("BoutonSupprimeArme1.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonSupprimeArme1PosX=configuration->getValeurParametre("BoutonSupprimeArme1.posX");
+   string boutonSupprimeArme1PosY=configuration->getValeurParametre("BoutonSupprimeArme1.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme1PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme1PosY)*application->resolution.second));
@@ -361,8 +388,9 @@ BoutonSupprimeArme2::BoutonSupprimeArme2()
 
 bool BoutonSupprimeArme2::init()
 {
-    string boutonSupprimeArme2PosX=configuration->getValeurParametre("BoutonSupprimeArme2.posX");
-    string boutonSupprimeArme2PosY=configuration->getValeurParametre("BoutonSupprimeArme2.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonSupprimeArme2PosX=configuration->getValeurParametre("BoutonSupprimeArme2.posX");
+   string boutonSupprimeArme2PosY=configuration->getValeurParametre("BoutonSupprimeArme2.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme2PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme2PosY)*application->resolution.second));
@@ -397,8 +425,9 @@ BoutonSupprimeArme3::BoutonSupprimeArme3()
 
 bool BoutonSupprimeArme3::init()
 {
-    string boutonSupprimeArme3PosX=configuration->getValeurParametre("BoutonSupprimeArme3.posX");
-    string boutonSupprimeArme3PosY=configuration->getValeurParametre("BoutonSupprimeArme3.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonSupprimeArme3PosX=configuration->getValeurParametre("BoutonSupprimeArme3.posX");
+   string boutonSupprimeArme3PosY=configuration->getValeurParametre("BoutonSupprimeArme3.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme3PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme3PosY)*application->resolution.second));
@@ -433,8 +462,9 @@ BoutonSupprimeArme4::BoutonSupprimeArme4()
 
 bool BoutonSupprimeArme4::init()
 {
-    string boutonSupprimeArme4PosX=configuration->getValeurParametre("BoutonSupprimeArme4.posX");
-    string boutonSupprimeArme4PosY=configuration->getValeurParametre("BoutonSupprimeArme4.posY");
+	typeBouttons=BOUTTONS_MODIFICATIONS_ARME;
+   string boutonSupprimeArme4PosX=configuration->getValeurParametre("BoutonSupprimeArme4.posX");
+   string boutonSupprimeArme4PosY=configuration->getValeurParametre("BoutonSupprimeArme4.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme4PosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonSupprimeArme4PosY)*application->resolution.second));
@@ -468,8 +498,9 @@ BoutonGrade::BoutonGrade()
 
 bool BoutonGrade::init()
 {
-    string boutonGradePosX=configuration->getValeurParametre("BoutonGrade.posX");
-    string boutonGradePosY=configuration->getValeurParametre("BoutonGrade.posY");
+	typeBouttons=BOUTTONS_APTITUDE_PERSONNAGE;
+   string boutonGradePosX=configuration->getValeurParametre("BoutonGrade.posX");
+   string boutonGradePosY=configuration->getValeurParametre("BoutonGrade.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonGradePosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonGradePosY)*application->resolution.second));
@@ -508,8 +539,9 @@ BoutonVie::BoutonVie()
 
 bool BoutonVie::init()
 {
-    string boutonViePosX=configuration->getValeurParametre("BoutonVie.posX");
-    string boutonViePosY=configuration->getValeurParametre("BoutonVie.posY");
+	typeBouttons=BOUTTONS_APTITUDE_PERSONNAGE;
+   string boutonViePosX=configuration->getValeurParametre("BoutonVie.posX");
+   string boutonViePosY=configuration->getValeurParametre("BoutonVie.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonViePosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonViePosY)*application->resolution.second));
@@ -548,8 +580,9 @@ BoutonDefense::BoutonDefense()
 
 bool BoutonDefense::init()
 {
-    string boutonDefensePosX=configuration->getValeurParametre("BoutonDefense.posX");
-    string boutonDefensePosY=configuration->getValeurParametre("BoutonDefense.posY");
+	typeBouttons=BOUTTONS_APTITUDE_PERSONNAGE;
+   string boutonDefensePosX=configuration->getValeurParametre("BoutonDefense.posX");
+   string boutonDefensePosY=configuration->getValeurParametre("BoutonDefense.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonDefensePosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonDefensePosY)*application->resolution.second));
@@ -588,8 +621,9 @@ BoutonSupport::BoutonSupport()
 
 bool BoutonSupport::init()
 {
-    string boutonSupportPosX=configuration->getValeurParametre("BoutonSupport.posX");
-    string boutonSupportPosY=configuration->getValeurParametre("BoutonSupport.posY");
+	typeBouttons=BOUTTONS_APTITUDE_PERSONNAGE;
+   string boutonSupportPosX=configuration->getValeurParametre("BoutonSupport.posX");
+   string boutonSupportPosY=configuration->getValeurParametre("BoutonSupport.posY");
 
 	posX = static_cast<int>(ceil(stringToFloat(boutonSupportPosX)*application->resolution.first));
 	posY = static_cast<int>(ceil(stringToFloat(boutonSupportPosY)*application->resolution.second));

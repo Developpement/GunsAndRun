@@ -110,7 +110,7 @@ int Application::init ()
 	// Background init
 	int posXbackground = 0;
 	int posYbackground = 0;
-	cadre=new Cadre(posXCadre,posYCadre,configuration,surfaces,this);
+	cadre=Cadre::getInstance(); // new Cadre(posXCadre,posYCadre,configuration,surfaces,this);
 	background = new Background(posXbackground,posYbackground, configuration, surfaces, this);
 
 

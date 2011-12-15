@@ -6,11 +6,19 @@
 #include "Debug.h"
 class Application;
 
+enum TypeBouttons {
+	BOUTTONS_SELECTION_ARME=0,
+	BOUTTONS_MODIFICATIONS_ARME,
+	BOUTTONS_APTITUDE_PERSONNAGE,
+	BOUTTONS_MENU
+};
 
 
 class Bouton
 {
 public:
+	TypeBouttons typeBouttons;
+
 	int posX,posY; // position de l'image sur l'écran
 	Application* application;
 	Configuration* configuration;
@@ -19,10 +27,13 @@ public:
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
 
+	string type;
+
 	Bouton();
 	virtual bool init()=0;
 	virtual bool load()=0;
 	virtual bool draw(SDL_Surface* screen)=0;
+	virtual void changeImage(string& nom);
 };
 
 

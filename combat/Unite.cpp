@@ -41,6 +41,7 @@ UniteJoueurJouable::UniteJoueurJouable(int& posX, int& posY, string& typeArme, s
 
 	// ARME de l'unité.
 	arme = usineArmes->creationArme(static_cast<int>(this->posX), static_cast<int>(this->posY), angle, typeArme, typeUnite, identifiantJoueur);
+	Cadre::getInstance()->changeImageBouttonArme(typeArme);
 #endif
 }
 
