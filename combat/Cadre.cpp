@@ -1,5 +1,6 @@
 #include "Cadre.h"
 
+
 Cadre* Cadre::_singleton = 0;
 
 Cadre* Cadre::getInstance()
@@ -24,9 +25,9 @@ Cadre::Cadre()
 
 	posX=posY=0;
 
-	configuration=Configuration::getInstance();
+	configuration=ConfigurationJeu::getInstance();
 	surfaces = Surfaces::getInstance();
-	application = Application::getInstance();
+	application = Gestionnaire::getInstance();
 	load();
 
 
@@ -49,6 +50,8 @@ Cadre::Cadre()
 	boutonsCadre.push_back(new BoutonVie());
 	boutonsCadre.push_back(new BoutonDefense());
 	boutonsCadre.push_back(new BoutonSupport());
+
+	boutonsCadre.push_back(new BoutonMenu());
 
 	doitEffectuerUneAction=false;
 }
@@ -77,10 +80,13 @@ bool Cadre::actionSouris(int& X, int& Y)
 }
 
 
-int Cadre::handleInput(SDL_Event& event)
+int Cadre::selectionBouton(Uint16& X, Uint16& Y)
 {
 	debug->print("Cadre doit effectuer une action");
-
+	for (vector<Bouton*>::iterator it=boutonsCadre.begin();it!=boutonsCadre.end();it++){
+		if((*it)->estClique(X,Y)==true)
+			break;
+	}
 	return 0;
 }
 

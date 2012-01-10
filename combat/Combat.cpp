@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "Gestionnaire.h"
 #include <windows.h>
 
 using namespace std;
@@ -18,11 +18,11 @@ int main( int argc, char* argv[] )
 
 	// Initialisation des objets static*
 	Debug::getInstance();
-	Configuration::getInstance();
+	ConfigurationJeu::getInstance();
 //	Musique::getInstance();
-
+	
 	// Lancement du jeu...
-	Application* application=Application::getInstance();
+	Gestionnaire* application=Gestionnaire::getInstance();
 	application->init();
 	application->update();
 
@@ -31,9 +31,9 @@ int main( int argc, char* argv[] )
 	UsineArmes::destruction();
 
 	Surfaces::destruction();
-	Application::destruction();
+	Gestionnaire::destruction();
 //	Musique::destruction();
-	Configuration::destruction();
+	ConfigurationJeu::destruction();
 	Debug::destruct();
 
 	return 0;

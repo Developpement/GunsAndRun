@@ -1,25 +1,25 @@
 #pragma once
 
-#include "Application.h"
+#include "Gestionnaire.h"
 #include "DisplayFormatSurfaces.h"
 #include "Affichage.h"
 #include "Outils.h"
 #include "Debug.h"
-#include "Timers.h"
+#include "Horloge.h"
 #include <SDL/SDL.h>
 #include <vector>
 #include <map>
 using namespace std;
 
-//class Application;
+//class Gestionnaire;
 class Arme;
 
 class Balle
 {
 public:
-	Application* application;
+	Gestionnaire* application;
 	Debug* debug;
-	Timers* timers;
+	Horloge* timers;
 
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
@@ -61,7 +61,7 @@ class UsineBalles
 {
 	static UsineBalles* _singleton;
 	Debug* debug;
-	Timers* timers;
+	Horloge* timers;
 
 	map<string, Balle*> modelesBalles;
 

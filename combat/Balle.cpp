@@ -6,13 +6,13 @@ template <typename T>
 Balle::Balle(T& posX, T& posY, double angle, string& type, int& identifiantJoueur)
 {
 	debug=Debug::getInstance();
-	application = Application::getInstance();
-	timers=Timers::getInstance();
+	application = Gestionnaire::getInstance();
+	timers=Horloge::getInstance();
 	this->identifiantJoueur=identifiantJoueur;
 	this->angle = angle;
 	this->type = type;
 
-	string configDureeVie = Configuration::getInstance()->getValeurParametre((type+string(".dureeVie")).c_str());
+	string configDureeVie = ConfigurationJeu::getInstance()->getValeurParametre((type+string(".dureeVie")).c_str());
 	dureeVie = stringToInt(configDureeVie);
 
 	load();
@@ -22,7 +22,7 @@ Balle::Balle(T& posX, T& posY, double angle, string& type, int& identifiantJoueu
 
 int Balle::load()
 {
-	Configuration* configuration=Configuration::getInstance();
+	ConfigurationJeu* configuration=ConfigurationJeu::getInstance();
 	Surfaces* surfaces=Surfaces::getInstance();
 
 	animation = surfaces->getAnimation(type.c_str());
@@ -156,7 +156,7 @@ UsineBalles* UsineBalles::destruction()
 UsineBalles::UsineBalles()
 {
 	debug=Debug::getInstance();
-	timers=Timers::getInstance();
+	timers=Horloge::getInstance();
 }
 
 bool UsineBalles::chargement()

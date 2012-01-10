@@ -7,15 +7,15 @@
 */
 Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typeBalle, int typeUnite, int identifiantJoueur)
 {
-	timers = Timers::getInstance();
+	timers = Horloge::getInstance();
 	this->type=typeArme;
 	this->sousTypeBalle=typeBalle;
 
 	this->typeUnite= typeUnite;
-	application=Application::getInstance();
+	application=Gestionnaire::getInstance();
 	surfaces=Surfaces::getInstance();
 	usineBalles=UsineBalles::getInstance();
-	configuration=Configuration::getInstance();
+	configuration=ConfigurationJeu::getInstance();
 
 	load();
 

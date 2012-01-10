@@ -5,8 +5,8 @@
 #include "Affichage.h"
 #include "Outils.h"
 #include "Debug.h"
-#include "Timers.h"
-#include "Configuration.h"
+#include "Horloge.h"
+#include "ConfigurationJeu.h"
 #include <SDL/SDL.h>
 #include <string>
 #include <vector>
@@ -15,7 +15,7 @@ using namespace std;
 
 #define MAX_BALLES 300
 
-//class Application;
+//class Gestionnaire;
 //class UsineArmes;
 class UsineBalles;
 class Unite;
@@ -23,11 +23,11 @@ class Unite;
 class Arme
 {
 
-	Application* application;
+	Gestionnaire* application;
 	Surfaces* surfaces;
 	UsineBalles* usineBalles;
-	Timers* timers;
-	Configuration* configuration;
+	Horloge* timers;
+	ConfigurationJeu* configuration;
 
 public:
 

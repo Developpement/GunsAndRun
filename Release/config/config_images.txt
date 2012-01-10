@@ -11,4 +11,5 @@ BoutonGrade;images\\bouttons\\Niveau1.png
 BoutonVie;images\\bouttons\\vie.png
 BoutonDefense;images\\bouttons\\defense.png
 BoutonSupport;images\\bouttons\\support1.png
+BoutonMenu;images\\bouttons\\menu.png
 BalleDefaut;images\\Balles\\BalleDefaut.png

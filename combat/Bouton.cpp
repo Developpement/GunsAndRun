@@ -1,4 +1,5 @@
 #include "Bouton.h"
+#include "Form_menu.h"
 
 Bouton::Bouton()
 {
@@ -20,6 +21,13 @@ void Bouton::changeImage(string& nom)
 	imageCourante=(*animation).begin();
 }
 
+bool Bouton::estClique(Uint16& x, Uint16& y)
+{
+	if((x>posX)&&(x<posX+(*imageCourante)->w)&&(y>posY)&&(y<posY+(*imageCourante)->h)) {
+		return action();
+	}  
+	return false;
+}						  
 
 
 // ------------------------------------------------------------------------------------
@@ -28,8 +36,8 @@ void Bouton::changeImage(string& nom)
 BoutonArme1::BoutonArme1()
 {
 	debug->print("Constructeur BoutonArme1 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -64,14 +72,19 @@ bool BoutonArme1::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonArme1::action()
+{
+	return false;
+}
+
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON ARME 2-------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonArme2::BoutonArme2()
 {
 	debug->print("Constructeur BoutonArme2 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -105,6 +118,11 @@ bool BoutonArme2::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonArme2::action()
+{
+	return false;
+}
+
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON ARME 3-------------------------------------------------
 // ------------------------------------------------------------------------------------
@@ -112,8 +130,8 @@ bool BoutonArme2::draw(SDL_Surface* screen)
 BoutonArme3::BoutonArme3()
 {
 	debug->print("Constructeur BoutonArme3 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -143,14 +161,19 @@ bool BoutonArme3::draw(SDL_Surface* screen)
 	afficheEcran(posX, posY, screen, *imageCourante);
 	return true;
 }
+
+bool BoutonArme3::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON ARME 4-------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonArme4::BoutonArme4()
 {
 	debug->print("Constructeur BoutonArme4 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -181,14 +204,18 @@ bool BoutonArme4::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonArme4::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON AMELIORE ARME 1----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme1::BoutonAmelioreArme1()
 {
 	debug->print("Constructeur BoutonAmelioreArme1 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -222,14 +249,19 @@ bool BoutonAmelioreArme1::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonAmelioreArme1::action()
+{
+	return false;
+}
+
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON AMELIORE ARME 2----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme2::BoutonAmelioreArme2()
 {
 	debug->print("Constructeur BoutonAmelioreArme2 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -259,14 +291,19 @@ bool BoutonAmelioreArme2::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonAmelioreArme2::action()
+{
+	return false;
+}
+
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON AMELIORE ARME 3----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme3::BoutonAmelioreArme3()
 {
 	debug->print("Constructeur BoutonAmelioreArme3 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -296,14 +333,19 @@ bool BoutonAmelioreArme3::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonAmelioreArme3::action()
+{
+	return false;
+}
+
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON AMELIORE ARME 4----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonAmelioreArme4::BoutonAmelioreArme4()
 {
 	debug->print("Constructeur BoutonAmelioreArme4 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -333,14 +375,18 @@ bool BoutonAmelioreArme4::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonAmelioreArme4::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON SUPPRIME ARME 1----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme1::BoutonSupprimeArme1()
 {
 	debug->print("Constructeur BoutonSupprimeArme1 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -374,14 +420,18 @@ bool BoutonSupprimeArme1::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonSupprimeArme1::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON SUPPRIME ARME 2----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme2::BoutonSupprimeArme2()
 {
 	debug->print("Constructeur BoutonSupprimeArme2 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -411,14 +461,18 @@ bool BoutonSupprimeArme2::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonSupprimeArme2::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON SUPPRIME ARME 3----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme3::BoutonSupprimeArme3()
 {
 	debug->print("Constructeur BoutonSupprimeArme3 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -448,14 +502,18 @@ bool BoutonSupprimeArme3::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonSupprimeArme3::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON SUPPRIME ARME 4----------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupprimeArme4::BoutonSupprimeArme4()
 {
 	debug->print("Constructeur BoutonSupprimeArme4 appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -484,14 +542,19 @@ bool BoutonSupprimeArme4::draw(SDL_Surface* screen)
 	afficheEcran(posX, posY, screen, *imageCourante);
 	return true;
 }
+
+bool BoutonSupprimeArme4::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON GRADE--------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonGrade::BoutonGrade()
 {
 	debug->print("Constructeur BoutonGrade appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -525,14 +588,18 @@ bool BoutonGrade::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonGrade::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON VIE----------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonVie::BoutonVie()
 {
 	debug->print("Constructeur BoutonVie appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -566,14 +633,19 @@ bool BoutonVie::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonVie::action()
+{
+	return false;
+}
+
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON DEFENSE------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonDefense::BoutonDefense()
 {
 	debug->print("Constructeur BoutonDefense appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -607,14 +679,18 @@ bool BoutonDefense::draw(SDL_Surface* screen)
 	return true;
 }
 
+bool BoutonDefense::action()
+{
+	return false;
+}
 // ------------------------------------------------------------------------------------
 // ----------------------BOUTON SUPPORT------------------------------------------------
 // ------------------------------------------------------------------------------------
 BoutonSupport::BoutonSupport()
 {
 	debug->print("Constructeur BoutonSupport appele!");
-	this->application=Application::getInstance();
-	this->configuration=Configuration::getInstance();
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
 	init();
 	load();
 }
@@ -646,4 +722,71 @@ bool BoutonSupport::draw(SDL_Surface* screen)
 {
 	afficheEcran(posX, posY, screen, *imageCourante);
 	return true;
+}
+
+bool BoutonSupport::action()
+{
+	return false;
+}
+
+// ------------------------------------------------------------------------------------
+// ----------------------BOUTON MENU---------------------------------------------------
+// ------------------------------------------------------------------------------------
+BoutonMenu::BoutonMenu()
+{
+	debug->print("Constructeur BoutonMenu appele!");
+	this->application=Gestionnaire::getInstance();
+	this->configuration=ConfigurationJeu::getInstance();
+	init();
+	load();
+}
+
+bool BoutonMenu::init()
+{
+	typeBouttons=BOUTTONS_APTITUDE_PERSONNAGE;
+   string boutonSupportPosX=configuration->getValeurParametre("BoutonMenu.posX");
+   string boutonSupportPosY=configuration->getValeurParametre("BoutonMenu.posY");
+
+	posX = static_cast<int>(ceil(stringToFloat(boutonSupportPosX)*application->resolution.first));
+	posY = static_cast<int>(ceil(stringToFloat(boutonSupportPosY)*application->resolution.second));
+	return true;
+}
+
+bool BoutonMenu::load()
+{
+	Surfaces* surfaces=Surfaces::getInstance();
+	//animation=application->surfaces->getAnimation("BoutonSupport");
+	pair<int, int> taille=surfaces->getSizeAnimationFirstImage("BoutonMenu");
+	int largeur = static_cast<int>(ceil(taille.first*application->resolution.first));
+	int hauteur = static_cast<int>(ceil(taille.second*application->resolution.second));
+	animation=surfaces->getAnimation("BoutonMenu", largeur, hauteur);
+	imageCourante=(*animation).begin();
+	return true;
+}
+
+bool BoutonMenu::draw(SDL_Surface* screen)
+{
+	afficheEcran(posX, posY, screen, *imageCourante);
+	return true;
+}
+
+bool BoutonMenu::action()
+{
+	debug->print("BoutonMenu doit effecter une action!");
+	combat::Form_menu formMenu;
+	switch (formMenu.choixMenu)
+	{
+		case OPTIONS:
+		case INSTRUCTIONS:
+		case APROPOS:
+		case RETOURJEU:
+			break;
+		case QUITTERJEU:
+			application->close();
+			break;
+		case AUCUN:
+		default:
+			break;
+	}
+	return false;
 }

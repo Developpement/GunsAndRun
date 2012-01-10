@@ -2,7 +2,7 @@
 
 #include "Outils.h"
 #include "conversions.h"
-#include "Configuration.h"
+#include "ConfigurationJeu.h"
 #include "definitions.h"
 #include "Affichage.h"
 #include "Debug.h"
@@ -45,7 +45,7 @@ class Surfaces
 	map< string,vector<SDL_Rect> > collisionList;
 
 	/*! Permet d'utiliser les fichiers de configuration pour charger les images. */
-	Configuration* configuration;
+	ConfigurationJeu* configuration;
 
 	/*! Constructeur de la classe Surfaces. */
 	Surfaces();

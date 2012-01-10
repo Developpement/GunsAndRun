@@ -48,7 +48,7 @@
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -96,6 +96,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
+			ManagedExtensions="1"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -170,6 +171,31 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<AssemblyReference
+			RelativePath="System.dll"
+			AssemblyName="System, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="System.Data.dll"
+			AssemblyName="System.Data, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="System.Drawing.dll"
+			AssemblyName="System.Drawing, Version=2.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="System.Windows.Forms.dll"
+			AssemblyName="System.Windows.Forms, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="System.XML.dll"
+			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -179,10 +205,6 @@
 			>
 			<File
 				RelativePath=".\Affichage.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Application.cpp"
 				>
 			</File>
 			<File
@@ -198,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Batiment.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Bouton.cpp"
 				>
 			</File>
@@ -210,7 +236,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Configuration.cpp"
+				RelativePath=".\ConfigurationJeu.cpp"
 				>
 			</File>
 			<File
@@ -219,6 +245,74 @@
 			</File>
 			<File
 				RelativePath=".\DisplayFormatSurfaces.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Form_menu.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						MinimalRebuild="false"
+						ExceptionHandling="2"
+						BasicRuntimeChecks="0"
+						UsePrecompiledHeader="0"
+						DebugInformationFormat="3"
+						CompileAsManaged="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						MinimalRebuild="false"
+						ExceptionHandling="2"
+						BasicRuntimeChecks="0"
+						UsePrecompiledHeader="0"
+						DebugInformationFormat="3"
+						CompileAsManaged="1"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Form_quitter.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						MinimalRebuild="false"
+						ExceptionHandling="2"
+						BasicRuntimeChecks="0"
+						UsePrecompiledHeader="0"
+						DebugInformationFormat="3"
+						CompileAsManaged="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						MinimalRebuild="false"
+						ExceptionHandling="2"
+						BasicRuntimeChecks="0"
+						UsePrecompiledHeader="0"
+						DebugInformationFormat="3"
+						CompileAsManaged="1"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Gestionnaire.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Horlog.cpp"
 				>
 			</File>
 			<File
@@ -231,10 +325,6 @@
 			</File>
 			<File
 				RelativePath=".\SDL_collide.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Timers.cpp"
 				>
 			</File>
 			<File
@@ -252,10 +342,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Application.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Arme.h"
 				>
 			</File>
@@ -268,6 +354,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Batiment.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Bouton.h"
 				>
 			</File>
@@ -276,7 +366,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Configuration.h"
+				RelativePath=".\ConfigurationJeu.h"
 				>
 			</File>
 			<File
@@ -296,6 +386,33 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Form_menu.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\Form_menu.resx"
+					>
+				</File>
+			</File>
+			<File
+				RelativePath=".\Form_quitter.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\Form_quitter.resx"
+					SubType="Designer"
+					>
+				</File>
+			</File>
+			<File
+				RelativePath=".\Gestionnaire.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Horloge.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Musique.h"
 				>
 			</File>
@@ -305,10 +422,6 @@
 			</File>
 			<File
 				RelativePath=".\SDL_Collide.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Timers.h"
 				>
 			</File>
 			<File

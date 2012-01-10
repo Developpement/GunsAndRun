@@ -35,7 +35,7 @@ Surfaces* Surfaces::destruction()
 Surfaces::Surfaces()
 {
 	debug=Debug::getInstance();
-	configuration=Configuration::getInstance();
+	configuration=ConfigurationJeu::getInstance();
 	debug->print("Constructeur Surfaces apelle");
 }
 

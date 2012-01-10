@@ -6,7 +6,7 @@ Musique* Musique::_singleton=0;
 
 Musique::Musique ()
 {
-	this->configuration = Configuration::getInstance();
+	this->configuration = ConfigurationJeu::getInstance();
 	debug->print("Musique constructeur" << endl;
 }
 

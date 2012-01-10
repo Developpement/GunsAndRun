@@ -16,12 +16,12 @@ Unite::Unite()
 UniteJoueurJouable::UniteJoueurJouable(int& posX, int& posY, string& typeArme, string& typeBalle)
 {
 #ifndef NOUNIT
-	application=Application::getInstance();
-	configuration=Configuration::getInstance();
+	application=Gestionnaire::getInstance();
+	configuration=ConfigurationJeu::getInstance();
 	surfaces=Surfaces::getInstance();
 	usineArmes=UsineArmes::getInstance();
 	// On incrémente l'identifiant pour que toutes les unitées aient un identifiant différent.
-	this->identifiantJoueur=Application::getInstance()->idCpt++;
+	this->identifiantJoueur=Gestionnaire::getInstance()->idCpt++;
 
 	this->typeArme=typeArme;
 	this->typeBalle=typeBalle;
@@ -148,12 +148,12 @@ int UniteJoueurJouable::draw(SDL_Surface* screen)
 UniteNonJoueur::UniteNonJoueur(int& posX, int& posY, string& typeArme, string& typeBalle)
 {
 #ifndef NOUNIT
-	application=Application::getInstance();
-	configuration=Configuration::getInstance();
+	application=Gestionnaire::getInstance();
+	configuration=ConfigurationJeu::getInstance();
 	surfaces=Surfaces::getInstance();
 	usineArmes=UsineArmes::getInstance();
 	// On incrémente l'identifiant pour que toutes les unitées aient un identifiant différent.
-	this->identifiantJoueur=Application::getInstance()->idCpt++;
+	this->identifiantJoueur=Gestionnaire::getInstance()->idCpt++;
 
 	this->typeArme=typeArme;
 	this->typeBalle=typeBalle;

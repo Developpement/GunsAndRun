@@ -1,9 +1,9 @@
 #pragma once
 
-//#include "Application.h"
+//#include "Gestionnaire.h"
 #include "Arme.h"
 #include "DisplayFormatSurfaces.h"
-#include "Configuration.h"
+#include "ConfigurationJeu.h"
 #include "Affichage.h"
 #include "Outils.h"
 #include "Conversions.h"
@@ -15,7 +15,7 @@ using namespace std;
 
 class Arme;
 class UsineArmes;
-//class Application;
+//class Gestionnaire;
 
 enum typeUniteControle {
 	NON_DEFINI,
@@ -29,8 +29,8 @@ enum typeUniteControle {
 class Unite
 {
 public:
-	Application* application;
-	Configuration* configuration;
+	Gestionnaire* application;
+	ConfigurationJeu* configuration;
 	Surfaces* surfaces;
 
 	Debug* debug;
@@ -52,10 +52,10 @@ public:
 
 	int vie;
 	//Les coordonnées x et y du point
-    float posX, posY;
+   float posX, posY;
 
-    //La vitesse du point
-    float velX, velY;
+   //La vitesse du point
+   float velX, velY;
 
 	Unite();
 

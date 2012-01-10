@@ -3,7 +3,7 @@
 /*
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
-#include "Configuration.h"
+#include "ConfigurationJeu.h"
 #include "definitions.h"
 #include "Conversions.h"
 
@@ -37,7 +37,7 @@ class Musique
 
 	string repertoireSon, repertoireMusiqueAmbiant, repertoireMusiqueVif, repertoireMusiqueCalme;
 
-	Configuration* configuration;
+	ConfigurationJeu* configuration;
 
 	map<string, Mix_Music*>::iterator it_musiquesAmbiant;
 	map<string, Mix_Music*>::iterator it_musiquesVif;

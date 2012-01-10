@@ -5,7 +5,7 @@ static float zero = 0;
 static float coeffSpeedDiago=1.4f;
 
 
-Background::Background(int &posX, int &posY, Configuration *config, Surfaces *surfaces, Application* application)
+Background::Background(int &posX, int &posY, ConfigurationJeu *config, Surfaces *surfaces, Gestionnaire* application)
 {
 	debug=Debug::getInstance();
 	this->config = config;

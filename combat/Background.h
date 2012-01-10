@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Application.h"
+#include "Gestionnaire.h"
 #include "DisplayFormatSurfaces.h"
-#include "Configuration.h"
+#include "ConfigurationJeu.h"
 #include "Affichage.h"
 #include "Outils.h"
 #include "Debug.h"
@@ -14,13 +14,13 @@ using namespace std;
 
 
 
-class Application;
+class Gestionnaire;
 
 class Background
 {
 public:
-	Application* application;
-	Configuration* config;
+	Gestionnaire* application;
+	ConfigurationJeu* config;
 	Surfaces* surfaces;
 	Debug* debug;
 
@@ -39,7 +39,7 @@ public:
 	float velXbackgroundTeo;
 	float velYbackgroundTeo;
 
-	Background(int& posX, int& posY, Configuration*, Surfaces*, Application*);
+	Background(int& posX, int& posY, ConfigurationJeu*, Surfaces*, Gestionnaire*);
 	bool detecteCollisions(float& decalX, float& decalY);
 	int load();
 	int update();

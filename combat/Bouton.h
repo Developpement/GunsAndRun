@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include "Application.h"
-#include "Configuration.h"
+#include "Gestionnaire.h"
+#include "ConfigurationJeu.h"
 #include "Debug.h"
-class Application;
+class Gestionnaire;
 
 enum TypeBouttons {
 	BOUTTONS_SELECTION_ARME=0,
@@ -20,8 +20,8 @@ public:
 	TypeBouttons typeBouttons;
 
 	int posX,posY; // position de l'image sur l'écran
-	Application* application;
-	Configuration* configuration;
+	Gestionnaire* application;
+	ConfigurationJeu* configuration;
 	Debug* debug;
 
 	vector<SDL_Surface*>* animation;
@@ -34,6 +34,8 @@ public:
 	virtual bool load()=0;
 	virtual bool draw(SDL_Surface* screen)=0;
 	virtual void changeImage(string& nom);
+	virtual bool action()=0;
+	bool estClique(Uint16& x, Uint16& y);
 };
 
 
@@ -48,6 +50,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -61,6 +64,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -74,6 +78,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -87,6 +92,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -100,6 +106,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 
@@ -114,6 +121,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -127,6 +135,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -140,6 +149,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 
@@ -154,6 +164,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -167,6 +178,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -180,6 +192,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -193,6 +206,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -206,6 +220,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -219,6 +234,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -232,6 +248,7 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };
 
 /*
@@ -245,4 +262,19 @@ public:
 	virtual bool init();
 	virtual bool load();
 	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
+};
+
+/*
+ * BOUTON MENU
+ */
+class BoutonMenu : public Bouton
+{
+public:
+	BoutonMenu();
+
+	virtual bool init();
+	virtual bool load();
+	virtual bool draw(SDL_Surface* screen);
+	virtual bool action();
 };

@@ -1,8 +1,8 @@
 #pragma once
 
-//#include "Application.h"
+//#include "Gestionnaire.h"
 #include "DisplayFormatSurfaces.h"
-#include "Configuration.h"
+#include "ConfigurationJeu.h"
 #include "Affichage.h"
 #include "Outils.h"
 #include "Bouton.h"
@@ -12,7 +12,7 @@
 #include <map>
 using namespace std;
 
-class Application;
+class Gestionnaire;
 class Bouton;
 class BoutonArme1;
 class BoutonArme2;
@@ -28,8 +28,8 @@ class Cadre
 
 public:
 
-	Configuration* configuration;
-	Application* application;
+	ConfigurationJeu* configuration;
+	Gestionnaire* application;
 	Surfaces* surfaces;
 	Debug* debug;
 
@@ -48,7 +48,7 @@ public:
 	//bool detecteCollisions(int decalX, int decalY);
 	int load();
 	int update();
-	int handleInput(SDL_Event& event);
+	int selectionBouton(Uint16& X, Uint16& Y);
 	int draw(SDL_Surface* screen);
 
 	bool changeImageBouttonArme (string& nom);
