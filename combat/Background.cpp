@@ -1,24 +1,34 @@
-
 #include "Background.h"
 
+
+Background* Background::_singleton = 0;
+
 static float zero = 0;
-static float coeffSpeedDiago=1.4f;
+//static float coeffSpeedDiago=1.4f;
+static float coeffSpeedDiago=0.7f;
 
 
-Background::Background(int &posX, int &posY, ConfigurationJeu *config, Surfaces *surfaces, Gestionnaire* application)
+Background::~Background()
+{
+	debug->print("Background destructeur appele");
+
+}
+
+Background::Background()
 {
 	debug=Debug::getInstance();
-	this->config = config;
-	this->surfaces = surfaces;
-	this->application = application;
+	config=ConfigurationJeu::getInstance();
+	surfaces=Surfaces::getInstance();
+	application=Gestionnaire::getInstance();
+	nomMap=nomMap=config->getValeurParametre("map");
 	load();
 
-	posXbackground = static_cast<float>(-posX);
-	posYbackground = static_cast<float>(-posY);
+	posXbackground = -stringToFloat(config->getValeurParametre("joueurJouable.posX"));
+	posYbackground = -stringToFloat(config->getValeurParametre("joueurJouable.posY"));
 
 	velXbackgroundTeo=velXbackground=velYbackground=velYbackgroundTeo=0;
-	string playerMaxSpeed = this->config->getValeurParametre("playerMaxSpeed");
-	maxSpeed = stringToFloat(playerMaxSpeed);
+	string playerStartSpeed = config->getValeurParametre("joueurJouable.StartSpeed");
+	maxSpeed = stringToFloat(playerStartSpeed);
 }
 
 int Background::load()
@@ -28,11 +38,11 @@ int Background::load()
 	int windowWidth=stringToInt(windowWidthStr);
 	int windowHeight=stringToInt(windowHeightStr);
 
-	animation = surfaces->getAnimation("backgroundVisible");
-	fondNoir = surfaces->getAnimation("ecranNoir", windowWidth, windowHeight);
+	animation = surfaces->getAnimation("map");
 	imageCourante=(*animation).begin();
-	boitesCollisions = surfaces->getBoitesCollisions("backgroundVisible");
+	boitesCollisions = surfaces->getBoitesCollisions("map");
 
+	fondNoir = surfaces->getAnimation("ecranNoir", windowWidth, windowHeight);
 	return 0;
 }
 /*
@@ -62,184 +72,177 @@ bool Background::detecteCollisions(float& decalX, float& decalY)
 	return false;
 }
 
-int Background::handleInput(SDL_Event &event)
+void Background::setDirection()
 {
-	//// Détection collision avec le joueur? Alors on ne se déplace pas.
-	//if(this->application->keyValue.isArrowDownPressed)
-	//	velYbackground=-maxSpeed;
-	//else if (this->application->keyValue.isArrowUpPressed)
-	//	velYbackground=maxSpeed;
-	//else velYbackground=0;
-	//
-	//if(this->application->keyValue.isArrowLeftPressed)
-	//	velXbackground=maxSpeed;
-	//else if(this->application->keyValue.isArrowRightPressed)
-	//	velXbackground=-maxSpeed;
-	//else velXbackground=0;
+	Clavier* clavier=Clavier::getInstance();
+	int direction=DIRECTION_TOUTES;
 
-	//if ((velXbackground!=0)&&(velYbackground!=0)){ // diagonale
-	//	if((velXbackground==maxSpeed)||(velXbackground==-maxSpeed)){
-	//		velXbackground=velXbackground/coeffSpeedDiago;
-	//		velYbackground=velYbackground/coeffSpeedDiago;
-	//	}
-	//}
-	//
-	//if (velXbackground != 0) {
-	//	if ( detecteCollisions(static_cast<int>(velXbackground), zero)== true) {
-	//		velXbackground*=-1;
-	//		/*if(velXbackground>0)
-	//			posXbackground-=maxSpeed;
-	//		else posXbackground+=maxSpeed;
-	//		velXbackground = 0;	*/
-	//	}
-	//}
-	//if (velYbackground != 0) {
-	//	if ( detecteCollisions(zero, static_cast<int>(velYbackground))== true) {
-	//		velYbackground*=-1;
-	//		/*if(velYbackground>0)
-	//			posYbackground-=maxSpeed;
-	//		else posYbackground+=maxSpeed;
-	//		velYbackground = 0;*/
-	//	}
-	//}
+	if(!(clavier->etatClavier&FLECHE_BAS_PRESSEE)) {
+		direction&=~DIRECTION_BAS;
+	}
+	else if(clavier->etatClavier&FLECHE_HAUT_PRESSEE) {
+		direction&=~DIRECTION_BAS;
+		direction&=~DIRECTION_HAUT;
+	}
 
-	/*
-	switch (event.type) {
-		//Si une touche a ete pressee
-		case SDL_KEYDOWN:
-			//ajustement de la vitesse
-			switch( event.key.keysym.sym )
-			{
-				case SDLK_UP: velYbackground += maxSpeed; break;
-				case SDLK_DOWN: velYbackground -= 1; break;
-				case SDLK_LEFT: velXbackground += 1; break;
-				case SDLK_RIGHT: velXbackground -= 1; break;
-				default: break;
-			}
+	if(!(clavier->etatClavier&FLECHE_DROITE_PRESSEE))
+		direction&=~DIRECTION_DROITE;
+	else if(clavier->etatClavier&FLECHE_GAUCHE_PRESSEE) {
+		direction&=~DIRECTION_GAUCHE;
+		direction&=~DIRECTION_DROITE;
+	}
 
+	if(!(clavier->etatClavier&FLECHE_GAUCHE_PRESSEE))
+		direction&=~DIRECTION_GAUCHE;
+	if(!(clavier->etatClavier&FLECHE_HAUT_PRESSEE))
+		direction&=~DIRECTION_HAUT;
+
+
+	switch(direction) {
+		case DIRECTION_HAUT:
+			velYbackgroundTeo=maxSpeed;
+			velXbackgroundTeo=0;
 			break;
-		//Si une touche a ete relachee
-		case SDL_KEYUP:
-			//ajustement de la vitesse
-			switch( event.key.keysym.sym )
-			{
-				case SDLK_UP: velYbackground = 0; break;
-				case SDLK_DOWN: velYbackground = 0; break;
-				case SDLK_LEFT: velXbackground = 0; break;
-				case SDLK_RIGHT: velXbackground = 0; break;
-				default: break;
-			}
+		case DIRECTION_HAUT_DROITE:
+			velXbackgroundTeo=-maxSpeed*coeffSpeedDiago;
+			velYbackgroundTeo=maxSpeed*coeffSpeedDiago;
+			break;
+		case DIRECTION_DROITE:
+			velXbackgroundTeo=-maxSpeed;
+			velYbackgroundTeo=0;
+			break;
+		case DIRECTION_DROITE_BAS:
+			velXbackgroundTeo=-maxSpeed*coeffSpeedDiago;
+			velYbackgroundTeo=-maxSpeed*coeffSpeedDiago;
+			break;
+		case DIRECTION_BAS:
+			velXbackgroundTeo=0;
+			velYbackgroundTeo=-maxSpeed;
+			break;
+		case DIRECTION_BAS_GAUCHE:
+			velXbackgroundTeo=maxSpeed*coeffSpeedDiago;
+			velYbackgroundTeo=-maxSpeed*coeffSpeedDiago;
+			break;
+		case DIRECTION_GAUCHE:
+			velXbackgroundTeo=maxSpeed;
+			velYbackgroundTeo=0;
+			break;
+		case DIRECTION_GAUCHE_HAUT:
+			velXbackgroundTeo=maxSpeed*coeffSpeedDiago;
+			velYbackgroundTeo=maxSpeed*coeffSpeedDiago;
+			break;
+		case DIRECTION_AUCUNE:
+			velXbackgroundTeo=0;
+			velYbackgroundTeo=0;
 			break;
 	}
-	*/
-
-	return 0;
 }
 
 
 
-int Background::setSpeedKeyUpPressed()
-{
-	if(velXbackgroundTeo==0){
-		velYbackgroundTeo=maxSpeed;
-	}
-	else {
-		if(abs(velXbackgroundTeo)==maxSpeed){
-			velXbackgroundTeo/=coeffSpeedDiago;
-			velYbackgroundTeo=maxSpeed/coeffSpeedDiago;
-		}
-	}
-	return 0;
-}
-int Background::setSpeedKeyDownPressed()
-{
-	if(velXbackgroundTeo==0){
-		velYbackgroundTeo=-maxSpeed;
-	}
-	else {
-		if(abs(velXbackgroundTeo)==maxSpeed){
-			velXbackgroundTeo/=coeffSpeedDiago;
-			velYbackgroundTeo=-maxSpeed/coeffSpeedDiago;
-		}
-	}
-	return 0;
-}
-
-int Background::setSpeedKeyRightPressed()
-{
-	if(velYbackgroundTeo==0) {
-		velXbackgroundTeo=-maxSpeed;
-	}
-	else {
-		if(abs(velYbackgroundTeo)==maxSpeed){
-			velXbackgroundTeo=-maxSpeed/coeffSpeedDiago;
-			velYbackgroundTeo/=coeffSpeedDiago;
-		}
-	}
-	return 0;
-}
-
-int Background::setSpeedKeyLeftPressed()
-{
-	if(velYbackgroundTeo==0) {
-		velXbackgroundTeo=maxSpeed;
-	}
-	else {
-		if(abs(velYbackgroundTeo)==maxSpeed){
-			velXbackgroundTeo=maxSpeed/coeffSpeedDiago;
-			velYbackgroundTeo/=coeffSpeedDiago;
-		}
-	}
-	return 0;
-}
-
-
-int Background::setSpeedKeyUpReleased()
-{
-	velYbackgroundTeo=0;
-//	float speedLimit=maxSpeed/coeffSpeedDiago;
-	if(velXbackgroundTeo!=0) {
-		if(velXbackgroundTeo<0)
-			velXbackgroundTeo=-maxSpeed;
-		else velXbackgroundTeo=maxSpeed;
-	}
-
-	return 0;
-}
-int Background::setSpeedKeyDownReleased()
-{
-	velYbackgroundTeo=0;
-//	float speedLimit=maxSpeed/coeffSpeedDiago;
-	if(velXbackgroundTeo!=0) {
-		if(velXbackgroundTeo<0)
-			velXbackgroundTeo=-maxSpeed;
-		else velXbackgroundTeo=maxSpeed;
-	}
-	return 0;
-}
-int Background::setSpeedKeyRightReleased()
-{
-	velXbackgroundTeo=0;
-//	float speedLimit=maxSpeed/coeffSpeedDiago;
-	if(velYbackgroundTeo!=0) {
-		if(velYbackgroundTeo<0)
-			velYbackgroundTeo=-maxSpeed;
-		else velYbackgroundTeo=maxSpeed;
-	}
-	return 0;
-}
-int Background::setSpeedKeyLeftReleased()
-{
-	velXbackgroundTeo=0;
-//	float speedLimit=maxSpeed/coeffSpeedDiago;
-	if(velYbackgroundTeo!=0) {
-		if(velYbackgroundTeo<0)
-			velYbackgroundTeo=-maxSpeed;
-		else velYbackgroundTeo=maxSpeed;
-	}
-
-	return 0;
-}
+//
+//int Background::setSpeedKeyUpPressed()
+//{
+//	if(velXbackgroundTeo==0){
+//		velYbackgroundTeo=maxSpeed;
+//	}
+//	else {
+//		if(abs(velXbackgroundTeo)==maxSpeed){
+//			velXbackgroundTeo/=coeffSpeedDiago;
+//			velYbackgroundTeo=maxSpeed/coeffSpeedDiago;
+//		}
+//	}
+//	return 0;
+//}
+//int Background::setSpeedKeyDownPressed()
+//{
+//	if(velXbackgroundTeo==0){
+//		velYbackgroundTeo=-maxSpeed;
+//	}
+//	else {
+//		if(abs(velXbackgroundTeo)==maxSpeed){
+//			velXbackgroundTeo/=coeffSpeedDiago;
+//			velYbackgroundTeo=-maxSpeed/coeffSpeedDiago;
+//		}
+//	}
+//	return 0;
+//}
+//
+//int Background::setSpeedKeyRightPressed()
+//{
+//	if(velYbackgroundTeo==0) {
+//		velXbackgroundTeo=-maxSpeed;
+//	}
+//	else {
+//		if(abs(velYbackgroundTeo)==maxSpeed){
+//			velXbackgroundTeo=-maxSpeed/coeffSpeedDiago;
+//			velYbackgroundTeo/=coeffSpeedDiago;
+//		}
+//	}
+//	return 0;
+//}
+//
+//int Background::setSpeedKeyLeftPressed()
+//{
+//	if(velYbackgroundTeo==0) {
+//		velXbackgroundTeo=maxSpeed;
+//	}
+//	else {
+//		if(abs(velYbackgroundTeo)==maxSpeed){
+//			velXbackgroundTeo=maxSpeed/coeffSpeedDiago;
+//			velYbackgroundTeo/=coeffSpeedDiago;
+//		}
+//	}
+//	return 0;
+//}
+//
+//
+//int Background::setSpeedKeyUpReleased()
+//{
+//	velYbackgroundTeo=0;
+////	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	if(velXbackgroundTeo!=0) {
+//		if(velXbackgroundTeo<0)
+//			velXbackgroundTeo=-maxSpeed;
+//		else velXbackgroundTeo=maxSpeed;
+//	}
+//
+//	return 0;
+//}
+//int Background::setSpeedKeyDownReleased()
+//{
+//	velYbackgroundTeo=0;
+////	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	if(velXbackgroundTeo!=0) {
+//		if(velXbackgroundTeo<0)
+//			velXbackgroundTeo=-maxSpeed;
+//		else velXbackgroundTeo=maxSpeed;
+//	}
+//	return 0;
+//}
+//int Background::setSpeedKeyRightReleased()
+//{
+//	velXbackgroundTeo=0;
+////	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	if(velYbackgroundTeo!=0) {
+//		if(velYbackgroundTeo<0)
+//			velYbackgroundTeo=-maxSpeed;
+//		else velYbackgroundTeo=maxSpeed;
+//	}
+//	return 0;
+//}
+//int Background::setSpeedKeyLeftReleased()
+//{
+//	velXbackgroundTeo=0;
+////	float speedLimit=maxSpeed/coeffSpeedDiago;
+//	if(velYbackgroundTeo!=0) {
+//		if(velYbackgroundTeo<0)
+//			velYbackgroundTeo=-maxSpeed;
+//		else velYbackgroundTeo=maxSpeed;
+//	}
+//
+//	return 0;
+//}
 
 int Background::update()
 {
@@ -273,4 +276,29 @@ int Background::draw(SDL_Surface *screen)
 	afficheEcran(static_cast<int>(posXbackground), static_cast<int>(posYbackground), screen, *imageCourante);
 
 	return 0;
+}
+
+//
+//Background* Background::initInstance(int& posX, int& posY, string& map)
+//{
+//	if(_singleton==0) 
+//		_singleton=new Background(posX, posY, map);
+//	return _singleton;
+//}
+
+
+Background* Background::getInstance()
+{
+	if(_singleton==0)
+		_singleton=new Background();
+	return _singleton;
+}
+
+Background* Background::destruction()
+{
+	if(_singleton!=0){
+		delete _singleton;
+		_singleton=0;
+	}
+	return _singleton;
 }

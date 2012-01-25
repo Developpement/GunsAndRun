@@ -2,3 +2,4 @@ BalleDefaut.vitesse;10
 BalleDefaut.vie;5
 BalleDefaut.degat;5
 BalleDefaut.dureeVie;1000
+BalleDefaut.periodeChangeImage;20

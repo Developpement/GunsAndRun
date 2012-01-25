@@ -162,7 +162,7 @@ int Surfaces::addAnimation (string nomAnim, string imageNeutre)
 		i++;
 	}while(surfaceOptimisee!=0);
 
-	animList.insert(pair< string, vector<SDL_Surface*> >(string(nomAnim),animationCourante));
+	animList.insert(pair< string, vector<SDL_Surface*> >(nomAnim,animationCourante));
 
 	return 0;
 }
@@ -239,6 +239,12 @@ bool Surfaces::load()
 		addAnimation(key, value);
 		addCollisionBox(key, value);
 	}
+
+	// chargement de la map
+	string nomMap=configuration->getValeurParametre("map")+".png";
+	addAnimation("map", nomMap);
+	addCollisionBox("map", nomMap);
+
 	fichier.close();
 
 	return true;

@@ -35,6 +35,9 @@ Gestionnaire::Gestionnaire()
 	configuration=ConfigurationJeu::getInstance();
 	timers=Horloge::getInstance();
 //	musique=Musique::getInstance();
+	clavier=Clavier::getInstance();
+	souris=Souris::getInstance();
+
 	debug=Debug::getInstance();
 
 	gameover=false;
@@ -63,6 +66,8 @@ Gestionnaire::~Gestionnaire()
 	balles.clear();
 
 	// Le cadre et le background (appel de destruction).
+	cadre=Cadre::destruction();
+	background=Background::destruction();
 
 	/* free the background surface */
 	SDL_FreeSurface(screen);
@@ -110,11 +115,12 @@ int Gestionnaire::init ()
 	int posXCadre=0;
 	int posYCadre=0;
 	// Background init
-	int posXbackground = 0;
-	int posYbackground = 0;
-	cadre=Cadre::getInstance(); // new Cadre(posXCadre,posYCadre,configuration,surfaces,this);
-	background = new Background(posXbackground,posYbackground, configuration, surfaces, this);
-
+	/*int posXbackground = stringToInt(configuration->getValeurParametre("joueurJouable.posX"));
+	int posYbackground = stringToInt(configuration->getValeurParametre("joueurJouable.posY"));*/
+	cadre=Cadre::getInstance();
+	
+	background=Background::getInstance();
+	//background = new Background(posXbackground,posYbackground, string("map"));
 
 #ifndef NOUNIT
 	int moiX = (windowWidth)/2;
@@ -123,12 +129,30 @@ int Gestionnaire::init ()
 	string typeBalle="BalleDefaut";
 
 	unitees.push_back(new UniteJoueurJouable(moiX,moiY, typeArme, typeBalle));
-	int newX = 100;
-	int newY=newX;
-	unitees.push_back(new UniteNonJoueur(newX, newY, typeArme, typeBalle));
+	//int newX = 100;
+	//int newY = newX;
+	//unitees.push_back(new UniteNonJoueur(newX, newY, typeArme, typeBalle));
 #endif
 
-
+#ifndef NOBUILDING
+	string baseNomBatiment="Batiment_";
+	int cptBatiment=0;
+	while (1) {
+		string cleBatiment=baseNomBatiment+toString(cptBatiment);
+		string cleTypeBatiment=cleBatiment+".type";
+		string typeBatiment = configuration->getValeurParametre(cleTypeBatiment.c_str(),false);
+		if(typeBatiment.empty()==false) {
+			if(typeBatiment.compare("Marche")==0) {
+				string posXBatiment = configuration->getValeurParametre((cleBatiment+string(".posX")).c_str());
+				string posYBatiment = configuration->getValeurParametre((cleBatiment+string(".posY")).c_str());
+				batiments.push_back(new Marche(stringToInt(posXBatiment), stringToInt(posYBatiment) ) );		
+			}
+		}
+		else break;
+		cptBatiment++;
+	}
+	
+#endif
 	return 0;
 }
 
@@ -148,104 +172,8 @@ int Gestionnaire::update ()
 
 		/* look for an event */
 		if (SDL_PollEvent(&event)) {
-
-			switch (event.type) {
-				case SDL_KEYDOWN:
-					switch( event.key.keysym.sym ) {
-						case SDLK_UP:
-							debug->print("Touche haut appuyee");
-							keyValue.isArrowUpPressed=true;
-							background->setSpeedKeyUpPressed();
-							break;
-						case SDLK_DOWN:
-							debug->print("Touche bas appuyee");
-							keyValue.isArrowDownPressed=true;
-							background->setSpeedKeyDownPressed();
-							break;
-						case SDLK_LEFT:
-							debug->print("Touche gauche appuyee");
-							keyValue.isArrowLeftPressed=true;
-							background->setSpeedKeyLeftPressed();
-							break;
-						case SDLK_RIGHT:
-							debug->print("Touche droite appuyee");
-							keyValue.isArrowRightPressed=true;
-							background->setSpeedKeyRightPressed();
-							break;
-						case SDLK_ESCAPE:
-							this->close();
-							break;
-						default: 
-							break;
-					}
-					break;
-
-				//Si une touche a ete relachee
-				case SDL_KEYUP:
-					switch( event.key.keysym.sym )
-					{
-						case SDLK_UP:
-							debug->print("Touche haut relache");
-							keyValue.isArrowUpPressed=false;
-							background->setSpeedKeyUpReleased();
-							break;
-						case SDLK_DOWN:
-							debug->print("Touche bas relache");
-							keyValue.isArrowDownPressed=false;
-							background->setSpeedKeyDownReleased();
-							break;
-						case SDLK_LEFT:
-							debug->print("Touche gauche relache");
-							keyValue.isArrowLeftPressed=false;
-							background->setSpeedKeyLeftReleased();
-							break;
-						case SDLK_RIGHT:
-							debug->print("Touche droite relache");
-							keyValue.isArrowRightPressed=false;
-							background->setSpeedKeyRightReleased();
-							break;
-						default: break;
-					}
-					break;
-				//on veut récupérer les positions de la souris lors d'un clic et déterminer s'il s'agit d'une action sur le menu ou sur le terrain (Tir)
-				//Le clic ne sera effectif que lorsque l'on aura relaché le bouton.
-				case SDL_MOUSEBUTTONDOWN:
-				{
-					int x = event.motion.x;
-					int y = event.motion.y;
-					if(cadre->actionSouris(x,y)){
-						debug->print("Clic sur le cadre");
-						keyValue.isLeftMouseClickOnCadre=true;
-						keyValue.isLeftMouseClickOnBackground=false;
-					}
-					else {
-						debug->print("Clic sur le terrain");
-						keyValue.isLeftMouseClickOnCadre=false;
-						keyValue.isLeftMouseClickOnBackground=true;
-					}
-				}
-					break;
-				case SDL_MOUSEBUTTONUP:
-
-					if(keyValue.isLeftMouseClickOnCadre)
-						cadre->selectionBouton(event.motion.x, event.motion.y);
-
-					debug->print("Bouton souris relache");
-					keyValue.isLeftMouseClickOnCadre=false;
-					keyValue.isLeftMouseClickOnBackground=false;
-
-					break;
-				default: break;
-			}// end switch
-
-			for (list<Unite*>::iterator itUnite = unitees.begin(); itUnite != unitees.end(); itUnite++) {
-				// controle spécifique au joueur, soit une unité->traitement par l'objet
-				if((*itUnite)->typeUnite==PJOUEUR_JOUABLE) {
-					(*itUnite)->handleInput(event);
-					break;
-				}
-			}
-
+			clavier->handleInput(event);
+			souris->handleInput(event);
 		}// end SDL_PollEvent
 
 		//----------------------
@@ -263,8 +191,15 @@ int Gestionnaire::update ()
             for (itBalle = balles.begin(); itBalle != balles.end(); itBalle++) {
                 (*itBalle)->update();
             }
+			
+			list<Batiment*>::iterator itBatiment;
+            for (itBatiment = batiments.begin(); itBatiment != batiments.end(); itBatiment++) {
+                (*itBatiment)->update();
+            }
 
-            // destruction des objets
+
+
+            // destruction des objets qui doivent l'être
             itBalle=balles.begin();
             while(itBalle!=balles.end()){
                 if((*itBalle)->vie<=0) {
@@ -301,6 +236,11 @@ int Gestionnaire::draw()
 	for (itBalle = balles.begin(); itBalle != balles.end(); itBalle++) {
 		(*itBalle)->draw(screen);
 	}
+
+	list<Batiment*>::iterator itBatiment;
+    for (itBatiment = batiments.begin(); itBatiment != batiments.end(); itBatiment++) {
+		(*itBatiment)->draw(screen);
+    }
 
 	list<Unite*>::iterator itUnite;
 	for (itUnite = unitees.begin(); itUnite != unitees.end(); itUnite++) {

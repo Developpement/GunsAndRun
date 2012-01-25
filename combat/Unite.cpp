@@ -2,8 +2,6 @@
 
 
 
-
-
 Unite::Unite()
 {
 	debug=Debug::getInstance();
@@ -55,7 +53,7 @@ int UniteJoueurJouable::load()
 	boitesCollisions = surfaces->getBoitesCollisions("uniteJoueur");
 
 	//autres
-	vie = stringToInt(configuration->getValeurParametre("playerStartLife"));
+	vie = stringToInt(configuration->getValeurParametre("joueurJouable.StartLife"));
 #endif
 	return 0;
 }
@@ -166,8 +164,8 @@ UniteNonJoueur::UniteNonJoueur(int& posX, int& posY, string& typeArme, string& t
 
 	load();
 
-	this->posX = static_cast<float>(posX - (*animation)[0]->w/2);
-	this->posY = static_cast<float>(posY - (*animation)[0]->h/2);
+	this->posX = static_cast<float>(posX - (*animation)[0]->w/2) - stringToInt(configuration->getValeurParametre("joueurJouable.posX"));
+	this->posY = static_cast<float>(posY - (*animation)[0]->h/2) - stringToInt(configuration->getValeurParametre("joueurJouable.posY"));
 	velX = 0;
 	velY = 0;
 
@@ -186,7 +184,7 @@ int UniteNonJoueur::load()
 	boitesCollisions = surfaces->getBoitesCollisions("uniteJoueur");
 
 	//autres
-	vie=stringToInt(configuration->getValeurParametre("playerStartLife"));
+	vie=stringToInt(configuration->getValeurParametre("nonJoueur.StartLife"));
 #endif
 	return 0;
 }

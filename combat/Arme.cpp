@@ -28,10 +28,11 @@ Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typ
 	
 	// Nombre de balles par seconde
 	
-	string cadenceKey = typeArme+".cadence";
-	
-	cadence = stringToInt(configuration->getValeurParametre(cadenceKey.c_str()));
-	
+	string cadenceCle = typeArme+".cadence";
+	cadence = stringToInt(configuration->getValeurParametre(cadenceCle.c_str()));
+	string modeArmeCle = typeArme+".mode";
+	modeArme = stringToInt(configuration->getValeurParametre(modeArmeCle.c_str()));
+
 	this->angle=angle;
 }
 
@@ -68,6 +69,8 @@ int Arme::update()
 
 			application->balles.push_back(usineBalles->creationBalle(posX, posY, angle, sousTypeBalle, identifiantJoueur));
 		}
+		if(modeArme==MANUEL)
+			tir=false;
 	}
 	if(typeUnite==PNON_JOUEUR){
 		velX=application->background->velXbackground;

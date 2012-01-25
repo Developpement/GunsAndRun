@@ -19,8 +19,10 @@ int main( int argc, char* argv[] )
 	// Initialisation des objets static*
 	Debug::getInstance();
 	ConfigurationJeu::getInstance();
-//	Musique::getInstance();
-	
+#ifndef NOMUSIC
+	Musique::getInstance();
+#endif
+
 	// Lancement du jeu...
 	Gestionnaire* application=Gestionnaire::getInstance();
 	application->init();

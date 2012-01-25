@@ -1,10 +1,9 @@
 ApplicationTitle;Mon jeu
-ScreenWidth;800
-ScreenHeight;600
+ScreenWidth;1400
+ScreenHeight;1000
 fullscreenEnable;0
 bytePerPixel;24
-playerMaxSpeed;5
-playerStartLife;50
+map;images\\Background\\decor1
 repertoireSon;Mixer\\Sons
 repertoireMusiqueAmbiant;Mixer\\Musiques\\ambiant
 repertoireMusiqueVif;Mixer\\Musiques\\vif

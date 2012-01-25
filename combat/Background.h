@@ -6,6 +6,8 @@
 #include "Affichage.h"
 #include "Outils.h"
 #include "Debug.h"
+#include "Clavier.h"
+#include "Direction.h"
 #include <cmath>
 #include <SDL/SDL.h>
 #include <vector>
@@ -18,6 +20,11 @@ class Gestionnaire;
 
 class Background
 {
+	static Background* _singleton;
+
+	Background();
+	~Background();
+
 public:
 	Gestionnaire* application;
 	ConfigurationJeu* config;
@@ -29,7 +36,9 @@ public:
 	vector<SDL_Surface*>* fondNoir;
 	vector<SDL_Surface*>* animation;
 	vector<SDL_Surface*>::iterator imageCourante;
-	vector<SDL_Rect>* boitesCollisions;
+	vector<SDL_Rect>* boitesCollisions; 
+
+	string nomMap;
 
 	// position des decors, directement liés à la vitesse de déplacement du joueur
 	float posXbackground;
@@ -39,12 +48,13 @@ public:
 	float velXbackgroundTeo;
 	float velYbackgroundTeo;
 
-	Background(int& posX, int& posY, ConfigurationJeu*, Surfaces*, Gestionnaire*);
+//	Background(int& posX, int& posY, string& map);
 	bool detecteCollisions(float& decalX, float& decalY);
 	int load();
 	int update();
-	int handleInput(SDL_Event& event);
-	int setSpeedKeyUpPressed();
+	void setDirection();
+	//int handleInput(SDL_Event& event);
+	/*int setSpeedKeyUpPressed();
 	int setSpeedKeyDownPressed();
 	int setSpeedKeyRightPressed();
 	int setSpeedKeyLeftPressed();
@@ -52,7 +62,12 @@ public:
 	int setSpeedKeyUpReleased();
 	int setSpeedKeyDownReleased();
 	int setSpeedKeyRightReleased();
-	int setSpeedKeyLeftReleased();
+	int setSpeedKeyLeftReleased();*/
 
 	int draw(SDL_Surface* screen);
+
+	
+	static Background* getInstance();
+	//static Background* initInstance(int& posX, int& posY, string& map);
+	static Background* destruction();
 };

@@ -11,42 +11,22 @@
 #include "ConfigurationJeu.h"
 #include "definitions.h"
 #include "Debug.h"
+#include "Batiment.h"
+#include "Clavier.h"
+#include "Souris.h"
 #include <SDL/SDL_rotozoom.h>
 #include <SDL/SDL.h>
 
 #include <list>
 
-/**
-* \class KeyValue
-* \brief Contient l'état des touches et souris.
-*/
-class KeyValue
-{
-public:
-	bool isArrowUpPressed;
-	bool isArrowLeftPressed;
-	bool isArrowDownPressed;
-	bool isArrowRightPressed;
-	bool isLeftMouseClickOnCadre;
-	bool isLeftMouseClickOnBackground;
 
-	KeyValue()
-	{
-		isArrowUpPressed=false;
-		isArrowLeftPressed=false;
-		isArrowDownPressed=false;
-		isArrowRightPressed=false;
-		isLeftMouseClickOnCadre=false;
-		isLeftMouseClickOnBackground=false;
-	}
-};
-
-
+class Clavier;
+class Souris;
 class Cadre;
 class Background;
 class Unite;
 class Balle;
-
+class Batiment;
 
 /**
 * \class Gestionnaire
@@ -69,6 +49,8 @@ class Gestionnaire
 
 	Debug* debug;
 
+	Clavier* clavier;
+	Souris* souris;
 
 	/**
 	* \brief Constructeur de la classe application. Initialise quelques variables.
@@ -83,11 +65,12 @@ class Gestionnaire
 
 public:
 	/*! enregistre l'etat des entrées clavie r et souris. */
-	KeyValue keyValue;
+	//KeyValue keyValue;
 	pair<float, float> resolution;
 
 	list<Unite*> unitees;
 	list<Balle*> balles;
+	list<Batiment*> batiments;
 	Background* background;
 	Cadre* cadre;
 

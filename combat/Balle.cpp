@@ -29,16 +29,34 @@ int Balle::load()
 	imageCourante=(*animation).begin();
 	boitesCollisions = surfaces->getBoitesCollisions(type.c_str());
 
+	
+
 	string degatStr=configuration->getValeurParametre((type+string(".degat")).c_str());
 	string vitesseStr=configuration->getValeurParametre((type+string(".vitesse")).c_str());
 	string vieStr=configuration->getValeurParametre((type+string(".vie")).c_str());
+	string periodeChangeImageStr=configuration->getValeurParametre((type+string(".periodeChangeImage")).c_str());
 
 	this->degats = stringToInt(degatStr);
 	this->vitesse = stringToFloat(vitesseStr);
 	this->vie = stringToInt(vieStr);
+	this->periodeChangeImageMs=stringToInt(periodeChangeImageStr);
 
 	return 0;
 }
+
+bool Balle::updateImage()
+{
+	if(timers->timerInferieurHorloge(timerChangeImage)) {
+		timers->horlogePlusDelai(timerChangeImage,periodeChangeImageMs);
+		imageCourante++;
+		if(imageCourante==animation->end())
+			imageCourante=animation->begin();
+		return true;
+	}
+	return false;	
+}
+
+
 
 int Balle::update()
 {
@@ -58,6 +76,8 @@ int Balle::update()
 
 	if(timers->timerInferieurHorloge(timerDureeVie))
 		vie=0;
+
+	updateImage();
 
 	return 0;
 }

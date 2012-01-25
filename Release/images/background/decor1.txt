@@ -1,0 +1,11 @@
+Batiment_0.type;Marche
+Batiment_0.posX;200
+Batiment_0.posY;200
+Batiment_1.type;Marche
+Batiment_1.posX;1500
+Batiment_1.posY;1500
+joueurJouable.posX;-300
+joueurJouable.posY;-300
+joueurJouable.StartSpeed;5
+joueurJouable.StartLife;50
+nonJoueur.StartLife;50

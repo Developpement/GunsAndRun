@@ -20,6 +20,15 @@ using namespace std;
 class UsineBalles;
 class Unite;
 
+
+enum ModeArme {
+	MANUEL=0,
+	AUTOMATIQUE=1
+};
+
+
+
+
 class Arme
 {
 
@@ -28,6 +37,8 @@ class Arme
 	UsineBalles* usineBalles;
 	Horloge* timers;
 	ConfigurationJeu* configuration;
+
+	int modeArme;
 
 public:
 

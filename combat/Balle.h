@@ -33,7 +33,8 @@ public:
 	string type;
 
 
-	int timerDureeVie, dureeVie;
+	int timerDureeVie, dureeVie, timerChangeImage;
+	int periodeChangeImageMs;
 
 	//Les coordonnées x et y du point
     float vitesse, posX, posY, velX, velY;
@@ -44,6 +45,7 @@ public:
 	int load();
 
 	int update();
+	bool updateImage();
 	int handleInput(SDL_Event& event);
 	bool detecteCollisions(float& decalX, float& decalY);
 	int draw(SDL_Surface* screen);

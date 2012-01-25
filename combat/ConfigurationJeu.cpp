@@ -80,23 +80,25 @@ ConfigurationJeu* ConfigurationJeu::destruction()
 * \param nomParametre Nom du paramètre à rechercher.
 * \return La valeur du paramètre sous forme de chaine.
 */
-string ConfigurationJeu::getValeurParametre(const char* parametre)
+string ConfigurationJeu::getValeurParametre(const char* parametre, bool rensigneParametre)
 {
 	map<string, string>::iterator it = config.find(parametre);
 	if (it==config.end()) { // N'existe pas dans la config actuelle
 
-		// On signale l'erreur et on inscris en attendant la nouvelle valeur dans la configuration.
-		string msgErreur=string("Il manque la variable {")+string(parametre)+string("} dans la configuration. Entrez la valeur, puis ajoutez la ensuite dans le bon fichier.");
-        debug->print(msgErreur);
+		if(rensigneParametre) {
+			// On signale l'erreur et on inscris en attendant la nouvelle valeur dans la configuration.
+			string msgErreur=string("Il manque la variable {")+string(parametre)+string("} dans la configuration. Entrez la valeur, puis ajoutez la ensuite dans le bon fichier.");
+			debug->print(msgErreur);
 #ifdef WIN32
-		char valeur[100] = {0};
-		dialogueTr::InputBox(msgErreur.c_str(), parametre, valeur, sizeof(valeur),true);
-		//string value(buf);
+			char valeur[100] = {0};
+			dialogueTr::InputBox(msgErreur.c_str(), parametre, valeur, sizeof(valeur),true);
+			//string value(buf);
 
-		config.insert(pair<string,string>(parametre,valeur));
+			config.insert(pair<string,string>(parametre,valeur));
 
-		return valeur;
+			return valeur;
 #endif
+		}
 	}
 	else { // Value found in config
 		return it->second;
@@ -120,6 +122,10 @@ bool ConfigurationJeu::chargement()
 		return false;
 
 	if(chargementFichier(fichierConfigImages)==false)
+		return false;
+
+	string nomMap=getValeurParametre("map");
+	if(chargementFichier(nomMap+".txt")==false)
 		return false;
 
 	return true;

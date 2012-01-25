@@ -38,6 +38,7 @@ class ConfigurationJeu
 	*/
 	bool chargement();
 
+public:
 	/**
 	* \brief Charge la configuration du jeu depuis un fichier.
 	* \param nomFichier nom du fichier contenant la configuration à charger.
@@ -45,8 +46,6 @@ class ConfigurationJeu
 	*/
 	bool chargementFichier (string nomFichier);
 
-
-public:
 	/**
 	* \brief Force l'existance unique d'un objet configuration.
 	* \details La première fois que la méthode est appelée, une instance de la classe est crée. Les fois suivantes, seul le pointeur vers la première instance est appelée
@@ -68,7 +67,7 @@ public:
 	//template <typename T>
 	//T getValeurParametreA (const char* nomParametre);
 
-	string getValeurParametre(const char* nomParametre);
+	string getValeurParametre(const char* nomParametre, bool ask=true);
 
 #if 0
 	int deleteEntry (char* nameEntry, string fichier_config);
