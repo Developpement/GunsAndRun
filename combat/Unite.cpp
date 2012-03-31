@@ -118,7 +118,7 @@ int UniteJoueurJouable::draw(SDL_Surface* screen)
 {
 #ifndef NOUNIT
 	if (angle == 0)
-		afficheEcran(static_cast<int>(posX), static_cast<int>(posY), screen, *imageUniteCourante);
+		dessineSurface(static_cast<int>(posX), static_cast<int>(posY), screen, *imageUniteCourante);
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageUniteCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
@@ -129,7 +129,7 @@ int UniteJoueurJouable::draw(SDL_Surface* screen)
 		int posX2 = static_cast<int>((2*posX + (*imageUniteCourante)->w - surfaceAfficher->w)/2);
 		int posY2 = static_cast<int>((2*posY + (*imageUniteCourante)->h - surfaceAfficher->h)/2);
 
-		afficheEcran(posX2, posY2, screen, surfaceAfficher);
+		dessineSurface(posX2, posY2, screen, surfaceAfficher);
 		SDL_FreeSurface(surfaceAfficher);
 	}
 
@@ -215,7 +215,7 @@ int UniteNonJoueur::draw(SDL_Surface* screen)
 {
 #ifndef NOUNIT
 	if (angle == 0)
-		afficheEcran(static_cast<int>(posX), static_cast<int>(posY), screen, *imageUniteCourante);
+		dessineSurface(static_cast<int>(posX), static_cast<int>(posY), screen, *imageUniteCourante);
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageUniteCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
@@ -226,7 +226,7 @@ int UniteNonJoueur::draw(SDL_Surface* screen)
 		int posX2 = static_cast<int>((2*posX + (*imageUniteCourante)->w - surfaceAfficher->w)/2);
 		int posY2 = static_cast<int>((2*posY + (*imageUniteCourante)->h - surfaceAfficher->h)/2);
 
-		afficheEcran(posX2, posY2, screen, surfaceAfficher);
+		dessineSurface(posX2, posY2, screen, surfaceAfficher);
 		SDL_FreeSurface(surfaceAfficher);
 	}
 

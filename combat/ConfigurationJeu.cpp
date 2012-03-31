@@ -154,7 +154,10 @@ bool ConfigurationJeu::chargementFichier (string nomFichier)
 
 		getline (ss, clef,';');
 		getline (ss, valeur,';');
-		config.insert(pair<string,string>(clef,valeur));
+		map<string,string>::iterator it=config.find(clef);
+		if(it==config.end())
+			config.insert(pair<string,string>(clef,valeur));
+		else it->second=valeur;
 	}
 
 	fichier.close();

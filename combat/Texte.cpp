@@ -7,21 +7,27 @@ Fonts* Fonts::_singleton = 0;
 
 SDL_Surface* Texte::getSurface()
 {
-	return message;
+	return surface;
 }
 
 
-Texte::Texte(string& typeFont, int& taille, string& msg, SDL_Color& couleur)
+Texte::Texte(string& typeFont, int& taille, string& message, SDL_Color& couleur, int largeur, int hauteur)
 {
 	font = Fonts::getInstance()->getTTF_Font(typeFont,taille);
-	this->message = TTF_RenderText_Solid( font, msg.c_str(), couleur );
-	if(message==0)
-		cout << "erreur" << endl;
+	surface = TTF_RenderText_Solid( font, message.c_str(), couleur);
+	if(surface) {
+		if((largeur!=0)&&(hauteur!=0))
+			surface=redimensionneSurface(surface,largeur,hauteur,false);
+#if 0
+		insertDelimiteurSurface(surface,5);
+#endif
+	}
+	else Debug::getInstance()->print("Impossible d'obtenir une surface à partir du font "+typeFont);
 }
 
 Texte::~Texte()
 {
-	SDL_FreeSurface( message );
+	SDL_FreeSurface(surface);
 }
 
   
@@ -71,7 +77,7 @@ Font::Font(string& type, int& taille)
 {
 	font = TTF_OpenFont( type.c_str(), taille );
 	if(font==0)
-		cout << "erreur" << endl;
+		Debug::getInstance()->print("Impossible de charger le font " + type);
 	this->type = type;
 	this->taille=taille;
 }

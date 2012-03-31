@@ -1,3 +1,4 @@
 armeDefaut.precisionDegre;0
 armeDefaut.cadence;100
 armeDefaut.mode;0
+armeDefaut.precision;10

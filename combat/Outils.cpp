@@ -3,7 +3,7 @@
 #include <math.h>
 
 
-Uint32 getpixel(SDL_Surface *surface, int x, int y)
+Uint32 getPixel(SDL_Surface *surface, int x, int y)
 {
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to retrieve */
@@ -32,6 +32,7 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 
 
 
+
 void agrandiRectangle (vector<SDL_Rect>& out, SDL_Rect& nouveauRectangle) 
 {
 	bool found = false;
@@ -48,6 +49,21 @@ void agrandiRectangle (vector<SDL_Rect>& out, SDL_Rect& nouveauRectangle)
 	}
 }
 
+
+SDL_Surface* insertDelimiteurSurface(SDL_Surface* surface, int largeur)
+{
+	SDL_Rect rectangle1, rectangle2;
+	rectangle1.x = rectangle1.y = 0;
+	rectangle2.x = surface->w - largeur;
+	rectangle2.y = surface->h - largeur;
+	rectangle1.w = rectangle1.h = rectangle2.w = rectangle2.h = largeur;
+
+	Uint32 couleur = SDL_MapRGB(surface->format, 0, 0, 0);
+
+	SDL_FillRect(surface, &rectangle1, couleur);
+	SDL_FillRect(surface, &rectangle2, couleur);
+	return surface;
+}
 
 
 
@@ -68,7 +84,7 @@ vector<SDL_Rect> obtienRectCollisionSurface (SDL_Surface* surface)
 		}
 
 		for(int x = 0; x < surface->w; x++) {
-			Uint32 pos = getpixel(surface,x, y);
+			Uint32 pos = getPixel(surface,x, y);
 			SDL_GetRGB(pos, surface->format, &r, &g, &b);
 			if ((r==0x00)&&(g==0xFF)&&(b==0xFF)) {
 				if(estCyan == false) { // début du rectangle

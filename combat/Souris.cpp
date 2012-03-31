@@ -54,6 +54,7 @@ void Souris::handleInput(SDL_Event& event)
 		//Le clic ne sera effectif que lorsque l'on aura relaché le bouton.
 		case SDL_MOUSEBUTTONDOWN:
 		{
+			debug->print("Clic souris sur le pixel ("+toString(event.motion.x)+"-"+toString(event.motion.y)+")");
 			int x = event.motion.x;
 			int y = event.motion.y;
 			if(Cadre::getInstance()->actionSouris(x,y)){

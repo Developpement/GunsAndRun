@@ -27,7 +27,8 @@ Arme::Arme(float& posX, float& posY, double& angle, string& typeArme,string& typ
 	tir=false;
 	
 	// Nombre de balles par seconde
-	
+	string precisionCle = typeArme+".precision";
+	precision=stringToDouble(configuration->getValeurParametre(precisionCle.c_str()));
 	string cadenceCle = typeArme+".cadence";
 	cadence = stringToInt(configuration->getValeurParametre(cadenceCle.c_str()));
 	string modeArmeCle = typeArme+".mode";
@@ -67,7 +68,7 @@ int Arme::update()
 			if (application->balles.size()>=MAX_BALLES)
 				application->balles.erase(application->balles.begin());
 
-			application->balles.push_back(usineBalles->creationBalle(posX, posY, angle, sousTypeBalle, identifiantJoueur));
+			application->balles.push_back(usineBalles->creationBalle(posX, posY, angle+Aleatoire::getInstance()->getMinMax(precision), sousTypeBalle, identifiantJoueur));
 		}
 		if(modeArme==MANUEL)
 			tir=false;
@@ -106,13 +107,14 @@ void Arme::updateAngle(double &angle)
 	this->angle = angle;
 }
 
+
 /**
 * \brief
 */
 int Arme::draw(SDL_Surface* screen)
 {
 	if (angle == 0)
-		afficheEcran(posX, posY, screen, *imageCourante);
+		dessineSurface(posX, posY, screen, *imageCourante);
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
@@ -123,7 +125,7 @@ int Arme::draw(SDL_Surface* screen)
 		float posX2 = (2*posX + (*imageCourante)->w - surfaceAfficher->w)/2;
 		float posY2 = (2*posY + (*imageCourante)->h - surfaceAfficher->h)/2;
 
-		afficheEcran(posX2, posY2, screen, surfaceAfficher);
+		dessineSurface(posX2, posY2, screen, surfaceAfficher);
 		SDL_FreeSurface(surfaceAfficher);
 	}
 	return 0;

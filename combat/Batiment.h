@@ -47,3 +47,15 @@ public:
 	virtual int handleInput(SDL_Event& event);
 	virtual int draw(SDL_Surface* screen);
 };
+
+
+class QG : public Batiment
+{
+public:
+	QG(int posX, int posY);
+
+	virtual int load();
+	virtual int update();
+	virtual int handleInput(SDL_Event& event);
+	virtual int draw(SDL_Surface* screen);
+};

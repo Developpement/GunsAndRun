@@ -85,7 +85,6 @@ public:
 
 	vector<SDL_Rect>* getBoitesCollisions (const char* name);
 	vector<SDL_Rect>* getBoitesCollisions (const char* name, int& largeur, int& hauteur);
-
-
 };
+
 

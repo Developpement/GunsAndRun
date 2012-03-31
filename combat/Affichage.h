@@ -74,7 +74,7 @@ void afficheEcran(SDL_Surface* ecran, SDL_Surface* src, double& angle);
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-inline void afficheEcran(T x, T y, SDL_Surface* ecran, SDL_Surface* surface)
+inline void dessineSurface(T x, T y, SDL_Surface* ecran, SDL_Surface* surface)
 {
 	//rectangle temporaire
     SDL_Rect offset;

@@ -55,3 +55,6 @@ bool collision(A& pos1X, B& pos1Y, vector<SDL_Rect>& boitesCollision1,
 float angleVersX (float& vitesse, double& angle);
 float angleVersY (float& vitesse, double& angle);
 bool collision(int& pointX, int& pointY, int& boitesX, int& boitesY, vector<SDL_Rect>& boitesCollision);
+
+
+SDL_Surface* insertDelimiteurSurface(SDL_Surface* surface, int largeur);

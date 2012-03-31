@@ -23,8 +23,8 @@ Background::Background()
 	nomMap=nomMap=config->getValeurParametre("map");
 	load();
 
-	posXbackground = -stringToFloat(config->getValeurParametre("joueurJouable.posX"));
-	posYbackground = -stringToFloat(config->getValeurParametre("joueurJouable.posY"));
+	posXbackground = -stringToFloat(config->getValeurParametre("joueurJouable.posX")) + Gestionnaire::getInstance()->windowWidth/2;
+	posYbackground = -stringToFloat(config->getValeurParametre("joueurJouable.posY")) + Gestionnaire::getInstance()->windowHeight/2;
 
 	velXbackgroundTeo=velXbackground=velYbackground=velYbackgroundTeo=0;
 	string playerStartSpeed = config->getValeurParametre("joueurJouable.StartSpeed");
@@ -272,8 +272,8 @@ int Background::update()
 
 int Background::draw(SDL_Surface *screen)
 {
-	afficheEcran(zero,zero, screen, fondNoir->at(0));
-	afficheEcran(static_cast<int>(posXbackground), static_cast<int>(posYbackground), screen, *imageCourante);
+	dessineSurface(zero,zero, screen, fondNoir->at(0));
+	dessineSurface(static_cast<int>(posXbackground), static_cast<int>(posYbackground), screen, *imageCourante);
 
 	return 0;
 }

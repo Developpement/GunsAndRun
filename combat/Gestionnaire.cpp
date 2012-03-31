@@ -86,6 +86,11 @@ int Gestionnaire::init ()
 	/* initialize SDL */
 	SDL_Init(SDL_INIT_EVERYTHING);
 
+	//Initialisation de SDL_TTF 
+	if( TTF_Init() == -1 ) { 
+		return false; 
+	} 
+
 	/* set the title bar */
 	string applicationTitre = configuration->getValeurParametre("ApplicationTitle");
 	SDL_WM_SetCaption(applicationTitre.c_str(), applicationTitre.c_str());
@@ -134,6 +139,8 @@ int Gestionnaire::init ()
 	//unitees.push_back(new UniteNonJoueur(newX, newY, typeArme, typeBalle));
 #endif
 
+
+	//batiments.push_back(new Marche(630, 300));
 #ifndef NOBUILDING
 	string baseNomBatiment="Batiment_";
 	int cptBatiment=0;
@@ -146,6 +153,11 @@ int Gestionnaire::init ()
 				string posXBatiment = configuration->getValeurParametre((cleBatiment+string(".posX")).c_str());
 				string posYBatiment = configuration->getValeurParametre((cleBatiment+string(".posY")).c_str());
 				batiments.push_back(new Marche(stringToInt(posXBatiment), stringToInt(posYBatiment) ) );		
+			}
+			else if(typeBatiment.compare("QG")==0) {
+				string posXBatiment = configuration->getValeurParametre((cleBatiment+string(".posX")).c_str());
+				string posYBatiment = configuration->getValeurParametre((cleBatiment+string(".posY")).c_str());
+				batiments.push_back(new QG(stringToInt(posXBatiment), stringToInt(posYBatiment) ) );		
 			}
 		}
 		else break;
@@ -213,6 +225,12 @@ int Gestionnaire::update ()
                 if((*itUnite)->vie<=0)
                     itUnite=unitees.erase(itUnite);
                 else itUnite++;
+            }
+			itBatiment=batiments.begin();
+            while(itBatiment!=batiments.end()){
+                if((*itBatiment)->vie<=0)
+                    itBatiment=batiments.erase(itBatiment);
+                else itBatiment++;
             }
         }
 

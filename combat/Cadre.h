@@ -1,11 +1,13 @@
 #pragma once
 
-//#include "Gestionnaire.h"
+#include "Gestionnaire.h"
 #include "DisplayFormatSurfaces.h"
 #include "ConfigurationJeu.h"
 #include "Affichage.h"
 #include "Outils.h"
-#include "Bouton.h"
+
+#include "ComposantsCadre.h"
+
 #include "Debug.h"
 #include <SDL/SDL.h>
 #include <vector>
@@ -13,11 +15,12 @@
 using namespace std;
 
 class Gestionnaire;
-class Bouton;
-class BoutonArme1;
-class BoutonArme2;
-class BoutonArme3;
-class BoutonArme4;
+class ComposantCadre;
+//class BoutonAmelioreArme1;
+//class BoutonArme1;
+//class BoutonArme2;
+//class BoutonArme3;
+//class BoutonArme4;
 
 
 class Cadre
@@ -38,7 +41,7 @@ public:
 	vector<SDL_Rect>* boitesCollisions;
 
 	// On utilise un vecteur de pointeurs, car il n'est pas possible d'instancier une classe virtuelle pure dans un conteneur de type vector
-	vector<Bouton*> boutonsCadre;
+	vector<ComposantCadre*> composantsCadre;
 
 	bool doitEffectuerUneAction;
 	int posX,posY;
@@ -55,6 +58,4 @@ public:
 
 	static Cadre* getInstance();
 	static Cadre* destruction();
-
-
 };

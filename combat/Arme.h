@@ -7,6 +7,7 @@
 #include "Debug.h"
 #include "Horloge.h"
 #include "ConfigurationJeu.h"
+#include "Aleatoire.h"
 #include <SDL/SDL.h>
 #include <string>
 #include <vector>
@@ -50,7 +51,7 @@ public:
 
 	int cadence;
 	int degat;
-	double angle;
+	double angle, precision;
 	bool tir;
 
 	int timerCadence;

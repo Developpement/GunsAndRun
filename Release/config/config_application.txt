@@ -8,6 +8,8 @@ repertoireSon;Mixer\\Sons
 repertoireMusiqueAmbiant;Mixer\\Musiques\\ambiant
 repertoireMusiqueVif;Mixer\\Musiques\\vif
 repertoireMusiqueCalme;Mixer\\Musiques\\calme
+Coffre.posX;490
+Coffre.posY;4
 boutonArme1.posX;1200
 boutonArme1.posY;29
 boutonArme2.posX;1339
@@ -42,3 +44,10 @@ BoutonSupport.posX;1042
 BoutonSupport.posY;4
 BoutonMenu.posX;1821
 BoutonMenu.posY;6
+BoutonVieJoueur.posX;11
+BoutonVieJoueur.posY;12
+Marche.vie;200
+QG.vie;350
+joueurJouable.StartSpeed;5
+joueurJouable.StartLife;50
+joueurJouable.StartMoney;500

@@ -1,5 +1,29 @@
 #include "Cadre.h"
 
+// ----------------- relatifs au cadre ------------------------
+#include "CadreBoutonAmelioreArme1.h"
+#include "CadreBoutonAmelioreArme2.h"
+#include "CadreBoutonAmelioreArme3.h"
+#include "CadreBoutonAmelioreArme4.h"
+#include "CadreBoutonArme1.h"
+#include "CadreBoutonArme2.h"
+#include "CadreBoutonArme3.h"
+#include "CadreBoutonArme4.h"
+#include "CadreBoutonDefense.h"
+#include "CadreBoutonGrade.h"
+#include "CadreBoutonMenu.h"
+#include "CadreBoutonSupport.h"
+#include "CadreBoutonSupprimeArme1.h"
+#include "CadreBoutonSupprimeArme2.h"
+#include "CadreBoutonSupprimeArme3.h"
+#include "CadreBoutonSupprimeArme4.h"
+#include "CadreBoutonVie.h"
+#include "CadreCoffre.h"
+#include "CadreVieJoueur.h"
+#include "CadreCoffre.h"
+// --------------------------------------------------------------
+
+
 
 Cadre* Cadre::_singleton = 0;
 
@@ -30,28 +54,30 @@ Cadre::Cadre()
 	application = Gestionnaire::getInstance();
 	load();
 
+	composantsCadre.push_back(new CadreCoffre());
+	composantsCadre.push_back(new CadreVieJoueur());
 
-	boutonsCadre.push_back(new BoutonArme1());
-	boutonsCadre.push_back(new BoutonArme2());
-	boutonsCadre.push_back(new BoutonArme3());
-	boutonsCadre.push_back(new BoutonArme4());
+	composantsCadre.push_back(new BoutonArme1());
+	composantsCadre.push_back(new BoutonArme2());
+	composantsCadre.push_back(new BoutonArme3());
+	composantsCadre.push_back(new BoutonArme4());
 
-	boutonsCadre.push_back(new BoutonAmelioreArme1());
-	boutonsCadre.push_back(new BoutonAmelioreArme2());
-	boutonsCadre.push_back(new BoutonAmelioreArme3());
-	boutonsCadre.push_back(new BoutonAmelioreArme4());
+	composantsCadre.push_back(new BoutonAmelioreArme1());
+	composantsCadre.push_back(new BoutonAmelioreArme2());
+	composantsCadre.push_back(new BoutonAmelioreArme3());
+	composantsCadre.push_back(new BoutonAmelioreArme4());
 
-	boutonsCadre.push_back(new BoutonSupprimeArme1());
-	boutonsCadre.push_back(new BoutonSupprimeArme2());
-	boutonsCadre.push_back(new BoutonSupprimeArme3());
-	boutonsCadre.push_back(new BoutonSupprimeArme4());
+	composantsCadre.push_back(new BoutonSupprimeArme1());
+	composantsCadre.push_back(new BoutonSupprimeArme2());
+	composantsCadre.push_back(new BoutonSupprimeArme3());
+	composantsCadre.push_back(new BoutonSupprimeArme4());
 
-	boutonsCadre.push_back(new BoutonGrade());
-	boutonsCadre.push_back(new BoutonVie());
-	boutonsCadre.push_back(new BoutonDefense());
-	boutonsCadre.push_back(new BoutonSupport());
+	composantsCadre.push_back(new BoutonGrade());
+	composantsCadre.push_back(new CadreBoutonVie());
+	composantsCadre.push_back(new BoutonDefense());
+	composantsCadre.push_back(new BoutonSupport());
 
-	boutonsCadre.push_back(new BoutonMenu());
+	composantsCadre.push_back(new BoutonMenu());
 
 	doitEffectuerUneAction=false;
 }
@@ -72,8 +98,8 @@ int Cadre::load()
 
 
 /*
-*\brief Permet de savoir si le clic souris a été fait sur ce cadre (this)
-*/
+ * \brief Permet de savoir si le clic souris a été fait sur ce cadre (this)
+ */
 bool Cadre::actionSouris(int& X, int& Y)
 {
 	return collision(X,Y,posX,posY,*boitesCollisions);
@@ -83,7 +109,7 @@ bool Cadre::actionSouris(int& X, int& Y)
 int Cadre::selectionBouton(Uint16& X, Uint16& Y)
 {
 	debug->print("Cadre doit effectuer une action");
-	for (vector<Bouton*>::iterator it=boutonsCadre.begin();it!=boutonsCadre.end();it++){
+	for (vector<ComposantCadre*>::iterator it=composantsCadre.begin();it!=composantsCadre.end();it++){
 		if((*it)->estClique(X,Y)==true)
 			break;
 	}
@@ -93,9 +119,9 @@ int Cadre::selectionBouton(Uint16& X, Uint16& Y)
 
 int Cadre::draw(SDL_Surface* screen) 
 {
-	afficheEcran(static_cast<int>(posX), static_cast<int>(posY), screen, (*imageCourante));
+	dessineSurface(static_cast<int>(posX), static_cast<int>(posY), screen, (*imageCourante));
 
-	for(vector<Bouton*>::iterator it=boutonsCadre.begin(); it!=boutonsCadre.end();it++){
+	for(vector<ComposantCadre*>::iterator it=composantsCadre.begin(); it!=composantsCadre.end();it++){
 		(*it)->draw(screen);
 	}
 	return 0;
@@ -103,7 +129,7 @@ int Cadre::draw(SDL_Surface* screen)
 
 bool Cadre::changeImageBouttonArme (string& nom)
 {
-	for (vector<Bouton*>::iterator it=boutonsCadre.begin();it!=boutonsCadre.end();it++){
+	for (vector<ComposantCadre*>::iterator it=composantsCadre.begin();it!=composantsCadre.end();it++){
 		if((*it)->typeBouttons==BOUTTONS_SELECTION_ARME) {
 			if((*it)->type.compare("boutonNoWeapon")==0){
 				(*it)->changeImage(nom);

@@ -105,6 +105,21 @@ bool Balle::detecteCollisions(float& decalX, float& decalY)
 		}
 		itUnite++;
 	}
+
+	// détection batiments
+	list<Batiment*>::iterator itBatiment = application->batiments.begin();
+	while (itBatiment != application->batiments.end()) {
+		if (( (*itBatiment)->identifiantJoueur!=identifiantJoueur)&&(collision(newX, newY, *boitesCollisions, (*itBatiment)->posX, (*itBatiment)->posY, *(*itBatiment)->boitesCollisions))) {
+			(*itBatiment)->vie-=degats;
+			vie=0;
+			debug->print("collision batiment");
+			return true;
+		}
+		itBatiment++;
+	}
+
+
+
 	float posPixelXBackground=application->background->posXbackground;
 	float posPixelYBackground=application->background->posYbackground;
 
@@ -122,7 +137,7 @@ bool Balle::detecteCollisions(float& decalX, float& decalY)
 int Balle::draw(SDL_Surface *screen)
 {
 	if (angle == 0)
-		afficheEcran((int)posX, (int)posY, screen, *imageCourante);
+		dessineSurface((int)posX, (int)posY, screen, *imageCourante);
 	else {
 		SDL_Surface* surfaceAfficher = pivoteSurface(*imageCourante,angle,true);
 		surfaceAfficher = conversionFormatAffichable(surfaceAfficher, false);
@@ -133,7 +148,7 @@ int Balle::draw(SDL_Surface *screen)
 		int posX2 = (2*(int)posX + (*imageCourante)->w - surfaceAfficher->w)/2;
 		int posY2 = (2*(int)posY + (*imageCourante)->h - surfaceAfficher->h)/2;
 
-		afficheEcran((int)posX2, (int)posY2, screen, surfaceAfficher);
+		dessineSurface((int)posX2, (int)posY2, screen, surfaceAfficher);
 		SDL_FreeSurface(surfaceAfficher);
 	}
 	return 0;

@@ -48,6 +48,14 @@ inline unsigned int stringToUInt (string& value)
 	return retVal;
 }
 
+inline double stringToDouble (string& value)
+{
+	double retVal;
+	stringstream ss;
+	ss << value;
+	ss >> retVal;
+	return retVal;
+}
 
 /**
 * \brief		Fast convertion from a std::wstring to a std::string used for ASCII
